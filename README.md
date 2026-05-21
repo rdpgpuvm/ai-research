@@ -1,36 +1,36 @@
-# Agentic AI & Generative AI Advancements — May 20, 2026
+# Agentic AI & Generative AI Advancements — May 21, 2026
 
 ## Top 5 Latest Advancements
 
-### 1. OpenAI Unveils GPT-5.1 with Native Agentic Reasoning
-OpenAI released GPT-5.1, introducing built-in agentic reasoning capabilities that allow the model to autonomously plan, execute multi-step tasks, and use external tools without explicit prompting. The model demonstrates significant improvements in long-horizon task completion and self-correction.
-- Source: [OpenAI Blog](https://openai.com/blog)
+### 1. Lukan — Open-Source Agentic Workstation in a Single Rust Binary
+Lukan is a new open-source agentic workstation packaged entirely in a single Rust binary, aiming to deliver a fast, self-contained AI agent environment without heavy dependencies. It signals a growing trend toward lightweight, portable agent runtimes.
+- Source: [Lukan.ai](https://lukan.ai)
 
-### 2. Anthropic Launches Claude 4.6 with Extended Context and Tool Use
-Anthropic announced Claude 4.6, featuring a 2-million-token context window and enhanced tool-use capabilities. The model can now maintain coherence across entire codebases and complex multi-document workflows, making it ideal for enterprise agentic applications.
-- Source: [Anthropic News](https://www.anthropic.com/news)
+### 2. Slate — Open-Source AI Workspace with Built-in Browser
+Slate introduces an open-source AI workspace that embeds a live browser, letting agentic workflows interact directly with web content. This bridges the gap between static LLM prompts and dynamic, real-time web automation.
+- Source: [GitHub — slate-ai/slate](https://github.com/slate-ai/slate)
 
-### 3. Google DeepMind Introduces Gemini 2.5 Pro with Multimodal Agentic Workflows
-Google DeepMind released Gemini 2.5 Pro, which integrates multimodal understanding with agentic workflows. The model can autonomously navigate web interfaces, process visual information, and execute complex cross-modal tasks with minimal human oversight.
-- Source: [Google DeepMind Blog](https://deepmind.google/discover/blog/)
+### 3. Captain Claw — Local AI Agent with 29 Tools, Multi-Session & DAG Orchestration
+Captain Claw is a local-first AI agent framework featuring 29 built-in tools, multi-session memory, and DAG-based task orchestration. It highlights the shift toward on-device, privacy-preserving agent stacks with sophisticated execution graphs.
+- Source: [GitHub — kstevica/captain-claw](https://github.com/kstevica/captain-claw)
 
-### 4. Microsoft Copilot Studio Adds Autonomous Agent Orchestration
-Microsoft expanded Copilot Studio with autonomous agent orchestration features, enabling enterprises to deploy swarms of AI agents that collaborate on complex business processes. The platform now supports dynamic task delegation and real-time agent-to-agent communication.
-- Source: [Microsoft AI Blog](https://blogs.microsoft.com/ai/)
+### 4. Voker (YC S24) — Analytics for AI Agents
+Voker is a YC-backed startup offering analytics and observability purpose-built for AI agents. As agent deployments scale in production, dedicated monitoring and tracing tools like Voker are becoming critical infrastructure.
+- Source: [Voker.ai](https://voker.ai)
 
-### 5. Meta AI Open-Sources Llama 4 with Agentic Capabilities
-Meta released Llama 4, the latest version of their open-source LLM, with native agentic capabilities including planning, memory, and tool integration. The model is designed to be fine-tuned for specific agentic tasks while maintaining high performance on general reasoning benchmarks.
-- Source: [Meta AI Blog](https://ai.meta.com/blog/)
+### 5. EZClaw — Deploy OpenClaw Agents in Under 1 Minute with No Tech Skills
+EZClaw lowers the barrier to deploying autonomous OpenClaw agents, enabling non-technical users to spin up agent instances in under a minute. It reflects the broader push to democratize agentic AI beyond developer circles.
+- Source: [EZClaw.app](https://ezclaw.app)
 
 ---
 
 ## New Use Cases
 
-### Autonomous Software Development Teams
-AI agents are now being deployed as autonomous software development teams, where multiple specialized agents collaborate on coding projects. These teams include agents for architecture design, code generation, testing, and documentation, working together to deliver complete software products with minimal human intervention.
+### Autonomous Compliance & Regulatory Monitoring
+AI compliance agents are now scanning regulatory corpuses in real time. Tools like Rival AI parse evolving legal frameworks and flag risks automatically, reducing the manual burden on compliance teams and cutting response time from weeks to hours.
 
-### Real-Time Scientific Research Acceleration
-Agentic AI systems are being used to accelerate scientific research by autonomously designing experiments, analyzing results, and proposing new hypotheses. These systems can process vast amounts of scientific literature, identify gaps in knowledge, and suggest novel research directions, significantly reducing the time from hypothesis to discovery.
+### Vision RAG — Multimodal Retrieval with Image + Text Embeddings
+New vision RAG systems (e.g., Morphik’s ColPali approach) embed images and text into a unified retrieval space. This unlocks use cases such as searching technical manuals by screenshot, analyzing design mock-ups conversationally, and building multimodal knowledge bases for engineering and healthcare.
 
 ---
 
@@ -38,12 +38,12 @@ Agentic AI systems are being used to accelerate scientific research by autonomou
 
 | Project | Stars | Description |
 |---------|-------|-------------|
-| [microsoft/autogen](https://github.com/microsoft/autogen) | 45.2k | A programming framework for building AI agents and enabling multi-agent collaboration. |
-| [langchain-ai/langchain](https://github.com/langchain-ai/langchain) | 98.5k | Framework for developing applications powered by language models with agent support. |
-| [Significant-Gravitas/AutoGPT](https://github.com/Significant-Gravitas/AutoGPT) | 172k | An experimental open-source attempt at making GPT-4 fully autonomous. |
-| [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) | 28.7k | Framework for orchestrating role-playing, autonomous AI agents. |
-| [OpenBMB/ChatDev](https://github.com/OpenBMB/ChatDev) | 25.3k | Create customized software using natural language idea through multi-agent collaboration. |
+| [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 160,452 | The agent that grows with you |
+| [langflow-ai/langflow](https://github.com/langflow-ai/langflow) | 148,590 | Powerful tool for building and deploying AI-powered agents and workflows |
+| [langgenius/dify](https://github.com/langgenius/dify) | 142,125 | Production-ready platform for agentic workflow development |
+| [langchain-ai/langchain](https://github.com/langchain-ai/langchain) | 137,267 | The agent engineering platform |
+| [firecrawl/firecrawl](https://github.com/firecrawl/firecrawl) | 122,486 | Search, scrape, and clean the web for AI agents |
 
 ---
 
-*Report compiled from Hacker News, Reddit, GitHub API, and official announcements. Date: May 20, 2026.*
+*Report compiled from Hacker News, Reddit, GitHub API, and official announcements. Date: May 21, 2026.*
