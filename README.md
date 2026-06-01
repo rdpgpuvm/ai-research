@@ -1,34 +1,34 @@
-# Agentic AI & Generative AI Advancements — May 31, 2026
+# Agentic AI & Generative AI Advancements — June 1, 2026
 
 ## Top 5 Latest Advancements
 
-### 1) Google showcased Gemini Omni + Gemini 3.5 practical demos
-Google published a fresh set of demo workflows showing multimodal interactions and higher-fidelity assistant behavior, signaling continued progress toward production-grade agentic interfaces.
+### 1) JetBrains released Mellum2 (12B MoE) for code-focused AI development
+JetBrains announced **Mellum2**, a 12B Mixture-of-Experts model aimed at software engineering tasks. This is notable for teams building domain-tuned coding agents that need strong code priors without requiring frontier-scale closed models.
+- Source: https://huggingface.co/blog/JetBrains/mellum2-launch
+
+### 2) IBM Research argued that scalable enterprise adoption depends on explicit agent logic
+IBM’s latest write-up emphasizes that deployment quality is not only model quality; it also depends on robust orchestration, control flow, and constraints around agents. This aligns with the shift from “single prompts” to governed multi-step agent systems.
+- Source: https://huggingface.co/blog/ibm-research/agent-logic-and-scalable-ai-adoption
+
+### 3) Google published new Gemini Omni / Gemini 3.5 practical demos
+Google’s latest demo set highlights higher-fidelity multimodal interactions and workflow execution patterns, signaling continued movement toward production-ready assistant behavior for real user tasks.
 - Source: https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-omni-3-5-videos/
 
-### 2) Hugging Face highlighted NVIDIA Cosmos 3 for physical AI reasoning/action
-A new open omni-model direction focused on embodied reasoning and action broadens agentic AI beyond text-only scenarios into robotics/simulation and physical-world planning.
-- Source: https://huggingface.co/blog/nvidia/cosmos-3-for-physical-ai
+### 4) Microsoft Research introduced MagenticLite, MagenticBrain, and Fara1.5 for small-model agentic systems
+Microsoft Research shared an agentic stack optimized for smaller models, pointing to a practical trend: reducing inference cost while preserving coordination quality in multi-agent workflows.
+- Source: https://www.microsoft.com/en-us/research/blog/magenticlite-magenticbrain-fara1-5-an-agentic-experience-optimized-for-small-models/
 
-### 3) IBM + Artificial Analysis reported frontier-model limits on enterprise agent tasks
-The ITBench-AA results indicate leading models still score below 50% on realistic enterprise IT operations, providing a concrete benchmark for where agent reliability needs improvement.
-- Source: https://huggingface.co/blog/ibm-research/itbench-aa
-
-### 4) Meta released Segment Anything Model 3 (SAM 3)
-Meta’s latest segmentation foundation model strengthens vision grounding quality, which is foundational for multimodal agents that must interpret scenes before acting.
-- Source: https://ai.meta.com/blog/segment-anything-model-3/
-
-### 5) arXiv continues rapid cs.AI research velocity (latest submissions stream)
-The continuously updated cs.AI feed shows active publication momentum across planning, tool-use, and evaluation methods relevant to agentic systems.
-- Source: http://export.arxiv.org/api/query?search_query=cat:cs.AI&sortBy=submittedDate&sortOrder=descending&max_results=5
+### 5) Fresh arXiv cs.AI submissions continue expanding agent robustness and multimodal generation research
+The latest cs.AI stream includes new work on distributed-agent attack monitoring and video-centric unified modeling, reinforcing that reliability/security and multimodal capability are both accelerating in parallel.
+- Source: https://export.arxiv.org/api/query?search_query=cat:cs.AI&sortBy=submittedDate&sortOrder=descending&max_results=5
 
 ---
 
 ## New Use Cases
 
-- **Embodied operations copilots**: Physical AI models can assist warehouse/field workflows by combining perception + action planning.
-- **Agent reliability gates in enterprise IT**: Benchmarks like ITBench-AA can be used as pre-production acceptance criteria for automation rollouts.
-- **Vision-grounded service agents**: Improved segmentation enables agents for visual inspection, medical intake support, and industrial QA.
+- **Cost-efficient enterprise copilots**: Smaller-model agent stacks (e.g., MagenticLite patterns) make internal automation more deployable under budget constraints.
+- **Governed multi-agent operations**: “Agent logic first” approaches are becoming a blueprint for regulated workflows (finance, healthcare ops, IT change management).
+- **Domain-specific coding assistants**: Models like Mellum2 support team-level coding automation with tighter alignment to real engineering workflows.
 
 ---
 
@@ -36,30 +36,31 @@ The continuously updated cs.AI feed shows active publication momentum across pla
 
 | Project | Stars | Description |
 |---|---:|---|
-| [langgenius/dify](https://github.com/langgenius/dify) | 143,333 | Open-source platform for building and operating LLM apps and agents. |
-| [langchain-ai/langchain](https://github.com/langchain-ai/langchain) | 138,156 | Widely used framework ecosystem for agent/tool orchestration. |
-| [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) | 75,518 | Autonomous software-development agent platform. |
-| [microsoft/autogen](https://github.com/microsoft/autogen) | 58,579 | Multi-agent application framework and runtime patterns. |
-| [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) | 52,558 | Framework for collaborative autonomous-agent workflows. |
+| [langgenius/dify](https://github.com/langgenius/dify) | 143,411 | Production-ready platform for agentic workflow development. |
+| [langchain-ai/langchain](https://github.com/langchain-ai/langchain) | 138,217 | Agent engineering platform and framework ecosystem. |
+| [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) | 75,576 | AI-driven software development agent platform. |
+| [microsoft/autogen](https://github.com/microsoft/autogen) | 58,605 | Programming framework for building agentic AI systems. |
+| [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) | 52,598 | Framework for orchestrating collaborative autonomous agents. |
 
 ---
 
 ## Sources
 
-1. https://blog.google/technology/ai/rss/
-2. https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-omni-3-5-videos/
-3. https://huggingface.co/blog/feed.xml
-4. https://huggingface.co/blog/nvidia/cosmos-3-for-physical-ai
-5. https://huggingface.co/blog/ibm-research/itbench-aa
-6. https://ai.meta.com/blog/
-7. https://ai.meta.com/blog/segment-anything-model-3/
-8. http://export.arxiv.org/api/query?search_query=cat:cs.AI&sortBy=submittedDate&sortOrder=descending&max_results=5
-9. https://api.github.com/repos/langgenius/dify
-10. https://api.github.com/repos/langchain-ai/langchain
-11. https://api.github.com/repos/OpenHands/OpenHands
-12. https://api.github.com/repos/microsoft/autogen
-13. https://api.github.com/repos/crewAIInc/crewAI
+1. https://huggingface.co/blog/feed.xml
+2. https://huggingface.co/blog/JetBrains/mellum2-launch
+3. https://huggingface.co/blog/ibm-research/agent-logic-and-scalable-ai-adoption
+4. https://blog.google/technology/ai/rss/
+5. https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-omni-3-5-videos/
+6. https://www.microsoft.com/en-us/research/feed/
+7. https://www.microsoft.com/en-us/research/blog/magenticlite-magenticbrain-fara1-5-an-agentic-experience-optimized-for-small-models/
+8. https://www.microsoft.com/en-us/research/blog/data-formulator-0-7-ai-powered-data-analytics-for-enterprise-data/
+9. https://export.arxiv.org/api/query?search_query=cat:cs.AI&sortBy=submittedDate&sortOrder=descending&max_results=5
+10. https://api.github.com/repos/langgenius/dify
+11. https://api.github.com/repos/langchain-ai/langchain
+12. https://api.github.com/repos/OpenHands/OpenHands
+13. https://api.github.com/repos/microsoft/autogen
+14. https://api.github.com/repos/crewAIInc/crewAI
 
 ---
 
-*Compilation note: Compiled on May 31, 2026 (America/Los_Angeles) from live vendor/research feeds and real-time GitHub metadata refreshes.*
+*Short compilation note: Compiled on June 1, 2026 (America/Los_Angeles) using live vendor research feeds, arXiv API output, and current GitHub repository metadata.*
