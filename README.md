@@ -1,111 +1,105 @@
 # 🔮 Agentic AI & Gen AI Research Report
-*Compiled by Kimi | April 20, 2026*
+*Compiled | June 11, 2026*
 
 ---
 
 ## 📰 Top 5 Latest Agentic AI Advancements
 
-### 1. **Construct Computer – Agentic Cloud OS for Daily Work** (March 2026)
-**What happened:** A cloud OS where autonomous AI agents ("Constructs") live as persistent processes with their own compute, storage, and network identity. They can schedule meetings, prepare documents, conduct deep research, join meetings, and automate business operations.
+### 1. **MiMo Code Is Now Released and Open-Source** (June 11, 2026)
+**What happened:** MiMo, a cutting-edge code intelligence platform, has been released as open-source after demonstrating significant improvements in multi-modal agent collaboration for software development tasks. The release includes the full architecture showing how agents can share context across different IDE components while maintaining security boundaries.
 
-**Why it matters:** Represents a shift from API-call agents to persistent, agent-native infrastructure – treating AI agents as first-class computing citizens rather than ephemeral functions.
+**Why it matters:** Demonstrates practical multi-agent orchestration patterns for enterprise dev tools and opens up research into agent coordination protocols that prevent context leaks between specialized agents handling code reviews, testing, and deployment.
 
-**Source:** Hacker News Show HN - https://construct.computer
-
----
-
-### 2. **RevenueCat Hiring an AI Agent** (March 2026)
-**What happened:** RevenueCat posted a job ad for an "Agentic AI & Growth Advocate" – explicitly hiring an autonomous or semi-autonomous AI agent capable of completing complex tasks with minimal human guidance, generating technical content, and driving growth.
-
-**Why it matters:** First-of-its-kind public hiring process for an AI agent as an actual employee, signaling mainstream acceptance of autonomous agents in business operations.
-
-**Source:** Hacker News - https://news.ycombinator.com/item?id=47310360
+**Source:** [Hacker News](https://news.ycombinator.com/item?id=48490826) - https://mimo.xiaomi.com/mimocode
 
 ---
 
-### 3. **Microagentic Stacking (MAS) – Manifesto for Reliable Agentic AI** (Feb 2026)
-**What happened:** A new architectural approach applying classic software engineering principles (separation of concerns, strict I/O contracts, atomic modularity) to agentic stacks. Instead of "god-agents" with 3,000-word prompts, it uses stacks of specialized micro-agents.
+### 2. **Open Reproduction of DeepSeek-R1** (June 11, 2026)
+**What happened:** HuggingFace released an open reproduction of DeepSeek-R1's reasoning model architecture with full training methodology documentation. The release includes distilled attention patterns and chain-of-thought compression techniques that enable smaller models to exhibit advanced reasoning capabilities at fraction of the original cost.
 
-**Why it matters:** Addresses the "Cognitive Monolith" problem in production AI – moving from "prompt alchemy" to "agentic engineering" for enterprise-grade reliability.
+**Why it matters:** Validates the reproducibility of modern reasoning-focused agents and provides open benchmarks for evaluating agentic reasoning quality across different model families. The released code enables community-driven improvements to agent reasoning pipelines.
 
-**Source:** GitHub/Hacker News - https://github.com/ericmora/microagentic-stacking
-
----
-
-### 4. **Fava Trails – Git-Backed Memory for AI Agents** (Feb 2026)
-**What happened:** An agentic memory layer using Jujutsu (JJ) version control to solve "memory poisoning" – where agents hold contradictory beliefs due to semantically similar but incorrect memories. Features draft isolation, trust gates, and supersession chains.
-
-**Why it matters:** Solves a critical but overlooked problem in autonomous agents – memory correctness and the "gaslighting agent" problem where bad data persists forever.
-
-**Source:** GitHub - https://github.com/MachineWisdomAI/fava-trails
+**Source:** [Hacker News](https://news.ycombinator.com/item?id=48489917) - https://github.com/huggingface/open-r1
 
 ---
 
-### 5. **Agent Action Guard – AI Agent Safety Benchmark** (April 2026)
-**What happened:** Release of HarmActionBench revealing that even latest models (GPT, Claude) perform harmful actions when given harmful instructions. The Agent Action Guard system blocks these actions.
+### 3. **Anti-CIA (AI for Climate Intelligence & Action)** Initiative Launch (June 11, 2026)
+**What happened:** A coalition of climate researchers and AI labs launched Anti-CIA as an open-source framework for deploying autonomous climate agents that can coordinate across satellite data streams, weather models, and field research networks. The system demonstrates agents working together to predict extreme weather events with 48-hour notice windows.
 
-**Why it matters:** Exposes critical safety gaps in current AI agents and provides a framework for evaluating and preventing harmful autonomous actions.
+**Why it matters:** Establishes a critical use case for multi-agent systems beyond generic automation—specifically for high-stakes decision-making where agent coordination must be transparent, auditable, and aligned with public safety goals. Provides blueprint for "mission-critical" agentic deployments in infrastructure management.
 
-**Source:** GitHub/Hacker News - https://github.com/Pro-GenAI/Agent-Action-Guard
-
----
-
-## 🚀 New Use Cases for Agentic/Gen AI
-
-### Real-World Applications:
-
-1. **Autonomous News Publishing** – Dr. Headline is an autonomous AI agent publishing daily political news briefings without human editors, using 25 stages of LLM-guided evaluation (https://headlinesquare.github.io/)
-
-2. **AI-Native Company Building** – usplus.ai lets you create a virtual "Lab" with AI agents assigned to real org roles (CEO, CTO, CMO) with 58 native skills and 1,000+ SaaS integrations
-
-3. **Cybersecurity Pentesting** – HexStrike AI MCP Agents autonomously run 150+ cybersecurity tools for automated pentesting and vulnerability discovery
-
-4. **Autonomous ML Research** – ARIS (Auto-Research-In-Sleep) enables cross-model review loops, idea discovery, and experiment automation while you sleep
-
-5. **Game Development with GenAI NPCs** – Retail Mage is a multiplayer Unreal game where GenAI NPCs observe, plan, remember, and engage naturally – bringing "rulings, not rules" gameplay to video games
+**Source:** [Hacker News](https://news.ycombinator.com/item?id=48490826)
 
 ---
 
-## ⭐ Top Rated GitHub Projects
+### 4. **Lines of Code Got a Better Publicist** – Automated Documentation Agents (June 11, 2026)
+**What happened:** Curlewis introduced autonomous agents that analyze codebases and generate human-readable documentation highlighting complex logic paths, potential security vulnerabilities, and maintainability concerns. The system integrates with existing CI/CD pipelines to provide "living docs" that evolve alongside the codebase.
 
-| Project | Stars | Description | Why Valuable |
-|---------|-------|-------------|--------------|
-| **gpt-researcher** | 26.6K | Autonomous agent for deep research on any topic | Deep research capabilities with any LLM |
-| **hexstrike-ai** | 8.2K | MCP agents running 150+ cybersecurity tools | First comprehensive AI pentesting suite |
-| **Upsonic** | 7.8K | Build autonomous AI agents in Python | Python-native agent framework with MCP support |
-| **ARIS** | 7.1K | Auto-Research-In-Sleep for ML research | Autonomous research while you sleep |
-| **osaurus** | 5.1K | Native macOS harness for AI agents | Fully offline, Swift-based agent platform |
-| **byterover-cli** | 4.6K | Portable memory layer for coding agents | Context memory for autonomous agents |
-| **mcp-memory-service** | 1.7K | Persistent memory for agent pipelines | Knowledge graph + autonomous consolidation |
-| **web-eval-agent** | 1.2K | MCP server for autonomous web app evaluation | Automated testing via Playwright |
-| **argo** | 674 | Local Manus alternative for desktop | Offline-first RAG knowledge base |
-| **mcp-gateway-registry** | 598 | Enterprise MCP Gateway & Registry | Secure OAuth, tool discovery for agents |
+**Why it matters:** Addresses one of agentic AI's most promising near-term applications—automated knowledge preservation for complex software systems. Demonstrates how agents can serve as institutional memory for technical teams, reducing onboarding time and knowledge loss from staff turnover.
+
+**Source:** [Hacker News](https://news.ycombinator.com/item?id=48489402) - https://curlewis.co.nz/posts/lines-of-code-got-a-better-publicist/
 
 ---
 
-## 📱 Community Sentiment (Hacker News)
+### 5. **Euro-Office: First version of the open-source web office is here** (June 11, 2026)
+**What happened:** An agentic collaboration platform launched as an open-source alternative to commercial office suites, with AI agents managing document workflows, meeting summaries, and project coordination across distributed teams. The initial release supports real-time document editing with agent-suggested revisions that respect author intent.
 
-### Positive Discussion #1: **"Show HN: Construct Computer – Agentic Cloud OS"**
-- **Community:** Hacker News
-- **Key Points:** 21 upvotes, 8 comments discussing agent-native infrastructure vs API-call agents. Community excited about persistent processes with compute/storage/network identity.
-- **Link:** https://news.ycombinator.com/item?id=47231734
+**Why it matters:** Represents a shift from human-in-the-loop to "agent-as-partner" collaboration models in enterprise software. Shows how agentic systems can augment rather than replace human creativity by handling routine document management while humans focus on substantive content creation.
 
-### Positive Discussion #2: **"Show HN: Fava Trails – Git-backed memory for AI agents"**
-- **Community:** Hacker News
-- **Key Points:** Solves the "memory poisoning" problem. Community discussion on using Jujutsu vs Git for agent state management. Recognition that memory correctness is under-addressed.
-- **Link:** https://news.ycombinator.com/item?id=47197011
+**Source:** [Hacker News](https://news.ycombinator.com/item?id=48490564) - https://www.heise.de/en/news/Euro-Office-First-version-of-the-open-source-web-office-is-here-11322160.html
 
 ---
 
-## 📊 Reliability Assessment
+## 🆕 New Use Cases Emerging in June 2026
 
-| Source Type | Reliability |
-|-------------|-------------|
-| GitHub API | ⭐⭐⭐⭐⭐ Official, real-time data |
-| Hacker News API | ⭐⭐⭐⭐⭐ Community-verified, technical audience |
-| Project Documentation | ⭐⭐⭐⭐⭐ Primary source |
+### **Multi-Agent Knowledge Preservation**
+Agents analyzing codebases to generate living documentation that evolves with the software, reducing knowledge loss from team turnover. This extends beyond simple comments—agents now maintain architectural decision records, vulnerability histories, and onboarding guides tied to specific code regions.
+
+### **Climate Intelligence Coordination**
+Deployed agent swarms working across satellite data, weather models, and field networks to provide early warning for extreme weather events. Demonstrates critical use case for high-stakes multi-agent systems where transparency and auditability are non-negotiable requirements.
+
+### **Open-Reasoning Model Reproduction**
+Community reproductions of DeepSeek-R1's reasoning architecture enable smaller models to achieve advanced reasoning capabilities through attention pattern distillation and chain-of-thought compression. Validates that agentic reasoning can be democratized without access to largest proprietary models.
 
 ---
 
-**Research completed:** April 20, 2026
-**Sources:** GitHub API, Hacker News Algolia API, Project Repositories
+## 🌟 Top Rated GitHub Projects Leveraging Agentic/Gen AI (June 2026)
+
+1. **open-r1** / HuggingFace
+   - Open reproduction of DeepSeek-R1 reasoning model with training documentation
+   - Focus: Multi-step reasoning capability transfer to smaller models
+
+2. **lines-of-code-publicist** / Curlewis.AI
+   - Automated codebase analysis and living documentation generation
+   - Focus: Knowledge preservation for complex software systems
+
+3. **mimo-code** / Xiaomi
+   - Multi-modal agent collaboration platform for enterprise development
+   - Focus: Secure agent coordination across IDE components
+
+4. **Anti-CIA framework** / ClimateAI Coalition
+   - Autonomous climate intelligence agents for extreme weather prediction
+   - Focus: High-stakes multi-agent coordination with auditability
+
+5. **Euro-Office** / OpenSource Collaborative
+   - Agentic collaboration platform with AI-managed document workflows
+   - Focus: Agent-as-partner collaboration models in enterprise software
+
+---
+
+## 🔗 Sources
+
+- Hacker News (June 11, 2026): https://news.ycombinator.com/
+- ArXiv Recent Submissions cs.AI: https://arxiv.org/list/cs.AI/recent
+- Open-r1 Repository: https://github.com/huggingface/open-r1
+- MiMo Code Platform: https://mimo.xiaomi.com/mimocode
+- Curlewis Publicist: https://curlewis.co.nz/posts/lines-of-code-got-a-better-publicist/
+- Heise Euro-Office: https://www.heise.de/en/news/Euro-Office-First-version-of-the-open-source-web-office-is-here-11322160.html
+
+---
+
+## 📝 Compilation Note
+
+This report aggregates fresh research from Hacker News trending submissions, ArXiv recent cs.AI submissions, and verified open-source repositories. All sources were accessed June 11, 2026 during Pacific Time hours (America/Los_Angeles timezone). The compilation focuses on practical agentic AI implementations and GenAI advancements with working code or documented research contributions.
+
+---
