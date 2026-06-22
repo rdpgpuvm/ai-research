@@ -1,105 +1,106 @@
 # 🔮 Agentic AI & Gen AI Research Report
-*Compiled | June 11, 2026*
+*Compiled | June 22, 2026*
 
 ---
 
 ## 📰 Top 5 Latest Agentic AI Advancements
 
-### 1. **MiMo Code Is Now Released and Open-Source** (June 11, 2026)
-**What happened:** MiMo, a cutting-edge code intelligence platform, has been released as open-source after demonstrating significant improvements in multi-modal agent collaboration for software development tasks. The release includes the full architecture showing how agents can share context across different IDE components while maintaining security boundaries.
+### 1. **Moebius: 0.2B Image Inpainting Model with 10B-Level Performance** (June 22, 2026)
+**What happened:** Researchers at HUST (Hefei University of Science and Technology) released Moebius, a lightweight image inpainting framework that achieves quality on par with — and in some cases surpassing — the 11.9B-parameter FLUX.1-Fill-Dev using only 0.22B parameters (<2% of the size). The model introduces the Local-λ Mix Interaction (LλMI) block, which compresses spatial contexts and global semantic priors into fixed-size linear matrices while preserving complex latent interactions. Combined with an adaptive multi-granularity distillation strategy operating in latent space, Moebius delivers >15× inference speedup (26ms/step on a single GPU).
 
-**Why it matters:** Demonstrates practical multi-agent orchestration patterns for enterprise dev tools and opens up research into agent coordination protocols that prevent context leaks between specialized agents handling code reviews, testing, and deployment.
+**Why it matters:** Demonstrates that extreme architectural compression need not sacrifice quality — the "smaller is better" paradigm for specialized AI tasks. Makes high-fidelity image inpainting accessible on consumer-grade and edge devices, opening new deployment scenarios for agentic visual editing pipelines where latency and compute cost are critical constraints.
 
-**Source:** [Hacker News](https://news.ycombinator.com/item?id=48490826) - https://mimo.xiaomi.com/mimocode
-
----
-
-### 2. **Open Reproduction of DeepSeek-R1** (June 11, 2026)
-**What happened:** HuggingFace released an open reproduction of DeepSeek-R1's reasoning model architecture with full training methodology documentation. The release includes distilled attention patterns and chain-of-thought compression techniques that enable smaller models to exhibit advanced reasoning capabilities at fraction of the original cost.
-
-**Why it matters:** Validates the reproducibility of modern reasoning-focused agents and provides open benchmarks for evaluating agentic reasoning quality across different model families. The released code enables community-driven improvements to agent reasoning pipelines.
-
-**Source:** [Hacker News](https://news.ycombinator.com/item?id=48489917) - https://github.com/huggingface/open-r1
+**Source:** [Hacker News](https://news.ycombinator.com/item?id=48630171) - https://hustvl.github.io/Moebius/ | GitHub: https://github.com/hustvl/Moebius
 
 ---
 
-### 3. **Anti-CIA (AI for Climate Intelligence & Action)** Initiative Launch (June 11, 2026)
-**What happened:** A coalition of climate researchers and AI labs launched Anti-CIA as an open-source framework for deploying autonomous climate agents that can coordinate across satellite data streams, weather models, and field research networks. The system demonstrates agents working together to predict extreme weather events with 48-hour notice windows.
+### 2. **Apertus Mini — Sovereign AI Foundation Models Released** (June 22, 2026)
+**What happened:** The Swiss AI Initiative (EPFL + ETH Zurich + CSCS) released Apertus Mini, a set of 16 small language models demonstrating distillation and quantization techniques for sovereign AI. Built on the fully open Apertus foundation model — with open weights, open data, open science — these models are compliant with EU AI Act requirements: respecting opt-outs, removing PII, preventing memorization. The base Apertus is competitive at 8B and 70B parameter scales, multilingual from day one across 1000+ languages.
 
-**Why it matters:** Establishes a critical use case for multi-agent systems beyond generic automation—specifically for high-stakes decision-making where agent coordination must be transparent, auditable, and aligned with public safety goals. Provides blueprint for "mission-critical" agentic deployments in infrastructure management.
+**Why it matters:** Establishes a blueprint for sovereign, regulation-compliant AI infrastructure that nations can deploy without relying on foreign model providers. The distillation techniques demonstrated by Apertus Mini show how to scale down foundation models while preserving capability — critical for edge deployment and national AI sovereignty initiatives.
 
-**Source:** [Hacker News](https://news.ycombinator.com/item?id=48490826)
-
----
-
-### 4. **Lines of Code Got a Better Publicist** – Automated Documentation Agents (June 11, 2026)
-**What happened:** Curlewis introduced autonomous agents that analyze codebases and generate human-readable documentation highlighting complex logic paths, potential security vulnerabilities, and maintainability concerns. The system integrates with existing CI/CD pipelines to provide "living docs" that evolve alongside the codebase.
-
-**Why it matters:** Addresses one of agentic AI's most promising near-term applications—automated knowledge preservation for complex software systems. Demonstrates how agents can serve as institutional memory for technical teams, reducing onboarding time and knowledge loss from staff turnover.
-
-**Source:** [Hacker News](https://news.ycombinator.com/item?id=48489402) - https://curlewis.co.nz/posts/lines-of-code-got-a-better-publicist/
+**Source:** [Hacker News](https://news.ycombinator.com/item?id=48622778) - https://apertvs.ai/ | Article: https://apertvs.ai/articles/2026-06-apertus-mini/
 
 ---
 
-### 5. **Euro-Office: First version of the open-source web office is here** (June 11, 2026)
-**What happened:** An agentic collaboration platform launched as an open-source alternative to commercial office suites, with AI agents managing document workflows, meeting summaries, and project coordination across distributed teams. The initial release supports real-time document editing with agent-suggested revisions that respect author intent.
+### 3. **Sakana Fugu — Multi-Agent System as a Model** (June 22, 2026)
+**What happened:** Sakana AI launched Fugu, a model interface that coordinates specialized AI agents through a single OpenAI-compatible API. Rather than relying on one monolithic model, Fugu dynamically routes requests to purpose-built specialist agents — each optimized for specific tasks like code generation, reasoning, or creative writing — and composes their outputs into coherent responses.
 
-**Why it matters:** Represents a shift from human-in-the-loop to "agent-as-partner" collaboration models in enterprise software. Shows how agentic systems can augment rather than replace human creativity by handling routine document management while humans focus on substantive content creation.
+**Why it matters:** Represents a fundamental architectural shift from "one big model does everything" to "orchestrated specialists." This multi-agent-as-a-model approach could deliver better quality at lower cost by matching the right agent to each task, while maintaining API compatibility that makes integration seamless for existing applications.
 
-**Source:** [Hacker News](https://news.ycombinator.com/item?id=48490564) - https://www.heise.de/en/news/Euro-Office-First-version-of-the-open-source-web-office-is-here-11322160.html
+**Source:** [Hacker News](https://news.ycombinator.com/item?id=48624782) - https://sakana.ai/fugu/
+
+---
+
+### 4. **Claude Code's "Extended Thinking" Exposed as Summary, Not Authentic Reasoning** (June 22, 2026)
+**What happened:** Patrick McCanna published an analysis demonstrating that Claude Code's "extended thinking" output is not authentic step-by-step reasoning — it is a post-hoc summary generated after the model has already formed its answer. The visible "thinking process" does not reflect the actual computational path taken by the model.
+
+**Why it matters:** Raises critical questions about transparency and trust in AI coding assistants. If users believe they are seeing genuine reasoning when they are actually seeing fabricated explanations, this undermines the ability to audit agent decisions — a key concern for agentic systems that modify production codebases autonomously.
+
+**Source:** [Hacker News](https://news.ycombinator.com/item?id=48630535) - https://patrickmccanna.net/the-text-in-claude-codes-extended-thinking-output-is-not-authentic/
+
+---
+
+### 5. **NVIDIA Halos — Autonomous Vehicle Safety Stack** (June 22, 2026)
+**What happened:** NVIDIA unveiled Halos, a comprehensive safety solution for autonomous vehicles that integrates three pillars: DGX for AI training, Omniverse with Cosmos for simulation, and AGX for deployment. The system builds safety and explainability directly into the AI-based AV stack rather than treating it as an afterthought.
+
+**Why it matters:** Addresses one of the most critical barriers to autonomous vehicle adoption — verifiable safety. By integrating safety at every layer from training through simulation to real-world deployment, Halos provides a framework for agentic systems operating in high-stakes physical environments where failure is not acceptable.
+
+**Source:** [Hacker News](https://news.ycombinator.com/item?id=48630220) - https://www.nvidia.com/en-us/ai-trust-center/halos/autonomous-vehicles/
 
 ---
 
 ## 🆕 New Use Cases Emerging in June 2026
 
-### **Multi-Agent Knowledge Preservation**
-Agents analyzing codebases to generate living documentation that evolves with the software, reducing knowledge loss from team turnover. This extends beyond simple comments—agents now maintain architectural decision records, vulnerability histories, and onboarding guides tied to specific code regions.
+### **AI Coding Agent Audit Trails**
+Ponytrail, a new CLI tool and bundled agent skill, records why files changed when AI coding agents make edits — creating local audit trails for autonomous code modifications. This addresses the growing need for accountability as agentic systems take on more autonomous development roles. The tool integrates with Claude, Copilot, and Codex workflows.
 
-### **Climate Intelligence Coordination**
-Deployed agent swarms working across satellite data, weather models, and field networks to provide early warning for extreme weather events. Demonstrates critical use case for high-stakes multi-agent systems where transparency and auditability are non-negotiable requirements.
+### **Sovereign AI Infrastructure**
+The Apertus project demonstrates how nations can build fully open, regulation-compliant foundation models — training data, code, weights, methods, and alignment principles all documented and reproducible. This enables countries to deploy AI without dependency on foreign model providers while meeting EU AI Act requirements.
 
-### **Open-Reasoning Model Reproduction**
-Community reproductions of DeepSeek-R1's reasoning architecture enable smaller models to achieve advanced reasoning capabilities through attention pattern distillation and chain-of-thought compression. Validates that agentic reasoning can be democratized without access to largest proprietary models.
+### **Multi-Agent Orchestration as a Service**
+Sakana Fugu shows that coordinating specialized agents through a unified API can replace monolithic models for many use cases. The "system as a model" paradigm opens new possibilities for agentic workflows where different tasks require fundamentally different capabilities — from code generation to creative writing to mathematical reasoning.
 
 ---
 
 ## 🌟 Top Rated GitHub Projects Leveraging Agentic/Gen AI (June 2026)
 
-1. **open-r1** / HuggingFace
-   - Open reproduction of DeepSeek-R1 reasoning model with training documentation
-   - Focus: Multi-step reasoning capability transfer to smaller models
+1. **Moebius** / HUST Vision Lab
+   - 0.2B parameter image inpainting model rivaling 10B-level FLUX.1-Fill-Dev
+   - Focus: Extreme parametric efficiency for high-fidelity visual editing on edge devices
+   - https://github.com/hustvl/Moebius
 
-2. **lines-of-code-publicist** / Curlewis.AI
-   - Automated codebase analysis and living documentation generation
-   - Focus: Knowledge preservation for complex software systems
+2. **Apertus** / Swiss AI Initiative (EPFL + ETH Zurich)
+   - Fully open foundation model for sovereign AI, EU AI Act compliant
+   - Focus: National AI sovereignty with 1000+ language support and distillation techniques
+   - https://apertvs.ai/
 
-3. **mimo-code** / Xiaomi
-   - Multi-modal agent collaboration platform for enterprise development
-   - Focus: Secure agent coordination across IDE components
+3. **Sakana Fugu** / Sakana AI
+   - Multi-agent system as a model — coordinates specialist agents via OpenAI-compatible API
+   - Focus: Dynamic agent routing for task-specific optimization
+   - https://sakana.ai/fugu/
 
-4. **Anti-CIA framework** / ClimateAI Coalition
-   - Autonomous climate intelligence agents for extreme weather prediction
-   - Focus: High-stakes multi-agent coordination with auditability
+4. **Ponytrail** / 0xroylee
+   - Local audit trail for AI coding-agent edits with bundled skills for Claude, Copilot, Codex
+   - Focus: Accountability and traceability in autonomous code modification
+   - https://github.com/0xroylee/ponytrail
 
-5. **Euro-Office** / OpenSource Collaborative
-   - Agentic collaboration platform with AI-managed document workflows
-   - Focus: Agent-as-partner collaboration models in enterprise software
-
----
-
-## 🔗 Sources
-
-- Hacker News (June 11, 2026): https://news.ycombinator.com/
-- ArXiv Recent Submissions cs.AI: https://arxiv.org/list/cs.AI/recent
-- Open-r1 Repository: https://github.com/huggingface/open-r1
-- MiMo Code Platform: https://mimo.xiaomi.com/mimocode
-- Curlewis Publicist: https://curlewis.co.nz/posts/lines-of-code-got-a-better-publicist/
-- Heise Euro-Office: https://www.heise.de/en/news/Euro-Office-First-version-of-the-open-source-web-office-is-here-11322160.html
+5. **NVIDIA Halos** / NVIDIA
+   - End-to-end AV safety stack integrating DGX training, Omniverse simulation, AGX deployment
+   - Focus: Verifiable safety for agentic systems in physical environments
+   - https://www.nvidia.com/en-us/ai-trust-center/halos/autonomous-vehicles/
 
 ---
 
-## 📝 Compilation Note
+## 📚 Sources
 
-This report aggregates fresh research from Hacker News trending submissions, ArXiv recent cs.AI submissions, and verified open-source repositories. All sources were accessed June 11, 2026 during Pacific Time hours (America/Los_Angeles timezone). The compilation focuses on practical agentic AI implementations and GenAI advancements with working code or documented research contributions.
+1. [Moebius Project Page](https://hustvl.github.io/Moebius/) — HUST Vision Lab research on lightweight image inpainting
+2. [Apertus.ai](https://apertvs.ai/) — Swiss AI Initiative sovereign foundation model
+3. [Sakana Fugu](https://sakana.ai/fugu/) — Multi-agent system as a model interface
+4. [Patrick McCanna: Claude Code Extended Thinking Analysis](https://patrickmccanna.net/the-text-in-claude-codes-extended-thinking-output-is-not-authentic/) — Investigation of Claude Code's reasoning transparency
+5. [NVIDIA Halos AV Safety](https://www.nvidia.com/en-us/ai-trust-center/halos/autonomous-vehicles/) — Autonomous vehicle safety solutions
+6. [Ponytrail on GitHub](https://github.com/0xroylee/ponytrail) — AI coding agent audit trail tool
 
 ---
+
+*Compiled by automated research pipeline | June 22, 2026 | Sources verified at time of compilation*
