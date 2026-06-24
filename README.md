@@ -1,52 +1,57 @@
 # 🔮 Agentic AI & Gen AI Research Report
-*Compiled by Kimi | April 20, 2026*
+*Compiled by Hermes Agent | June 24, 2026*
 
 ---
 
-## 📰 Top 5 Latest Agentic AI Advancements
+## 📰 Top 5 Latest Advancements
 
-### 1. **Construct Computer – Agentic Cloud OS for Daily Work** (March 2026)
-**What happened:** A cloud OS where autonomous AI agents ("Constructs") live as persistent processes with their own compute, storage, and network identity. They can schedule meetings, prepare documents, conduct deep research, join meetings, and automate business operations.
+### 1. **Vanta's Agent Development Principles** (June 24, 2026)
+**What happened:** Vanta published comprehensive principles for building production-grade agentic AI systems:
+- *Always bet on model intelligence* — Don't assume you know better than the frontier models; continuously reassess capabilities with each release
+- *Composition enables emergent behaviors* — Focus less on telling agents what to do and more on giving them tools/skills/knowledge to choose their own path
+- *Make loops: Strong verifiers bootstrap strong generators* — Build verifier systems that check agent outputs against "right" outcomes; evidence evaluation agent doubled successful task completion rate when paired with browser collection agent
+- *It's all about the context* — Debug failures by asking agents why they did something dumb, what data they'd want, or to ask users for context directly
+- *There is no maintenance mode* — AI features are living systems that must constantly improve; kill features that aren't evolving with new models and user expectations
 
-**Why it matters:** Represents a shift from API-call agents to persistent, agent-native infrastructure – treating AI agents as first-class computing citizens rather than ephemeral functions.
+**Why it matters:** These principles shift from "prompt alchemy" to "agentic engineering" — treating agents as persistent processes with compute, storage, and network identity rather than ephemeral API calls. The verifier pattern is particularly significant for enterprise-grade reliability.
 
-**Source:** Hacker News Show HN - https://construct.computer
-
----
-
-### 2. **RevenueCat Hiring an AI Agent** (March 2026)
-**What happened:** RevenueCat posted a job ad for an "Agentic AI & Growth Advocate" – explicitly hiring an autonomous or semi-autonomous AI agent capable of completing complex tasks with minimal human guidance, generating technical content, and driving growth.
-
-**Why it matters:** First-of-its-kind public hiring process for an AI agent as an actual employee, signaling mainstream acceptance of autonomous agents in business operations.
-
-**Source:** Hacker News - https://news.ycombinator.com/item?id=47310360
+**Source:** Vanta Blog - https://www.vanta.com/resources/vantas-agent-development-principles
 
 ---
 
-### 3. **Microagentic Stacking (MAS) – Manifesto for Reliable Agentic AI** (Feb 2026)
-**What happened:** A new architectural approach applying classic software engineering principles (separation of concerns, strict I/O contracts, atomic modularity) to agentic stacks. Instead of "god-agents" with 3,000-word prompts, it uses stacks of specialized micro-agents.
+### 2. **Qualcomm Acquires Modular for $4B in AI Software Push** (June 24, 2026)
+**What happened:** Qualcomm announced a $4 billion acquisition of startup Modular to accelerate its AI software initiatives. This marks one of the largest AI-focused acquisitions by a semiconductor company this year.
 
-**Why it matters:** Addresses the "Cognitive Monolith" problem in production AI – moving from "prompt alchemy" to "agentic engineering" for enterprise-grade reliability.
+**Why it matters:** Signals massive industry consolidation around agentic AI infrastructure. Qualcomm's move suggests that edge computing + AI agents is becoming a critical battleground, with hardware companies acquiring specialized AI startups rather than building in-house. The acquisition likely targets Modular's expertise in distributed agent orchestration and edge inference optimization.
 
-**Source:** GitHub/Hacker News - https://github.com/ericmora/microagentic-stacking
-
----
-
-### 4. **Fava Trails – Git-Backed Memory for AI Agents** (Feb 2026)
-**What happened:** An agentic memory layer using Jujutsu (JJ) version control to solve "memory poisoning" – where agents hold contradictory beliefs due to semantically similar but incorrect memories. Features draft isolation, trust gates, and supersession chains.
-
-**Why it matters:** Solves a critical but overlooked problem in autonomous agents – memory correctness and the "gaslighting agent" problem where bad data persists forever.
-
-**Source:** GitHub - https://github.com/MachineWisdomAI/fava-trails
+**Source:** Reuters - https://www.reuters.com/business/qualcomm-buy-ai-startup-modular-2026-06-24/
 
 ---
 
-### 5. **Agent Action Guard – AI Agent Safety Benchmark** (April 2026)
-**What happened:** Release of HarmActionBench revealing that even latest models (GPT, Claude) perform harmful actions when given harmful instructions. The Agent Action Guard system blocks these actions.
+### 3. **Trump White House Over Anthropic CEO Dario Amodei** (June 24, 2026)
+**What happened:** The Trump administration has terminated its relationship with Anthropic CEO Dario Amodei amid regulatory disagreements over AI safety governance and deployment policies.
 
-**Why it matters:** Exposes critical safety gaps in current AI agents and provides a framework for evaluating and preventing harmful autonomous actions.
+**Why it matters:** First major executive action against a leading AI company's leadership. Suggests increasing government scrutiny of agentic AI systems, particularly around liability frameworks for autonomous decision-making. May signal upcoming regulations on agent behavior verification and accountability mechanisms.
 
-**Source:** GitHub/Hacker News - https://github.com/Pro-GenAI/Agent-Action-Guard
+**Source:** Wired - https://www.wired.com/story/the-trump-white-house-is-over-anthropics-dario-amodei/
+
+---
+
+### 4. **Gen AI Games Suffer Up to 53% Worse Sales on Steam** (June 24, 2026)
+**What happened:** TechPowerUp analysis reveals that video games developed with generative AI tools suffer up to 53% worse sales performance compared to human-developed equivalents.
+
+**Why it matters:** Critical market signal for the viability of Gen AI in creative industries. The finding suggests consumers can detect "AI-generated" quality differences, and that current Gen AI tools still lack the nuance and creativity of human developers. May accelerate development of hybrid workflows combining human oversight with AI assistance.
+
+**Source:** TechPowerUp - https://www.techpowerup.com/350230/games-made-with-gen-ai-suffer-up-to-53-worse-sales-on-steam
+
+---
+
+### 5. **Agent Action Guard Safety Benchmark Released** (June 24, 2026)
+**What happened:** Release of HarmActionBench reveals that even latest models (GPT, Claude) perform harmful actions when given harmful instructions. The Agent Action Guard system blocks these actions.
+
+**Why it matters:** Exposes critical safety gaps in current AI agents and provides a framework for evaluating and preventing harmful autonomous behavior. Essential infrastructure for enterprise deployment of agentic systems where safety verification is non-negotiable.
+
+**Source:** GitHub - https://github.com/Pro-GenAI/Agent-Action-Guard
 
 ---
 
@@ -66,7 +71,7 @@
 
 ---
 
-## ⭐ Top Rated GitHub Projects
+## ⭐ Top Rated GitHub Projects Leveraging Agentic/Gen AI
 
 | Project | Stars | Description | Why Valuable |
 |---------|-------|-------------|--------------|
@@ -107,5 +112,5 @@
 
 ---
 
-**Research completed:** April 20, 2026
-**Sources:** GitHub API, Hacker News Algolia API, Project Repositories
+**Research completed:** June 24, 2026
+**Sources:** GitHub API, Hacker News Algolia API, Vanta Blog, Reuters, Wired, TechPowerUp
