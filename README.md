@@ -1,116 +1,108 @@
-# 🔮 Agentic AI & Gen AI Research Report
-*Compiled by Hermes Agent | June 24, 2026*
+# 🔮 Agentic AI & Gen AI Research Report — Friday, June 26, 2026
+
+*Compiled by Hermes Agent from live source checks on June 26, 2026 (America/Los_Angeles).*  
+*Scope: agentic AI systems, generative model research, enterprise adoption, infrastructure, and open-source projects with current activity.*
 
 ---
 
 ## 📰 Top 5 Latest Advancements
 
-### 1. **Vanta's Agent Development Principles** (June 24, 2026)
-**What happened:** Vanta published comprehensive principles for building production-grade agentic AI systems:
-- *Always bet on model intelligence* — Don't assume you know better than the frontier models; continuously reassess capabilities with each release
-- *Composition enables emergent behaviors* — Focus less on telling agents what to do and more on giving them tools/skills/knowledge to choose their own path
-- *Make loops: Strong verifiers bootstrap strong generators* — Build verifier systems that check agent outputs against "right" outcomes; evidence evaluation agent doubled successful task completion rate when paired with browser collection agent
-- *It's all about the context* — Debug failures by asking agents why they did something dumb, what data they'd want, or to ask users for context directly
-- *There is no maintenance mode* — AI features are living systems that must constantly improve; kill features that aren't evolving with new models and user expectations
+### 1. OpenAI: agents are moving from short chats to longer workplace task execution
 
-**Why it matters:** These principles shift from "prompt alchemy" to "agentic engineering" — treating agents as persistent processes with compute, storage, and network identity rather than ephemeral API calls. The verifier pattern is particularly significant for enterprise-grade reliability.
+OpenAI's June 25 report, **"How agents are transforming work,"** frames the newest frontier as agents that can take on longer, multi-step work instead of only answering one-off prompts. The key signal is not simply better language output; it is sustained task completion across work roles, with agent systems increasingly coordinating context, tools, and review loops.
 
-**Source:** Vanta Blog - https://www.vanta.com/resources/vantas-agent-development-principles
+**Why it matters:** the center of gravity is shifting from chatbot UX toward operational agents that can own meaningful chunks of knowledge work. This makes evaluation, handoff quality, auditability, and domain-specific tool access more important than prompt polish alone.
+
+**Source:** https://openai.com/index/how-agents-are-transforming-work
 
 ---
 
-### 2. **Qualcomm Acquires Modular for $4B in AI Software Push** (June 24, 2026)
-**What happened:** Qualcomm announced a $4 billion acquisition of startup Modular to accelerate its AI software initiatives. This marks one of the largest AI-focused acquisitions by a semiconductor company this year.
+### 2. OpenAI + Broadcom: inference-specialized silicon becomes a model deployment bottleneck strategy
 
-**Why it matters:** Signals massive industry consolidation around agentic AI infrastructure. Qualcomm's move suggests that edge computing + AI agents is becoming a critical battleground, with hardware companies acquiring specialized AI startups rather than building in-house. The acquisition likely targets Modular's expertise in distributed agent orchestration and edge inference optimization.
+OpenAI and Broadcom announced **Jalapeño**, an LLM-optimized inference chip intended to improve performance, efficiency, and scale for production AI systems. This is a deployment-layer advancement rather than a model-card announcement: the competitive constraint is increasingly the ability to serve sophisticated models and agents cheaply, reliably, and at high throughput.
 
-**Source:** Reuters - https://www.reuters.com/business/qualcomm-buy-ai-startup-modular-2026-06-24/
+**Why it matters:** agentic workflows multiply inference calls through planning, tool use, reflection, verification, and memory retrieval. Dedicated inference hardware can reduce the cost penalty of these multi-call loops and may make always-on agents more economically viable.
 
----
-
-### 3. **Trump White House Over Anthropic CEO Dario Amodei** (June 24, 2026)
-**What happened:** The Trump administration has terminated its relationship with Anthropic CEO Dario Amodei amid regulatory disagreements over AI safety governance and deployment policies.
-
-**Why it matters:** First major executive action against a leading AI company's leadership. Suggests increasing government scrutiny of agentic AI systems, particularly around liability frameworks for autonomous decision-making. May signal upcoming regulations on agent behavior verification and accountability mechanisms.
-
-**Source:** Wired - https://www.wired.com/story/the-trump-white-house-is-over-anthropics-dario-amodei/
+**Source:** https://openai.com/index/openai-broadcom-jalapeno-inference-chip
 
 ---
 
-### 4. **Gen AI Games Suffer Up to 53% Worse Sales on Steam** (June 24, 2026)
-**What happened:** TechPowerUp analysis reveals that video games developed with generative AI tools suffer up to 53% worse sales performance compared to human-developed equivalents.
+### 3. Google DeepMind: computer-use capabilities arrive in Gemini 3.5 Flash
 
-**Why it matters:** Critical market signal for the viability of Gen AI in creative industries. The finding suggests consumers can detect "AI-generated" quality differences, and that current Gen AI tools still lack the nuance and creativity of human developers. May accelerate development of hybrid workflows combining human oversight with AI assistance.
+Google DeepMind's June 24 post, **"Introducing computer use in Gemini 3.5 Flash,"** points to a practical agent capability: models that can interact with graphical computer environments rather than relying only on APIs or text instructions. Computer-use models are important because many enterprise workflows still live behind browser UIs, legacy dashboards, and tools without clean programmatic interfaces.
 
-**Source:** TechPowerUp - https://www.techpowerup.com/350230/games-made-with-gen-ai-suffer-up-to-53-worse-sales-on-steam
+**Why it matters:** browser and desktop operation is becoming a core agent primitive. If paired with guardrails, logging, and sandboxing, computer-use models can automate back-office work, QA, data entry, and web research where APIs are incomplete or unavailable.
 
----
-
-### 5. **Agent Action Guard Safety Benchmark Released** (June 24, 2026)
-**What happened:** Release of HarmActionBench reveals that even latest models (GPT, Claude) perform harmful actions when given harmful instructions. The Agent Action Guard system blocks these actions.
-
-**Why it matters:** Exposes critical safety gaps in current AI agents and provides a framework for evaluating and preventing harmful autonomous behavior. Essential infrastructure for enterprise deployment of agentic systems where safety verification is non-negotiable.
-
-**Source:** GitHub - https://github.com/Pro-GenAI/Agent-Action-Guard
+**Source:** https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/
 
 ---
 
-## 🚀 New Use Cases for Agentic/Gen AI
+### 4. Google Research: reasoning can unlock latent parametric knowledge in LLMs
 
-### Real-World Applications:
+Google Research published **"Thinking to recall: How reasoning unlocks parametric knowledge in LLMs"** on June 24. The finding is relevant to agent builders because retrieval is not the only way to improve factual performance: structured reasoning can help models surface knowledge already stored in their parameters.
 
-1. **Autonomous News Publishing** – Dr. Headline is an autonomous AI agent publishing daily political news briefings without human editors, using 25 stages of LLM-guided evaluation (https://headlinesquare.github.io/)
+**Why it matters:** production agents should combine retrieval, reasoning traces, and verification rather than treating RAG as the only reliability mechanism. This supports lighter-weight workflows where an agent reasons first, retrieves when uncertain, and verifies before acting.
 
-2. **AI-Native Company Building** – usplus.ai lets you create a virtual "Lab" with AI agents assigned to real org roles (CEO, CTO, CMO) with 58 native skills and 1,000+ SaaS integrations
+**Source:** https://research.google/blog/thinking-to-recall-how-reasoning-unlocks-parametric-knowledge-in-llms/
 
-3. **Cybersecurity Pentesting** – HexStrike AI MCP Agents autonomously run 150+ cybersecurity tools for automated pentesting and vulnerability discovery
+---
 
-4. **Autonomous ML Research** – ARIS (Auto-Research-In-Sleep) enables cross-model review loops, idea discovery, and experiment automation while you sleep
+### 5. New arXiv work: self-evolving multimodal systems and open robot behavior cloning
 
-5. **Game Development with GenAI NPCs** – Retail Mage is a multiplayer Unreal game where GenAI NPCs observe, plan, remember, and engage naturally – bringing "rulings, not rules" gameplay to video games
+Two June 25 arXiv papers show momentum in self-improving multimodal models and embodied AI:
+
+- **Ask, Solve, Generate** proposes a self-evolving multimodal framework in which internal roles generate questions, solve/evaluate them, and synthesize images using self-consistency rewards from unlabeled images.
+- **Scalable Behavior Cloning with Open Data, Training, and Evaluation** introduces an open robotics behavior-cloning stack with ABC-130K, described as 3,500 hours of teleoperation data across 130K episodes and 195 tasks.
+
+**Why it matters:** the first paper pushes autonomous training loops for multimodal understanding/generation; the second lowers the barrier for reproducible robot policy research. Together they show agentic AI moving both inward (self-training loops) and outward (physical task execution).
+
+**Sources:**
+- https://arxiv.org/abs/2606.27376v1
+- https://arxiv.org/abs/2606.27375v1
+
+---
+
+## 🚀 New Use Cases
+
+1. **Long-running workplace agents** — Agents that manage research, reporting, operations, and handoffs over multi-step workflows rather than acting as one-turn assistants.
+2. **Browser and desktop automation** — Computer-use models can operate legacy web applications, internal dashboards, QA flows, and SaaS tools where APIs are incomplete.
+3. **Inference-efficient agent fleets** — Specialized inference chips can make multi-agent or verifier-heavy workflows cheaper by reducing the marginal cost of repeated model calls.
+4. **Reason-first knowledge work** — Agents can attempt structured reasoning to elicit parametric knowledge, then selectively retrieve and verify instead of retrieving for every subtask.
+5. **Self-improving multimodal pipelines** — Proposer/solver/generator loops can create training signals from unlabeled data, useful for visual QA, image generation evaluation, and synthetic-data bootstrapping.
+6. **Open robotics policy development** — Large shared behavior-cloning datasets and reproducible training/evaluation stacks can accelerate manipulation policies for warehouses, labs, and assistive robotics.
 
 ---
 
 ## ⭐ Top Rated GitHub Projects Leveraging Agentic/Gen AI
 
-| Project | Stars | Description | Why Valuable |
-|---------|-------|-------------|--------------|
-| **gpt-researcher** | 26.6K | Autonomous agent for deep research on any topic | Deep research capabilities with any LLM |
-| **hexstrike-ai** | 8.2K | MCP agents running 150+ cybersecurity tools | First comprehensive AI pentesting suite |
-| **Upsonic** | 7.8K | Build autonomous AI agents in Python | Python-native agent framework with MCP support |
-| **ARIS** | 7.1K | Auto-Research-In-Sleep for ML research | Autonomous research while you sleep |
-| **osaurus** | 5.1K | Native macOS harness for AI agents | Fully offline, Swift-based agent platform |
-| **byterover-cli** | 4.6K | Portable memory layer for coding agents | Context memory for autonomous agents |
-| **mcp-memory-service** | 1.7K | Persistent memory for agent pipelines | Knowledge graph + autonomous consolidation |
-| **web-eval-agent** | 1.2K | MCP server for autonomous web app evaluation | Automated testing via Playwright |
-| **argo** | 674 | Local Manus alternative for desktop | Offline-first RAG knowledge base |
-| **mcp-gateway-registry** | 598 | Enterprise MCP Gateway & Registry | Secure OAuth, tool discovery for agents |
+Live GitHub API checks on June 26 highlighted these highly starred, actively updated projects in agentic and generative AI categories:
+
+| Project | Stars at check | Primary language | Why it is relevant |
+|---|---:|---|---|
+| [langchain-ai/langchain](https://github.com/langchain-ai/langchain) | 140,284 | Python | Mature agent/RAG/application framework; strong ecosystem around LangGraph and tool-using workflows. |
+| [firecrawl/firecrawl](https://github.com/firecrawl/firecrawl) | 139,523 | TypeScript | Web search/scraping/extraction infrastructure for agents that need reliable external context. |
+| [google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli) | 105,568 | TypeScript | Terminal-native AI agent interface for coding and operational workflows. |
+| [browser-use/browser-use](https://github.com/browser-use/browser-use) | 100,832 | Python | Browser automation layer purpose-built for AI agents interacting with websites. |
+| [infiniflow/ragflow](https://github.com/infiniflow/ragflow) | 83,687 | Go | Agentic retrieval/RAG engine for building reliable context layers around LLM applications. |
 
 ---
 
-## 📱 Community Sentiment (Hacker News)
+## 🔗 Sources with Working URLs
 
-### Positive Discussion #1: **"Show HN: Construct Computer – Agentic Cloud OS"**
-- **Community:** Hacker News
-- **Key Points:** 21 upvotes, 8 comments discussing agent-native infrastructure vs API-call agents. Community excited about persistent processes with compute/storage/network identity.
-- **Link:** https://news.ycombinator.com/item?id=47231734
-
-### Positive Discussion #2: **"Show HN: Fava Trails – Git-backed memory for AI agents"**
-- **Community:** Hacker News
-- **Key Points:** Solves the "memory poisoning" problem. Community discussion on using Jujutsu vs Git for agent state management. Recognition that memory correctness is under-addressed.
-- **Link:** https://news.ycombinator.com/item?id=47197011
-
----
-
-## 📊 Reliability Assessment
-
-| Source Type | Reliability |
-|-------------|-------------|
-| GitHub API | ⭐⭐⭐⭐⭐ Official, real-time data |
-| Hacker News API | ⭐⭐⭐⭐⭐ Community-verified, technical audience |
-| Project Documentation | ⭐⭐⭐⭐⭐ Primary source |
+- OpenAI — How agents are transforming work: https://openai.com/index/how-agents-are-transforming-work
+- OpenAI — OpenAI and Broadcom unveil LLM-optimized inference chip: https://openai.com/index/openai-broadcom-jalapeno-inference-chip
+- Google DeepMind — Introducing computer use in Gemini 3.5 Flash: https://deepmind.google/blog/introducing-computer-use-in-gemini-3-5-flash/
+- Google Research — Thinking to recall: https://research.google/blog/thinking-to-recall-how-reasoning-unlocks-parametric-knowledge-in-llms/
+- arXiv — Ask, Solve, Generate: https://arxiv.org/abs/2606.27376v1
+- arXiv — Scalable Behavior Cloning with Open Data, Training, and Evaluation: https://arxiv.org/abs/2606.27375v1
+- GitHub — LangChain: https://github.com/langchain-ai/langchain
+- GitHub — Firecrawl: https://github.com/firecrawl/firecrawl
+- GitHub — Gemini CLI: https://github.com/google-gemini/gemini-cli
+- GitHub — Browser Use: https://github.com/browser-use/browser-use
+- GitHub — RAGFlow: https://github.com/infiniflow/ragflow
 
 ---
 
-**Research completed:** June 24, 2026
-**Sources:** GitHub API, Hacker News Algolia API, Vanta Blog, Reuters, Wired, TechPowerUp
+## 📝 Short Compilation Note
+
+This report was compiled from live RSS/API/page checks against primary sources: OpenAI News RSS, Google DeepMind RSS, Google Research RSS, arXiv API, and GitHub repository search. All listed source URLs returned HTTP 200 during verification. The content is materially new versus the June 24 report: it replaces the prior Vanta/Qualcomm/Wired/Steam/HarmActionBench emphasis with newly checked June 25–26 signals around workplace agents, inference silicon, computer-use models, reasoning-enabled recall, self-evolving multimodal training, and open robotics behavior cloning.
