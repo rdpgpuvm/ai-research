@@ -1,49 +1,103 @@
-# Agentic AI & Generative AI Advancements — May 23, 2026
+# 🔬 Agentic AI & Generative AI Research Report — July 10, 2026
+
+*Compiled July 10, 2026 (America/Los_Angeles) from fresh checks of the arXiv API and GitHub’s public API. Research claims below are summaries of the linked primary sources, not independent peer review.*
+
+---
 
 ## Top 5 Latest Advancements
 
-### 1. Microsoft's Multi-Model Agentic Security System Tops Industry Benchmark
-Microsoft unveiled a new multi-model agentic security system designed to defend at "AI speed." The system leverages autonomous agents to detect and respond to threats in real time, outperforming traditional security tools on leading industry benchmarks.
-- Source: [Microsoft Security Blog](https://www.microsoft.com/en-us/security/blog/2026/05/12/defense-at-ai-speed-microsofts-new-multi-model-agentic-security-system-tops-leading-industry-benchmark/)
+### 1. UniClawBench makes proactive agents testable on everyday tasks
 
-### 2. All Model Labs Are Now Agent Labs
-A growing consensus in the AI industry is that frontier model labs are pivoting from pure model training to agentic systems. The shift reflects a belief that the next wave of AI value will come from autonomous agents that can plan, execute, and iterate on complex tasks rather than single-shot inference.
-- Source: [Latent Space](https://www.latent.space/p/ainews-all-model-labs-are-now-agent)
+**What happened:** *UniClawBench: A Universal Benchmark for Proactive Agents on Real-World Tasks* (arXiv:2607.08768, submitted July 9) targets agents that operate tools and assist users without waiting for a narrowly phrased request. It addresses the gap between conventional task benchmarks and real-world proactive behavior.
 
-### 3. Microsoft Reports AI Is More Expensive Than Paying Human Employees
-A recent Microsoft internal analysis revealed that deploying AI agents at scale is currently more costly than employing human workers for equivalent tasks. The finding highlights the ongoing tension between AI hype and economic reality, especially as token and compute costs accumulate for agentic workflows.
-- Source: [Fortune](https://fortune.com/2026/05/22/microsoft-ai-cost-problem-tokens-agents/)
+**Why it matters:** Agent evaluation is moving toward initiative, tool operation, and end-to-end task completion—not only answer quality. Product teams can use this direction to test whether an assistant notices opportunities to help without becoming intrusive or acting outside its authority.
 
-### 4. Voker (YC S24) Launches Analytics for AI Agents
-Voker, a Y Combinator S24 startup, launched a platform dedicated to analytics and observability for AI agents. The tool helps developers track agent performance, trace decision paths, and debug failures in production agentic systems.
-- Source: [Hacker News / Voker](https://voker.ai)
+**Source:** https://arxiv.org/abs/2607.08768
 
-### 5. AMD Lemonade SDK 10.5 Promotes macOS to GA with ROCm 7.13 Integration
-AMD released Lemonade SDK 10.5, bringing its AI development toolkit for macOS to general availability. The update integrates ROCm 7.13, enabling developers to build and deploy generative AI applications on Apple Silicon with AMD's open software stack.
-- Source: [Phoronix](https://www.phoronix.com/news/Lemonade-SDK-10.5-Released)
+### 2. OpenCoF treats video generation as a reasoning medium
+
+**What happened:** *OpenCoF: Learning to Reason Through Video Generation* introduces OpenCoF-17K and Wan-CoF, using temporally connected frames as a “Chain-of-Frame” reasoning path. The paper reports gains over a Wan2.2-I2V-A14B baseline across four video-reasoning benchmarks and releases its dataset, model, and code for research.
+
+**Why it matters:** Video models are being studied not just as renderers but as systems that preserve intermediate visual and temporal state. This could improve simulation, embodied planning, visual inspection, and generation workflows where the order of events is part of the answer.
+
+**Source:** https://arxiv.org/abs/2607.08763
+
+### 3. IdeaGene-Bench evaluates scientific lineage, not just novelty
+
+**What happened:** *Ideas Have Genomes* represents scientific ideas as typed, evidence-grounded “Idea Genome” objects and evaluates inheritance, mutation, loss, import, and novel insertion across 10 domains. Its benchmark includes 1,961 lineage traces and reports a compositional bottleneck: the strongest tested system achieved only 27.3% exact accuracy on lineage reasoning.
+
+**Why it matters:** Research agents need to distinguish genuinely new proposals from recombinations that fail to preserve the relevant evidence. Lineage-aware evaluation gives scientific copilots a more demanding target than producing plausible-sounding abstracts.
+
+**Source:** https://arxiv.org/abs/2607.08758
+
+### 4. Semantic persistence turns workflows into reusable knowledge
+
+**What happened:** *Workflow as Knowledge: Semantic Persistence for LLM-Mediated Workflows* proposes treating tool-use workflows, retrieval, branching, checkpoints, and human approvals as knowledge that can persist semantically rather than as disposable execution traces.
+
+**Why it matters:** This links agent memory to operational learning. An agent platform could retain why a workflow branch was chosen, what evidence supported it, and where human approval was required—making later runs more reproducible, auditable, and easier to improve.
+
+**Source:** https://arxiv.org/abs/2607.08740
+
+### 5. Recursive multi-agent search expands deep-and-wide research
+
+**What happened:** *WebSwarm: Recursive Multi-Agent Orchestration for Deep-and-Wide Web Search* studies recursive orchestration for research tasks that require both breadth and depth. Its framing identifies the limitation of a single ReAct-style trajectory: one context and one path are poorly suited to exploring many evidence branches.
+
+**Why it matters:** Research agents increasingly need parallel discovery, source comparison, and synthesis. Recursive delegation can improve coverage, but it also raises requirements for provenance, duplicate suppression, budget controls, and conflict resolution before results are trusted.
+
+**Source:** https://arxiv.org/abs/2607.08662
 
 ---
 
 ## New Use Cases
 
-### Autonomous Enterprise Governance
-Microsoft's Agent 365 initiative points toward a future where autonomous AI agents handle enterprise governance tasks—compliance monitoring, policy enforcement, and risk assessment—without human intervention. This could dramatically reduce administrative overhead while introducing new challenges around accountability and error correction.
-
-### Embedded Acoustic AI with Sub-16ms Latency
-A new class of ultra-low-latency acoustic AI is emerging, capable of running on devices with as little as 8MB of RAM. These systems enable real-time voice interaction, noise suppression, and audio event detection directly on edge hardware, opening doors for always-on AI in wearables, IoT, and automotive applications.
+- **Proactive personal operations:** Evaluate assistants on noticing and safely completing routine tasks—calendar, files, communications, and household workflows—using initiative-sensitive benchmarks.
+- **Temporal visual planning:** Use Chain-of-Frame-style models for video editing, robotics simulation, industrial inspection, and training data where intermediate states matter.
+- **Lineage-grounded scientific copilots:** Build literature systems that trace which mechanisms and limitations a proposed idea inherits before recommending experiments.
+- **Auditable workflow memory:** Store successful tool paths, evidence, checkpoints, and approval boundaries as reusable semantic procedures instead of opaque logs.
+- **Evidence-scaled web research:** Combine recursive specialist searches with citation graphs and disagreement checks for market intelligence, policy monitoring, technical due diligence, and investigative research.
+- **Physics-constrained autonomous markets:** SolarChain-Eval (arXiv:2607.08681) points toward evaluating agents in cyber-physical economic settings where utility must be balanced with physical validity and trustworthiness.
 
 ---
 
 ## Top Rated GitHub Projects Leveraging Agentic/Gen AI
 
-| Project | Stars | Description |
-|---------|-------|-------------|
-| [CopilotKit/CopilotKit](https://github.com/CopilotKit/CopilotKit) | 31,686 | The Frontend Stack for Agents & Generative UI. React + Angular. Makers of the AG-UI Protocol. |
-| [NirDiamant/GenAI_Agents](https://github.com/NirDiamant/GenAI_Agents) | 22,181 | 50+ tutorials and implementations for Generative AI Agent techniques, from basic conversational bots to complex multi-agent systems. |
-| [GoogleCloudPlatform/generative-ai](https://github.com/GoogleCloudPlatform/generative-ai) | 16,910 | Sample code and notebooks for Generative AI on Google Cloud, with Gemini Enterprise Agent Platform. |
-| [SamurAIGPT/Generative-Media-Skills](https://github.com/SamurAIGPT/Generative-Media-Skills) | 3,315 | Multi-modal Generative Media Skills for AI Agents (Claude Code, Cursor, Gemini CLI). High-quality image, video, and audio generation powered by muapi.ai. |
-| [flyerhq/flutter_chat_ui](https://github.com/flyerhq/flutter_chat_ui) | 2,290 | Free and open-source chat SDK. Build fast, real-time apps and generative AI agents with a high-performance, customizable, cross-platform UI. |
+Fresh GitHub repository search and individual repository API checks were run on July 10, 2026. Star counts are the observed public API values at compilation time and will change.
+
+| Rank | Project | Stars | Language | Relevance |
+|---:|---|---:|---|---|
+| 1 | [obra/superpowers](https://github.com/obra/superpowers) | 251,595 | Shell | Agentic skills framework and software-development methodology. |
+| 2 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 212,638 | Python | Long-running, tool-using personal agent platform. |
+| 3 | [google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli) | 105,890 | TypeScript | Open-source terminal agent with Gemini and MCP support. |
+| 4 | [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) | 36,975 | Python | Stateful orchestration framework for resilient agents. |
+| 5 | [openai/openai-agents-python](https://github.com/openai/openai-agents-python) | 27,793 | Python | Lightweight framework for multi-agent workflows, tools, and handoffs. |
+
+Project ranking query: https://api.github.com/search/repositories?q=AI+agent+stars:%3E5000&sort=stars&order=desc
 
 ---
 
-*Report compiled from Hacker News, Reddit, GitHub API, and official announcements. Date: May 23, 2026.*
+## Sources with Working URLs
+
+### Fresh research
+
+- UniClawBench — https://arxiv.org/abs/2607.08768
+- OpenCoF — https://arxiv.org/abs/2607.08763
+- Ideas Have Genomes / IdeaGene-Bench — https://arxiv.org/abs/2607.08758
+- Workflow as Knowledge — https://arxiv.org/abs/2607.08740
+- WebSwarm — https://arxiv.org/abs/2607.08662
+- SolarChain-Eval — https://arxiv.org/abs/2607.08681
+- Fresh arXiv CS.AI query used for date-sorted discovery — https://export.arxiv.org/api/query?search_query=cat:cs.AI&start=0&max_results=10&sortBy=submittedDate&sortOrder=descending
+
+### GitHub project records
+
+- Repository search API — https://api.github.com/search/repositories?q=AI+agent+stars:%3E5000&sort=stars&order=desc
+- obra/superpowers — https://api.github.com/repos/obra/superpowers
+- NousResearch/hermes-agent — https://api.github.com/repos/NousResearch/hermes-agent
+- google-gemini/gemini-cli — https://api.github.com/repos/google-gemini/gemini-cli
+- langchain-ai/langgraph — https://api.github.com/repos/langchain-ai/langgraph
+- openai/openai-agents-python — https://api.github.com/repos/openai/openai-agents-python
+
+---
+
+## Short Compilation Note
+
+This report is materially new relative to July 9: it replaces yesterday’s governance/control-focused paper set with fresh July 9 research on proactive-agent benchmarking, temporal video reasoning, scientific idea lineage, semantic workflow memory, and recursive web search. The common thread is operational maturity: useful agents need measurable initiative, preserved intermediate state, evidence lineage, reusable procedures, and scalable research orchestration—not merely fluent generation.
