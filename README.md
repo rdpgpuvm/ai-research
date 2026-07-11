@@ -1,77 +1,77 @@
-# 🔬 Agentic AI & Generative AI Research Report — July 10, 2026
+# 🔬 Agentic AI & Generative AI Research Report — July 11, 2026
 
-*Compiled July 10, 2026 (America/Los_Angeles) from fresh checks of the arXiv API and GitHub’s public API. Research claims below are summaries of the linked primary sources, not independent peer review.*
+*Compiled July 11, 2026 (America/Los_Angeles) from fresh checks of the arXiv and GitHub public APIs. Research claims summarize linked primary sources and have not been independently peer reviewed.*
 
 ---
 
 ## Top 5 Latest Advancements
 
-### 1. UniClawBench makes proactive agents testable on everyday tasks
+### 1. A proactive memory agent fights “behavioral state decay”
 
-**What happened:** *UniClawBench: A Universal Benchmark for Proactive Agents on Real-World Tasks* (arXiv:2607.08768, submitted July 9) targets agents that operate tools and assist users without waiting for a narrowly phrased request. It addresses the gap between conventional task benchmarks and real-world proactive behavior.
+**What happened:** *Remember When It Matters* treats memory as an active intervention rather than passive retrieval. A separate agent maintains structured state and decides when to inject a grounded reminder into an otherwise unchanged action agent. The paper reports pass@1 gains of 8.3 percentage points on Terminal-Bench 2.0 and 6.8 points on τ²-Bench; selective reminders beat always-on injection and passive memory exposure in its ablations.
 
-**Why it matters:** Agent evaluation is moving toward initiative, tool operation, and end-to-end task completion—not only answer quality. Product teams can use this direction to test whether an assistant notices opportunities to help without becoming intrusive or acting outside its authority.
+**Why it matters:** Long-running agents often still possess relevant facts but fail to surface them at the decision where they matter. A selective sidecar memory policy offers a practical route to improving reliability without rebuilding the primary model or flooding every turn with retrieved context.
 
-**Source:** https://arxiv.org/abs/2607.08768
+**Source:** https://arxiv.org/abs/2607.08716
 
-### 2. OpenCoF treats video generation as a reasoning medium
+### 2. ProjAgent retrieves code by procedure, not only semantics
 
-**What happened:** *OpenCoF: Learning to Reason Through Video Generation* introduces OpenCoF-17K and Wan-CoF, using temporally connected frames as a “Chain-of-Frame” reasoning path. The paper reports gains over a Wan2.2-I2V-A14B baseline across four video-reasoning benchmarks and releases its dataset, model, and code for research.
+**What happened:** *ProjAgent* decomposes a target function into intermediate steps, retrieves repository functions with similar procedural behavior, combines that context with semantic retrieval, and uses compiler/static-analysis feedback for conservative repair. The authors report 41.14% Pass@1 on REPOCOD, ahead of the retrieval baselines they tested.
 
-**Why it matters:** Video models are being studied not just as renderers but as systems that preserve intermediate visual and temporal state. This could improve simulation, embodied planning, visual inspection, and generation workflows where the order of events is part of the answer.
+**Why it matters:** Two functions can follow the same project-specific implementation recipe while sharing few names or domain words. Procedural retrieval can expose conventions and dependency patterns that embeddings or lexical search miss, improving repository-scale coding agents.
 
-**Source:** https://arxiv.org/abs/2607.08763
+**Source:** https://arxiv.org/abs/2607.08691
 
-### 3. IdeaGene-Bench evaluates scientific lineage, not just novelty
+### 3. AUTOPILOT-VQA tests safety-aware dashcam reasoning
 
-**What happened:** *Ideas Have Genomes* represents scientific ideas as typed, evidence-grounded “Idea Genome” objects and evaluates inheritance, mutation, loss, import, and novel insertion across 10 domains. Its benchmark includes 1,961 lineage traces and reports a compositional bottleneck: the strongest tested system achieved only 27.3% exact accuracy on lineage reasoning.
+**What happened:** AUTOPILOT-VQA, released with the AUTOPILOT CVPR 2026 competition, evaluates vision-language systems on real driving incidents and near-incidents. Questions span visibility, road state, signage, involved entities, impact location, accident occurrence, and avoidability—not merely object recognition.
 
-**Why it matters:** Research agents need to distinguish genuinely new proposals from recombinations that fail to preserve the relevant evidence. Lineage-aware evaluation gives scientific copilots a more demanding target than producing plausible-sounding abstracts.
+**Why it matters:** Safety-critical video systems must reason across time and ground conclusions in event context. The benchmark provides a standardized way to probe whether multimodal models understand what happened, where risk emerged, and whether an incident could have been avoided.
 
-**Source:** https://arxiv.org/abs/2607.08758
+**Source:** https://arxiv.org/abs/2607.08745
 
-### 4. Semantic persistence turns workflows into reusable knowledge
+### 4. Quantized models can preserve accuracy while changing decisions
 
-**What happened:** *Workflow as Knowledge: Semantic Persistence for LLM-Mediated Workflows* proposes treating tool-use workflows, retrieval, branching, checkpoints, and human approvals as knowledge that can persist semantically rather than as disposable execution traces.
+**What happened:** *The Illusion of Equivalency* introduces **correctness agreement**, measuring whether a base model and a quantized variant get the same examples right. Across 8-bit through 2-bit schemes, the authors find behavioral divergence even where aggregate accuracy looks stable, nonlinear low-bit breakpoints, and greater sensitivity in query/key projections than value/output projections.
 
-**Why it matters:** This links agent memory to operational learning. An agent platform could retain why a workflow branch was chosen, what evidence supported it, and where human approval was required—making later runs more reproducible, auditable, and easier to improve.
+**Why it matters:** A compressed model can match a headline benchmark score yet fail on a different subset of cases. Deployment teams therefore need decision-level regression tests—especially for routed agents, safety filters, and domain workflows—rather than accepting perplexity or average accuracy alone.
 
-**Source:** https://arxiv.org/abs/2607.08740
+**Source:** https://arxiv.org/abs/2607.08734
 
-### 5. Recursive multi-agent search expands deep-and-wide research
+### 5. Relaxed speculative decoding needs capability audits
 
-**What happened:** *WebSwarm: Recursive Multi-Agent Orchestration for Deep-and-Wide Web Search* studies recursive orchestration for research tasks that require both breadth and depth. Its framing identifies the limitation of a single ReAct-style trajectory: one context and one path are poorly suited to exploring many evidence branches.
+**What happened:** *A Practical Investigation of Training-free Relaxed Speculative Decoding* unifies and benchmarks methods that trade exact distribution preservation for additional inference speed. Its practical warning is that relaxed methods require substantial capability evaluation, and many assume a strong language-model drafter rather than a lightweight dedicated multi-token predictor.
 
-**Why it matters:** Research agents increasingly need parallel discovery, source comparison, and synthesis. Recursive delegation can improve coverage, but it also raises requirements for provenance, duplicate suppression, budget controls, and conflict resolution before results are trusted.
+**Why it matters:** Lossless speculative decoding can be treated largely as an infrastructure optimization; relaxed decoding cannot. Agent operators need task-level acceptance tests because speed gains may alter tool choice, reasoning quality, or output behavior in ways that throughput numbers do not reveal.
 
-**Source:** https://arxiv.org/abs/2607.08662
+**Source:** https://arxiv.org/abs/2607.08690
 
 ---
 
 ## New Use Cases
 
-- **Proactive personal operations:** Evaluate assistants on noticing and safely completing routine tasks—calendar, files, communications, and household workflows—using initiative-sensitive benchmarks.
-- **Temporal visual planning:** Use Chain-of-Frame-style models for video editing, robotics simulation, industrial inspection, and training data where intermediate states matter.
-- **Lineage-grounded scientific copilots:** Build literature systems that trace which mechanisms and limitations a proposed idea inherits before recommending experiments.
-- **Auditable workflow memory:** Store successful tool paths, evidence, checkpoints, and approval boundaries as reusable semantic procedures instead of opaque logs.
-- **Evidence-scaled web research:** Combine recursive specialist searches with citation graphs and disagreement checks for market intelligence, policy monitoring, technical due diligence, and investigative research.
-- **Physics-constrained autonomous markets:** SolarChain-Eval (arXiv:2607.08681) points toward evaluating agents in cyber-physical economic settings where utility must be balanced with physical validity and trustworthiness.
+- **Memory reliability sidecars:** Add selective state reminders to long-running terminal, customer-support, and operations agents without modifying their base action model.
+- **Procedure-aware codebase migration:** Retrieve internal implementations that follow matching control-flow recipes when porting APIs, adding adapters, or repairing cross-file code.
+- **Incident review copilots:** Structure dashcam or fleet footage into grounded facts about conditions, participants, impact, and avoidability for human review.
+- **Quantization acceptance testing:** Compare per-example decisions between full-precision and compressed models before deploying edge assistants or safety-sensitive classifiers.
+- **Adaptive inference routing:** Use lossless speculative decoding by default and permit relaxed modes only for workloads whose capability regression suite remains within an explicit tolerance.
+- **Agent memory-policy training:** Train open-weight reminder policies to learn both *what* to preserve and *when silence is better* than injecting more context.
 
 ---
 
 ## Top Rated GitHub Projects Leveraging Agentic/Gen AI
 
-Fresh GitHub repository search and individual repository API checks were run on July 10, 2026. Star counts are the observed public API values at compilation time and will change.
+GitHub’s public repository API was checked on July 11, 2026 using a star-sorted `topic:ai-agents` query. Counts are snapshots and will change; ranking here excludes results that were not clearly reusable agent/GenAI platforms.
 
-| Rank | Project | Stars | Language | Relevance |
+| Rank | Project | Stars observed | Language | Agentic/GenAI role |
 |---:|---|---:|---|---|
-| 1 | [obra/superpowers](https://github.com/obra/superpowers) | 251,595 | Shell | Agentic skills framework and software-development methodology. |
-| 2 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 212,638 | Python | Long-running, tool-using personal agent platform. |
-| 3 | [google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli) | 105,890 | TypeScript | Open-source terminal agent with Gemini and MCP support. |
-| 4 | [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) | 36,975 | Python | Stateful orchestration framework for resilient agents. |
-| 5 | [openai/openai-agents-python](https://github.com/openai/openai-agents-python) | 27,793 | Python | Lightweight framework for multi-agent workflows, tools, and handoffs. |
+| 1 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 213,134 | Python | Long-running personal agent with tools, skills, scheduling, and persistent operation. |
+| 2 | [firecrawl/firecrawl](https://github.com/firecrawl/firecrawl) | 149,231 | TypeScript | Web data extraction and search infrastructure designed for AI applications and agents. |
+| 3 | [google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli) | 105,912 | TypeScript | Open-source terminal coding agent with Gemini and tool integrations. |
+| 4 | [browser-use/browser-use](https://github.com/browser-use/browser-use) | 104,227 | Python | Browser automation framework that lets AI agents operate websites. |
+| 5 | [bytedance/deer-flow](https://github.com/bytedance/deer-flow) | 76,775 | Python | Agent harness for research, coding, and content-generation workflows. |
 
-Project ranking query: https://api.github.com/search/repositories?q=AI+agent+stars:%3E5000&sort=stars&order=desc
+Discovery query: https://api.github.com/search/repositories?q=topic%3Aai-agents&sort=stars&order=desc&per_page=15
 
 ---
 
@@ -79,25 +79,24 @@ Project ranking query: https://api.github.com/search/repositories?q=AI+agent+sta
 
 ### Fresh research
 
-- UniClawBench — https://arxiv.org/abs/2607.08768
-- OpenCoF — https://arxiv.org/abs/2607.08763
-- Ideas Have Genomes / IdeaGene-Bench — https://arxiv.org/abs/2607.08758
-- Workflow as Knowledge — https://arxiv.org/abs/2607.08740
-- WebSwarm — https://arxiv.org/abs/2607.08662
-- SolarChain-Eval — https://arxiv.org/abs/2607.08681
-- Fresh arXiv CS.AI query used for date-sorted discovery — https://export.arxiv.org/api/query?search_query=cat:cs.AI&start=0&max_results=10&sortBy=submittedDate&sortOrder=descending
+- Proactive Memory Agent — https://arxiv.org/abs/2607.08716
+- ProjAgent — https://arxiv.org/abs/2607.08691
+- AUTOPILOT-VQA — https://arxiv.org/abs/2607.08745
+- The Illusion of Equivalency — https://arxiv.org/abs/2607.08734
+- Training-free Relaxed Speculative Decoding — https://arxiv.org/abs/2607.08690
+- Date-sorted arXiv CS.AI feed used for discovery — https://export.arxiv.org/api/query?search_query=cat%3Acs.AI&start=0&max_results=20&sortBy=submittedDate&sortOrder=descending
 
 ### GitHub project records
 
-- Repository search API — https://api.github.com/search/repositories?q=AI+agent+stars:%3E5000&sort=stars&order=desc
-- obra/superpowers — https://api.github.com/repos/obra/superpowers
-- NousResearch/hermes-agent — https://api.github.com/repos/NousResearch/hermes-agent
-- google-gemini/gemini-cli — https://api.github.com/repos/google-gemini/gemini-cli
-- langchain-ai/langgraph — https://api.github.com/repos/langchain-ai/langgraph
-- openai/openai-agents-python — https://api.github.com/repos/openai/openai-agents-python
+- GitHub topic search API — https://api.github.com/search/repositories?q=topic%3Aai-agents&sort=stars&order=desc&per_page=15
+- Hermes Agent — https://api.github.com/repos/NousResearch/hermes-agent
+- Firecrawl — https://api.github.com/repos/firecrawl/firecrawl
+- Gemini CLI — https://api.github.com/repos/google-gemini/gemini-cli
+- Browser Use — https://api.github.com/repos/browser-use/browser-use
+- DeerFlow — https://api.github.com/repos/bytedance/deer-flow
 
 ---
 
 ## Short Compilation Note
 
-This report is materially new relative to July 9: it replaces yesterday’s governance/control-focused paper set with fresh July 9 research on proactive-agent benchmarking, temporal video reasoning, scientific idea lineage, semantic workflow memory, and recursive web search. The common thread is operational maturity: useful agents need measurable initiative, preserved intermediate state, evidence lineage, reusable procedures, and scalable research orchestration—not merely fluent generation.
+This report is materially new relative to July 10: it replaces the prior themes of proactive-agent benchmarking, video-as-reasoning, scientific lineage, semantic workflow persistence, and recursive web search with a distinct primary-source set on selective memory intervention, procedural code retrieval, incident-centric driving VQA, decision-level quantization drift, and relaxed speculative decoding. The shared operational lesson is that agent quality depends on *when state is surfaced, which examples behavior changes on, and how acceleration or retrieval affects actual decisions*—not only aggregate scores.
