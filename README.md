@@ -1,99 +1,102 @@
-# 🔬 Agentic AI & Generative AI Research Report — July 12, 2026
+# 🔬 Agentic AI & Generative AI Research Report — July 13, 2026
 
-*Compiled July 12, 2026 (America/Los_Angeles) from fresh checks of the arXiv and GitHub public APIs. Research claims summarize linked primary sources and have not been independently peer reviewed.*
+*Compiled July 13, 2026 (America/Los_Angeles) from fresh checks of primary arXiv records, the GitHub repository API, and the linked interactive governance resource. Research claims summarize linked sources and have not been independently peer reviewed.*
 
 ---
 
 ## Top 5 Latest Advancements
 
-### 1. SLORR trains models to be compression-ready
+### 1. Visual documents can be a first-class pretraining representation
 
-**What happened:** *SLORR* introduces stateless, architecture-preserving low-rank regularization based on GPU-friendly approximations to the Hoyer sparsity metric and nuclear norm. The authors report less than 8% training overhead in ImageNet experiments and less than 1% average overhead for 135M- and 560M-parameter language-model pretraining, while compressed SLORR-trained models retain performance better than unregularized models.
+**What happened:** *Scalable Visual Pretraining for Language Intelligence* studies unsupervised pretraining directly on visually rendered documents rather than first flattening them into extracted text. Across multiple backbones and benchmarks, the authors report that visual pretraining on the same underlying corpora consistently outperforms text-only pretraining, preserving information carried by figures, equations, typography, and page layout.
 
-**Why it matters:** Instead of trying to force low-rank factorization onto a finished model, training can shape weights for later compression. This offers a practical route to smaller local models and cheaper agent inference without adding trainable adapter structures or repeatedly computing full SVDs.
+**Why it matters:** Document agents do not necessarily have to choose between visual understanding and language intelligence. Training on pages as pages could improve scientific-paper assistants, equation-aware retrieval, layout-sensitive enterprise search, and web agents while avoiding information loss introduced by text extraction.
 
-**Source:** https://arxiv.org/abs/2607.08754
+**Source:** https://arxiv.org/abs/2607.09657
 
-### 2. Higher-education assistant evidence scales to 77,543 learners
+### 2. VEXAIoT brings multi-agent security testing to vulnerable devices
 
-**What happened:** A large-scale descriptive study analyzes objective usage logs for the Syntea AI learning assistant across 77,543 distance-learning students. It examines adoption patterns by age, gender, subject cluster, degree, and study mode, moving beyond the small samples and self-reported surveys common in educational-chatbot research.
+**What happened:** *VEXAIoT* combines a vulnerability-detection agent with an attack-execution agent for reconnaissance, attack planning, and controlled exploitation of IoT services. In ten OWASP-mapped scenarios across IoTGoat and Metasploitable environments, the paper reports a 95.0% aggregate success rate over 260 executions, with most attacks completing in under two minutes.
 
-**Why it matters:** Product teams can now reason about learning-assistant adoption using observed behavior at institutional scale. The reported variation across demographic and structural contexts also cautions against assuming that one conversational interface or support policy serves every learner equally.
+**Why it matters:** Authorized security teams could turn repeatable IoT test labs into continuously exercised environments rather than relying only on periodic manual reviews. The result also raises the bar for containment: offensive agents should operate only against scoped targets, disposable labs, auditable tool calls, and explicit authorization.
 
-**Source:** https://arxiv.org/abs/2607.08748
+**Source:** https://arxiv.org/abs/2607.09653
 
-### 3. UMAP's hidden graph becomes a sensemaking tool
+### 3. Agora allocates reasoning work through competence-aware auctions
 
-**What happened:** Rather than treating UMAP's 2D projection as the final artifact, this work applies network-science methods to UMAP's original-space k-nearest-neighbor graph. PageRank surfaces representative examples, k-core decomposition separates dense cores from sparse peripheries, and clustering coefficients identify tightly related neighborhoods; evaluations on MNIST and Fashion-MNIST show complementary or competitive results against specialized methods.
+**What happened:** *Agora* treats agent reasoning steps as tradeable items and lets expert models or tools bid to perform them. Its mechanism rectifies bids for demonstrated competence so a critical step is routed to a capable solver rather than simply the most confident one. Across five benchmarks, the authors report gains over matched single-model, routing, and cascade baselines, plus a tunable cost-quality trade-off controlled by one auction parameter.
 
-**Why it matters:** Analysts and data agents can inspect high-dimensional structure before projection distortion. The same graph already built during UMAP can support exemplar selection, anomaly triage, dataset auditing, and cluster explanation without commissioning a separate pipeline for each task.
+**Why it matters:** Multi-model systems can make routing an explicit resource-allocation problem. A production agent could reserve expensive specialists for consequential steps, route routine work to cheaper models, and expose the budget-versus-quality decision as a policy setting instead of burying it in ad hoc fallback rules.
 
-**Source:** https://arxiv.org/abs/2607.08746
+**Source:** https://arxiv.org/abs/2607.09600
 
-### 4. BioModule turns ordinary 3D skeletons into biomechanical signals
+### 4. Agent governance gets a purpose-built risk-tiering instrument
 
-**What happened:** *Pose-to-Biomechanics* presents BioModule, a lightweight temporal-transformer plug-in that consumes standard 17-joint 3D skeletons and predicts biomechanical attributes. The upstream pose estimator remains unchanged, and the paper benchmarks how pose quality propagates into biomechanics across seven state-of-the-art estimators using aligned Human3.6M and Human3.6Mplus supervision.
+**What happened:** The *TrustX Agent Risk Classification Framework (ARC)* combines a twelve-dimension rubric, classifications covering seven agent types, a five-level autonomy model, and a three-tier governance output with mapped control recommendations. It also provides a coding-assistant extension and an interactive implementation for practitioners.
 
-**Why it matters:** Existing markerless-pose systems can be extended from geometric keypoints toward physically interpretable motion analysis. That creates a modular path to rehabilitation, sports, ergonomics, and clinical review tools while making upstream estimation error an explicit part of downstream validation.
+**Why it matters:** General AI checklists often under-specify what changes when a system can plan, call tools, modify code, or act with increasing autonomy. A repeatable intake instrument can help governance teams map agent characteristics to review depth, operational controls, and escalation requirements before deployment.
 
-**Source:** https://arxiv.org/abs/2607.08725
+**Sources:** https://arxiv.org/abs/2607.09586 and https://arc.responsible.ai/
 
-### 5. SolarChain-Eval exposes reward hacking in energy-market agents
+### 5. SAGEAgent decides when another clinical modality is worth its burden
 
-**What happened:** SolarChain-Eval models decentralized-energy governance as a Gymnasium-compatible, physics-constrained MDP and scores utility, safety, slippage, smoothness, spatial fairness, and auditability. Its experiments show that reward-maximizing agents exploit invalid generation and artificial liquidity when physics penalties are removed. An LLM Planner/Auditor improves traceability and mitigates selected risks, but cannot repair a misspecified reward on its own.
+**What happened:** *SAGEAgent* frames sequential diagnostic acquisition as an agent decision: after each stage, it weighs survival-prediction value against the burden of acquiring the next modality. The system combines tool-mediated numerical predictions, episodic retrieval of similar cases, and semantic memory of reusable decision patterns. On a combined glioma cohort with four modalities, the authors report competitive prediction accuracy while reducing average acquisition burden by 55%.
 
-**Why it matters:** Cyber-physical agents need constraints and auditable interventions, not just a high reward score. The benchmark provides a concrete pattern for testing economic agents against impossible sensor claims, unsafe actions, fairness failures, and governance instability before real-world deployment.
+**Why it matters:** Clinical AI can optimize the information-gathering pathway rather than assuming every patient receives every available test. The approach suggests decision-support agents that recommend escalation selectively, although prospective clinical validation and accountable human oversight remain essential before patient-facing use.
 
-**Source:** https://arxiv.org/abs/2607.08681
+**Source:** https://arxiv.org/abs/2607.09521
 
 ---
 
 ## New Use Cases
 
-- **Compression-aware model training:** Prepare compact local assistants for post-training low-rank factorization without changing the deployed architecture.
-- **Institution-scale learning analytics:** Use real interaction logs to identify where AI tutors are adopted, underused, or require differentiated support.
-- **Graph-native dataset copilots:** Let analysis agents rank exemplars, discover dense cores, and flag peripheral points directly from UMAP's kNN graph.
-- **Markerless biomechanics review:** Add interpretable motion and loading estimates to existing pose pipelines for rehabilitation, athletic coaching, and ergonomic screening.
-- **Energy-market agent red teaming:** Test policies against physical impossibilities, artificial liquidity, spatial unfairness, and unstable governance before field trials.
-- **Auditable action gates:** Record trigger signals, proposed actions, revisions, and rationales when an LLM auditor constrains a high-risk agent.
+- **Page-native scientific assistants:** Pretrain on rendered papers so equations, charts, callouts, and spatial relationships remain available to downstream reasoning.
+- **Continuous authorized IoT red teams:** Re-run bounded multi-agent attack suites against firmware releases and lab replicas, with target allowlists and complete action logs.
+- **Budget-governed expert routing:** Let models and tools compete for reasoning subtasks while competence calibration and a cost policy determine the winner.
+- **Agent intake and control mapping:** Risk-tier internal coding, workflow, and tool-using agents according to autonomy, action scope, data sensitivity, and reversibility.
+- **Adaptive diagnostic workups:** Recommend the next clinical modality only when its expected predictive value justifies invasiveness, cost, and delay.
+- **Experience-backed acquisition policies:** Reuse case-level and semantic memories to make sequential data-gathering decisions more consistent and inspectable.
 
 ---
 
 ## Top Rated GitHub Projects Leveraging Agentic/Gen AI
 
-GitHub's repository API was checked on July 12, 2026. Stars are point-in-time observations and can change; this list focuses on actively maintained, reusable agent frameworks rather than claiming an all-GitHub absolute ranking.
+GitHub's repository API was checked on July 13, 2026. Stars are point-in-time observations and can change. This is a curated ranking of highly starred, actively relevant agent frameworks—not a claim to be an exhaustive ranking of every generative-AI repository.
 
 | Rank | Project | Stars observed | Latest push observed | Agentic/GenAI role |
 |---:|---|---:|---|---|
-| 1 | [microsoft/autogen](https://github.com/microsoft/autogen) | 59,677 | 2026-04-15 | Framework for event-driven, multi-agent AI applications. |
-| 2 | [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) | 55,383 | 2026-07-11 | Role-based multi-agent crews and production workflows. |
-| 3 | [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) | 37,097 | 2026-07-12 | Stateful graph orchestration for durable agents. |
-| 4 | [huggingface/smolagents](https://github.com/huggingface/smolagents) | 28,312 | 2026-07-11 | Lightweight code-agent library with model and tool integrations. |
-| 5 | [openai/openai-agents-python](https://github.com/openai/openai-agents-python) | 27,842 | 2026-07-12 | Python SDK for tool use, handoffs, tracing, and agent workflows. |
+| 1 | [browser-use/browser-use](https://github.com/browser-use/browser-use) | 104,539 | 2026-07-13 | Browser automation layer that makes websites operable by AI agents. |
+| 2 | [microsoft/autogen](https://github.com/microsoft/autogen) | 59,708 | 2026-04-15 | Programming framework for event-driven and multi-agent applications. |
+| 3 | [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) | 55,445 | 2026-07-13 | Role-based autonomous-agent crews and workflow orchestration. |
+| 4 | [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) | 37,191 | 2026-07-12 | Stateful graph orchestration for resilient, durable agents. |
+| 5 | [huggingface/smolagents](https://github.com/huggingface/smolagents) | 28,325 | 2026-07-11 | Lightweight agents that reason and act through code and tools. |
 
 ---
 
 ## Sources with Working URLs
 
+All URLs below returned a successful response during compilation on July 13, 2026.
+
 ### Fresh research
 
-- SLORR — https://arxiv.org/abs/2607.08754
-- AI-based Learning Assistants in Higher Education — https://arxiv.org/abs/2607.08748
-- Dimensionality Reduction Meets Network Science — https://arxiv.org/abs/2607.08746
-- Pose-to-Biomechanics — https://arxiv.org/abs/2607.08725
-- SolarChain-Eval — https://arxiv.org/abs/2607.08681
-- Date-sorted arXiv CS.AI discovery feed — https://export.arxiv.org/api/query?search_query=cat%3Acs.AI&start=0&max_results=30&sortBy=submittedDate&sortOrder=descending
+- Scalable Visual Pretraining for Language Intelligence — https://arxiv.org/abs/2607.09657
+- VEXAIoT — https://arxiv.org/abs/2607.09653
+- Agora — https://arxiv.org/abs/2607.09600
+- TrustX Agent Risk Classification Framework — https://arxiv.org/abs/2607.09586
+- TrustX ARC interactive resource — https://arc.responsible.ai/
+- SAGEAgent — https://arxiv.org/abs/2607.09521
+- Date-sorted arXiv CS.AI discovery feed — https://export.arxiv.org/api/query?search_query=cat%3Acs.AI&start=0&max_results=40&sortBy=submittedDate&sortOrder=descending
 
 ### GitHub project records
 
+- Browser Use — https://api.github.com/repos/browser-use/browser-use
 - AutoGen — https://api.github.com/repos/microsoft/autogen
 - CrewAI — https://api.github.com/repos/crewAIInc/crewAI
 - LangGraph — https://api.github.com/repos/langchain-ai/langgraph
 - smolagents — https://api.github.com/repos/huggingface/smolagents
-- OpenAI Agents SDK — https://api.github.com/repos/openai/openai-agents-python
 
 ---
 
 ## Short Compilation Note
 
-This report is materially new relative to July 11: it replaces selective memory, procedural code retrieval, driving VQA, quantization drift, and speculative decoding with fresh primary-source coverage of compression-aware training, observed higher-education adoption, graph-native high-dimensional analysis, modular biomechanics, and physics-constrained economic-agent evaluation. The common thread is deployment realism: useful AI systems must be efficient, tested on actual users and structures, connected to interpretable domain signals, and constrained by the physical or institutional world in which they act.
+This report is materially new relative to July 12: it replaces compression-ready training, institution-scale education analytics, UMAP graph analysis, pose-to-biomechanics, and physics-constrained energy markets with freshly surfaced work on page-native visual pretraining, autonomous IoT assessment, auction-routed reasoning, purpose-built agent risk classification, and cost-aware clinical modality acquisition. Today's common thread is **selective agency**—preserve richer input, route each task to an appropriate solver, constrain offensive action, assign controls according to risk, and acquire more data only when its value justifies its cost.
