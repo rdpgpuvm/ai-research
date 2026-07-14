@@ -1,102 +1,104 @@
-# 🔬 Agentic AI & Generative AI Research Report — July 13, 2026
+# 🔬 Agentic AI & Generative AI Research Report — July 14, 2026
 
-*Compiled July 13, 2026 (America/Los_Angeles) from fresh checks of primary arXiv records, the GitHub repository API, and the linked interactive governance resource. Research claims summarize linked sources and have not been independently peer reviewed.*
+*Compiled July 14, 2026 (America/Los_Angeles) from fresh checks of primary arXiv records, linked project resources, and the GitHub repository API. Research claims summarize newly submitted papers and have not been independently peer reviewed.*
 
 ---
 
 ## Top 5 Latest Advancements
 
-### 1. Visual documents can be a first-class pretraining representation
+### 1. LLM metacognition is becoming a distinct engineering discipline
 
-**What happened:** *Scalable Visual Pretraining for Language Intelligence* studies unsupervised pretraining directly on visually rendered documents rather than first flattening them into extracted text. Across multiple backbones and benchmarks, the authors report that visual pretraining on the same underlying corpora consistently outperforms text-only pretraining, preserving information carried by figures, equations, typography, and page layout.
+**What happened:** *Metacognition in LLMs: Foundations, Progress, and Opportunities* presents a comprehensive taxonomy of work on whether language models can monitor, evaluate, and adapt their own reasoning. The review organizes methods and benchmarks for measuring metacognitive behavior, techniques for eliciting or improving it, practical applications, and major unresolved questions.
 
-**Why it matters:** Document agents do not necessarily have to choose between visual understanding and language intelligence. Training on pages as pages could improve scientific-paper assistants, equation-aware retrieval, layout-sensitive enterprise search, and web agents while avoiding information loss introduced by text extraction.
+**Why it matters:** Agent reliability depends not only on producing an answer, but also on recognizing uncertainty, selecting an appropriate strategy, requesting help, and revising a failing plan. A shared metacognition vocabulary can make those behaviors easier to measure instead of treating confidence and self-correction as vague model qualities.
 
-**Source:** https://arxiv.org/abs/2607.09657
+**Sources:** https://arxiv.org/abs/2607.11881 and https://github.com/yale-nlp/LLM-Metacognition
 
-### 2. VEXAIoT brings multi-agent security testing to vulnerable devices
+### 2. LLM-judge bias can be located—and causally steered—in activation space
 
-**What happened:** *VEXAIoT* combines a vulnerability-detection agent with an attack-execution agent for reconnaissance, attack planning, and controlled exploitation of IoT services. In ten OWASP-mapped scenarios across IoTGoat and Metasploitable environments, the paper reports a 95.0% aggregate success rate over 260 executions, with most attacks completing in under two minutes.
+**What happened:** *Inside the Unfair Judge* studies seven judge models, seven bias types, and nine benchmarks. The authors report that biased judging inputs move hidden states along low-dimensional, bias-specific directions; steering those directions can reproduce or reverse score shifts, while a linear projection anticipates failures on three unseen benchmarks better than text-based alternatives.
 
-**Why it matters:** Authorized security teams could turn repeatable IoT test labs into continuously exercised environments rather than relying only on periodic manual reviews. The result also raises the bar for containment: offensive agents should operate only against scoped targets, disposable labs, auditable tool calls, and explicit authorization.
+**Why it matters:** Evaluation pipelines may gain a model-internal warning signal for biased grading rather than relying only on prompt perturbations after the fact. The result also underscores that model-as-judge scores should be audited and calibrated, not treated as objective ground truth.
 
-**Source:** https://arxiv.org/abs/2607.09653
+**Sources:** https://arxiv.org/abs/2607.11871 and https://xzx34.github.io/unfair-judge/
 
-### 3. Agora allocates reasoning work through competence-aware auctions
+### 3. Visual tool agents now have a stateful, 500-tool stress test
 
-**What happened:** *Agora* treats agent reasoning steps as tradeable items and lets expert models or tools bid to perform them. Its mechanism rectifies bids for demonstrated competence so a critical step is routed to a capable solver rather than simply the most confident one. Across five benchmarks, the authors report gains over matched single-model, routing, and cascade baselines, plus a tunable cost-quality trade-off controlled by one auction parameter.
+**What happened:** *MM-ToolSandBox* introduces a visually grounded evaluation environment with more than 500 tools across 16 application domains. Its multi-image, multi-turn scenarios include changing goals, corrections, and state mutations. Across 12 evaluated models, the best result remains below 50% success; 53% of failures are attributed to incorrect extraction of visual information even when the workflow is otherwise correct.
 
-**Why it matters:** Multi-model systems can make routing an explicit resource-allocation problem. A production agent could reserve expensive specialists for consequential steps, route routine work to cheaper models, and expose the budget-versus-quality decision as a policy setting instead of burying it in ad hoc fallback rules.
+**Why it matters:** Larger agents may know what action to take yet still act on a misread screenshot, receipt, chart, or form. Teams building multimodal automation need separate measures for planning and visual precision, plus confirmation gates before consequential tool calls.
 
-**Source:** https://arxiv.org/abs/2607.09600
+**Sources:** https://arxiv.org/abs/2607.11818 and https://github.com/apple/ml-mmtoolsandbox
 
-### 4. Agent governance gets a purpose-built risk-tiering instrument
+### 4. Long-running scam detection can use explainable conversational memory
 
-**What happened:** The *TrustX Agent Risk Classification Framework (ARC)* combines a twelve-dimension rubric, classifications covering seven agent types, a five-level autonomy model, and a three-tier governance output with mapped control recommendations. It also provides a coding-assistant extension and an interactive implementation for practitioners.
+**What happened:** *An Explainable Agentic System for Detection of Conversational Scams with Summary-Based Memory* targets scams that develop over weeks or months rather than isolated phishing messages. It introduces the public ConScamBench-278 benchmark across eight scam categories and reports 97.8% accuracy on that benchmark, while identifying all 83 conversational scams in the LoveFraud02 corpus. The system uses conversation-level summaries to retain the evolving evidence behind its warning.
 
-**Why it matters:** General AI checklists often under-specify what changes when a system can plan, call tools, modify code, or act with increasing autonomy. A repeatable intake instrument can help governance teams map agent characteristics to review depth, operational controls, and escalation requirements before deployment.
+**Why it matters:** Safety assistants can watch for cumulative patterns—trust building, inconsistent identities, escalating urgency, and eventual requests for money or secrets—that no single message reveals. Explainable memory also gives a user or reviewer a concise basis for challenging a warning.
 
-**Sources:** https://arxiv.org/abs/2607.09586 and https://arc.responsible.ai/
+**Source:** https://arxiv.org/abs/2607.11707
 
-### 5. SAGEAgent decides when another clinical modality is worth its burden
+### 5. Red-team agents can accumulate falsifiable vulnerability knowledge
 
-**What happened:** *SAGEAgent* frames sequential diagnostic acquisition as an agent decision: after each stage, it weighs survival-prediction value against the burden of acquiring the next modality. The system combines tool-mediated numerical predictions, episodic retrieval of similar cases, and semantic memory of reusable decision patterns. On a combined glioma cohort with four modalities, the authors report competitive prediction accuracy while reducing average acquisition burden by 55%.
+**What happened:** *Agent Hacks Agent* proposes AHA, a discovery loop that forms a vulnerability hypothesis, constructs a falsifier, runs a valid attack in a sandbox, reflects on the trajectory, and promotes confirmed findings into a Vulnerability Concept Graph. In experiments involving Claude Code and Codex across direct and indirect attacks, a frozen graph reportedly outperforms the strongest frozen discovery baseline by 14.2 percentage points under the same single-shot protocol and transfers across scenarios and attack channels.
 
-**Why it matters:** Clinical AI can optimize the information-gathering pathway rather than assuming every patient receives every available test. The approach suggests decision-support agents that recommend escalation selectively, although prospective clinical validation and accountable human oversight remain essential before patient-facing use.
+**Why it matters:** Production-agent security programs need reusable explanations of *why* attacks work, not just growing payload collections. Falsifiers, enabling conditions, transfer predictions, and evidence can turn red-team findings into auditable regression tests and patch hypotheses.
 
-**Source:** https://arxiv.org/abs/2607.09521
+**Source:** https://arxiv.org/abs/2607.11698
 
 ---
 
 ## New Use Cases
 
-- **Page-native scientific assistants:** Pretrain on rendered papers so equations, charts, callouts, and spatial relationships remain available to downstream reasoning.
-- **Continuous authorized IoT red teams:** Re-run bounded multi-agent attack suites against firmware releases and lab replicas, with target allowlists and complete action logs.
-- **Budget-governed expert routing:** Let models and tools compete for reasoning subtasks while competence calibration and a cost policy determine the winner.
-- **Agent intake and control mapping:** Risk-tier internal coding, workflow, and tool-using agents according to autonomy, action scope, data sensitivity, and reversibility.
-- **Adaptive diagnostic workups:** Recommend the next clinical modality only when its expected predictive value justifies invasiveness, cost, and delay.
-- **Experience-backed acquisition policies:** Reuse case-level and semantic memories to make sequential data-gathering decisions more consistent and inspectable.
+- **Self-monitoring workflow agents:** Measure whether an agent recognizes uncertainty, changes strategy, or escalates before a low-confidence action becomes irreversible.
+- **Bias-aware automated evaluation:** Monitor judge activation features and route suspicious scores to a second model or a human adjudicator.
+- **Screenshot-to-action quality gates:** Test planning separately from OCR and visual grounding, then require field-level confirmation before purchases, submissions, or account changes.
+- **Conversation-history scam shields:** Maintain privacy-conscious summaries of long-running chats and explain the cumulative evidence behind a risk alert.
+- **Continuously learning agent red teams:** Convert validated attack traces into vulnerability concepts, falsifiers, and cross-model regression suites.
+- **Capability-specific model routing:** Send planning failures to stronger reasoners while routing visual-precision failures through specialized perception or verification tools.
 
 ---
 
 ## Top Rated GitHub Projects Leveraging Agentic/Gen AI
 
-GitHub's repository API was checked on July 13, 2026. Stars are point-in-time observations and can change. This is a curated ranking of highly starred, actively relevant agent frameworks—not a claim to be an exhaustive ranking of every generative-AI repository.
+GitHub's repository API was checked on July 14, 2026. Stars and latest-push dates are point-in-time observations and can change. This is a curated ranking of highly starred projects for constructing, operating, or orchestrating agentic/GenAI applications—not an exhaustive ranking of all AI repositories.
 
 | Rank | Project | Stars observed | Latest push observed | Agentic/GenAI role |
 |---:|---|---:|---|---|
-| 1 | [browser-use/browser-use](https://github.com/browser-use/browser-use) | 104,539 | 2026-07-13 | Browser automation layer that makes websites operable by AI agents. |
-| 2 | [microsoft/autogen](https://github.com/microsoft/autogen) | 59,708 | 2026-04-15 | Programming framework for event-driven and multi-agent applications. |
-| 3 | [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) | 55,445 | 2026-07-13 | Role-based autonomous-agent crews and workflow orchestration. |
-| 4 | [langchain-ai/langgraph](https://github.com/langchain-ai/langgraph) | 37,191 | 2026-07-12 | Stateful graph orchestration for resilient, durable agents. |
-| 5 | [huggingface/smolagents](https://github.com/huggingface/smolagents) | 28,325 | 2026-07-11 | Lightweight agents that reason and act through code and tools. |
+| 1 | [langflow-ai/langflow](https://github.com/langflow-ai/langflow) | 151,879 | 2026-07-14 | Visual and code-based platform for composing and serving AI agents and workflows. |
+| 2 | [langgenius/dify](https://github.com/langgenius/dify) | 148,815 | 2026-07-14 | Application platform for agentic workflows, retrieval, models, tools, and operations. |
+| 3 | [browser-use/browser-use](https://github.com/browser-use/browser-use) | 104,725 | 2026-07-13 | Browser automation layer that makes websites operable by AI agents. |
+| 4 | [microsoft/autogen](https://github.com/microsoft/autogen) | 59,727 | 2026-04-15 | Programming framework for event-driven and multi-agent applications. |
+| 5 | [crewAIInc/crewAI](https://github.com/crewAIInc/crewAI) | 55,522 | 2026-07-14 | Role-based autonomous-agent crews and workflow orchestration. |
 
 ---
 
 ## Sources with Working URLs
 
-All URLs below returned a successful response during compilation on July 13, 2026.
+All URLs below returned a successful HTTP response during compilation on July 14, 2026.
 
 ### Fresh research
 
-- Scalable Visual Pretraining for Language Intelligence — https://arxiv.org/abs/2607.09657
-- VEXAIoT — https://arxiv.org/abs/2607.09653
-- Agora — https://arxiv.org/abs/2607.09600
-- TrustX Agent Risk Classification Framework — https://arxiv.org/abs/2607.09586
-- TrustX ARC interactive resource — https://arc.responsible.ai/
-- SAGEAgent — https://arxiv.org/abs/2607.09521
-- Date-sorted arXiv CS.AI discovery feed — https://export.arxiv.org/api/query?search_query=cat%3Acs.AI&start=0&max_results=40&sortBy=submittedDate&sortOrder=descending
+- Metacognition in LLMs — https://arxiv.org/abs/2607.11881
+- LLM Metacognition reading list — https://github.com/yale-nlp/LLM-Metacognition
+- Inside the Unfair Judge — https://arxiv.org/abs/2607.11871
+- Inside the Unfair Judge project page — https://xzx34.github.io/unfair-judge/
+- MM-ToolSandBox — https://arxiv.org/abs/2607.11818
+- MM-ToolSandBox repository — https://github.com/apple/ml-mmtoolsandbox
+- Explainable agentic conversational-scam detection — https://arxiv.org/abs/2607.11707
+- Agent Hacks Agent — https://arxiv.org/abs/2607.11698
+- Date-sorted arXiv CS.AI discovery feed — https://export.arxiv.org/api/query?search_query=cat%3Acs.AI&start=0&max_results=60&sortBy=submittedDate&sortOrder=descending
 
 ### GitHub project records
 
-- Browser Use — https://api.github.com/repos/browser-use/browser-use
-- AutoGen — https://api.github.com/repos/microsoft/autogen
-- CrewAI — https://api.github.com/repos/crewAIInc/crewAI
-- LangGraph — https://api.github.com/repos/langchain-ai/langgraph
-- smolagents — https://api.github.com/repos/huggingface/smolagents
+- Langflow — https://github.com/langflow-ai/langflow
+- Dify — https://github.com/langgenius/dify
+- Browser Use — https://github.com/browser-use/browser-use
+- AutoGen — https://github.com/microsoft/autogen
+- CrewAI — https://github.com/crewAIInc/crewAI
 
 ---
 
 ## Short Compilation Note
 
-This report is materially new relative to July 12: it replaces compression-ready training, institution-scale education analytics, UMAP graph analysis, pose-to-biomechanics, and physics-constrained energy markets with freshly surfaced work on page-native visual pretraining, autonomous IoT assessment, auction-routed reasoning, purpose-built agent risk classification, and cost-aware clinical modality acquisition. Today's common thread is **selective agency**—preserve richer input, route each task to an appropriate solver, constrain offensive action, assign controls according to risk, and acquire more data only when its value justifies its cost.
+This report is materially new relative to July 13: it replaces page-native visual pretraining, autonomous IoT assessment, auction-routed reasoning, agent risk classification, and adaptive clinical data acquisition with freshly surfaced work on LLM metacognition, internal judge-bias geometry, visual tool-agent evaluation, memory-based scam detection, and agent-on-agent red-teaming. Today's common thread is **inspectable self-correction**: capable agents need mechanisms to notice their own limits, expose the evidence behind decisions, test failure hypotheses, and verify perception before acting.
