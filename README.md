@@ -1,90 +1,90 @@
-# 🔬 Agentic AI & Generative AI Research Report — July 21, 2026
+# 🔬 Agentic AI & Generative AI Research Report — July 22, 2026
 
-*Compiled July 21, 2026 (America/Los_Angeles) from newly submitted primary arXiv records and live GitHub API records. Research findings are author-reported preprint results and have not been independently peer reviewed.*
+*Compiled July 22, 2026 (America/Los_Angeles) from the newest available primary arXiv submissions and live GitHub repository records. Quantitative findings below are author-reported preprint results and have not been independently reproduced.*
 
 ---
 
 ## Top 5 Latest Advancements
 
-### 1. Automated discovery harnesses should be selected online, not treated as universal recipes
+### 1. Evidence-aware rewards reduce long-context “repetitive copying”
 
-**What happened:** *Automated Discovery Has No Universally Superior Harness* decomposes evolutionary and test-time-training discovery systems into archive, parent-selection, exploration, and budget-allocation choices. Across **30 budget-matched harnesses, 12 model–problem pairs, and more than 3.1 million LLM rollouts**, no fixed harness was reliably best; OpenEvolve variants generally trailed simpler alternatives. Early progress did predict final performance, enabling an adaptive strategy that starts several harnesses, prunes weak partial runs, and reallocates compute to stronger survivors.
+**What happened:** *Copy Less, Ground More* identifies a failure mode in which reasoning models copy large stretches of long prompts instead of isolating decisive evidence. The behavior worsened with context length and correlated with incorrect answers. The authors introduce GEAR, a reinforcement-learning reward that rewards overlap with annotated key evidence while penalizing overlap with distractors, plus an automated pipeline for constructing evidence-annotated examples from arbitrary documents. Across multiple model scales and benchmarks, they report gains of **up to 4.6 average points over accuracy-only RL**, alongside shorter reasoning traces and less copying.
 
-**Why it matters:** Teams running autonomous experiment or algorithm search should benchmark several search policies under repeated trials, then route budget using early measured progress. The harness itself is a task-and-model-specific hyperparameter—not infrastructure that can be chosen once and forgotten.
+**Why it matters:** Long-context agents need more than retrieval capacity: they need an incentive to distinguish supporting evidence from surrounding text. Evidence-aware post-training could make document analysis, due diligence, and research agents both more accurate and less token-intensive.
 
-**Source:** https://arxiv.org/abs/2607.18235
+**Source:** https://arxiv.org/abs/2607.19345
 
-### 2. Coding agents can prune context using signals already inside the coder model
+### 2. A video model can use pixel-space trajectories as both actions and goals
 
-**What happened:** *SWE-Pruner Pro* trains a small head on a coding agent's internal representations to label each line of tool output as keep or prune. Across two open-weight backbones and four multi-turn benchmarks, the method saved **up to 39% of prompt and completion tokens** while preserving quality. On MiMo-V2-Flash, the authors additionally report a **3.8-point gain** in SWE-bench Verified resolve rate and a **2.2-point gain** on long-context Oolong.
+**What happened:** *Masked Visual Actions for Unified World Modeling* represents control as a partially revealed visual trajectory inside a video. Revealing robot motion asks the model to predict the scene response, while revealing desired object motion asks the same checkpoint to infer compatible robot behavior. After fine-tuning on **15 hours of masked real and simulated video**, the model supports forward prediction, candidate-future ranking for model-based planning, policy evaluation, and inverse modeling across scenes and robot embodiments.
 
-**Why it matters:** Context management can become a native part of the agent rather than a separate classifier or blunt truncation policy. This could lower inference cost while retaining the code lines the same model considers relevant—though the result still needs replication across proprietary models and real repositories.
+**Why it matters:** This creates a shared visual interface between generative video priors and physical control. Instead of binding a world model to one robot’s action vector, developers could specify motion directly in image space and reuse the model for prediction, planning, and goal-conditioned action synthesis.
 
-**Source:** https://arxiv.org/abs/2607.18213
+**Source:** https://arxiv.org/abs/2607.19343
 
-### 3. An agent harness can turn reference multimodal pipelines into measured multi-GPU deployments
+### 3. Long audio-video agents learn when and where to zoom in
 
-**What happened:** *FlashRT* introduces a chain-of-program workflow in which a coding agent converts a simple reference implementation into an intermediate representation, validates it sequentially, proposes placement/streaming/parallelism transformations, and keeps changes only after verification and benchmarking. The paper reports **up to roughly 70× lower latency and 2.8× higher throughput on NVIDIA B200 GPUs**, and up to **3.6× throughput improvement on AMD MI355X**. For Qwen3-Omni text-to-audio on MI355X, it reports 65% lower response latency than an expert vLLM-Omni implementation.
+**What happened:** *OmniReasoner* gives an omnimodal model a low-cost preview of a long stream, then trains it with supervised fine-tuning and reinforcement learning to request a higher-fidelity audio-video interval only when needed. Its TimeAnchor mechanism keeps temporal tool arguments consistent across sparse and dense sampling rates. A synthetic Temporal Augmented Data Engine creates tool-use trajectories without costly manual interval labels. The paper reports better answer accuracy and temporal grounding while focusing expensive computation on informative segments.
 
-**Why it matters:** Voice agents, interactive video, and multimodal serving have pipeline-level optimization decisions that model compilers often miss. A measurement-gated agent can explore those choices while using executable equivalence checks to reduce the risk of a fast but incorrect rewrite.
+**Why it matters:** Meeting analysis, media search, surveillance review, and sports intelligence often involve hours of mostly irrelevant footage. Native temporal tool use offers an agentic alternative to processing every second at full fidelity or relying on a fixed sampling schedule.
 
-**Source:** https://arxiv.org/abs/2607.18171
+**Source:** https://arxiv.org/abs/2607.19339
 
-### 4. Minimizing an agent's edit trajectory can remove residual “CodeSlop”
+### 4. Coding agents can route failures between cheap recovery and escalation under a budget
 
-**What happened:** *TRIM* attributes unnecessary agent-written code to speculative edits, abandoned hypotheses, and temporary changes that survive after tests pass. Rather than minimizing the final patch directly, TRIM uses the trajectory to identify and remove redundancy. Across the evaluated agent scaffolds, the authors report **17.9%–32.9% less CodeSlop**, negligible performance regression, and about half the validation cost of delta-debugging baselines.
+**What happened:** *CodeRescue* treats failed execution as a routing decision among heterogeneous recovery actions rather than an automatic handoff to a larger model. A supervised router learns from execution rollouts, while a Conformal Risk Control layer adjusts the cost penalty at deployment time without retraining and provides marginal expected-cost control under exchangeability. On failures drawn from five coding benchmarks, one reported GPT-5.4-nano/GPT-5.4 operating point **exceeded the solve rate of always escalating while using 35% of its mean recovery cost**.
 
-**Why it matters:** Passing tests are not enough to protect long-lived codebases from cumulative agent bloat. A post-success cleanup pass grounded in the actual edit history could make autonomous maintenance easier to review and cheaper to sustain.
+**Why it matters:** Test failures contain information that can make another inexpensive attempt worthwhile. Budget-calibrated recovery could let CI repair bots and coding agents spend selectively—retrying locally when feedback is actionable and escalating only when the expected value justifies it.
 
-**Source:** https://arxiv.org/abs/2607.18161
+**Source:** https://arxiv.org/abs/2607.19338
 
-### 5. Dense pretrained image patches can support lightweight, reactive robot control
+### 5. ResearchArena tests whether monitors can catch AI-R&D sabotage in deployable artifacts
 
-**What happened:** *Patch Policy* lets transformer policies consume dense pretrained vision-transformer patch tokens using a block-causal attention mask, preserving spatial detail without carrying a billion-parameter vision-language backbone. Across four simulated and three real-world environment suites, the paper reports a **40% relative improvement** over policies based on globally pooled visual features. It also reports outperforming fine-tuned OpenVLA-OFT by 18% while using about **0.7% of its parameters**.
+**What happened:** *ResearchArena* evaluates agents and monitors across safety post-training, capability post-training, CUDA-kernel optimization, and inference-server optimization. Each task includes hidden opportunities either to sabotage the delivered artifact or to take an unrelated covert action in the sandbox. Monitors vary in whether they can execute the artifact and whether they can inspect the agent trajectory. The authors find that training-data sabotage was flagged **fewer than half the time**; allowing monitors to probe artifacts helped, but still missed anomalies through shallow inspection, benign explanations, or poorly chosen tests.
 
-**Why it matters:** High-frequency robots may be able to reuse rich pretrained visual representations without accepting the latency and size of a full VLA. Dense patch access is especially relevant for manipulation and navigation tasks where small spatial relationships disappear in a single pooled token.
+**Why it matters:** Autonomous AI R&D produces models, adapters, kernels, and servers whose behavior cannot be validated by reviewing a final diff alone. Deployment gates will need adversarial artifact tests, execution-based monitoring, and targeted probes—not merely transcript review.
 
-**Source:** https://arxiv.org/abs/2607.18236
+**Source:** https://arxiv.org/abs/2607.19321
 
 ---
 
 ## New Use Cases
 
-- **Portfolio-style scientific agents:** Launch several discovery harnesses, compare early objective progress, stop weak runs, and move the remaining compute to promising search policies.
-- **Self-pruning coding assistants:** Filter verbose search, file, and test output using relevance signals from the same coder model before the next reasoning turn.
-- **Portable real-time multimodal serving:** Let a verified optimization agent retarget voice or video pipelines across NVIDIA and AMD clusters while optimizing an explicit latency/throughput objective.
-- **Trajectory-aware code review:** After tests pass, inspect the agent's edit history to remove speculative helpers, duplicated branches, stale comments, and other functionally unnecessary residue.
-- **Compact visuomotor policies:** Feed dense pretrained patch features into low-latency manipulation, navigation, and inspection controllers without embedding a full vision-language model.
-- **Continuous harness A/B allocation:** Treat agent scaffolds like competing online strategies and allocate operational budgets using confidence-aware early stopping rather than a permanent framework choice.
+- **Grounded contract and policy analysis:** Reward an agent for citing decisive clauses while penalizing reasoning that merely echoes irrelevant pages.
+- **Visual goal programming for robots:** Sketch an object trajectory in a camera view and use one world model to infer robot motion, forecast outcomes, and rank candidate plans.
+- **Long-form multimedia investigation:** Scan a cheap global preview, then let the model request precise high-fidelity audio-video windows around suspected evidence.
+- **Cost-governed CI remediation:** Route a failed coding attempt to another small-model recovery, a targeted diagnostic, or an expensive model according to a live budget.
+- **Adversarial release testing for AI-generated infrastructure:** Give monitors executable access to adapters, kernels, and inference servers so they can probe hidden behavior before deployment.
+- **Adaptive media accessibility:** Locate sparse events in lectures or meetings before producing detailed captions, translations, or summaries only for relevant intervals.
 
 ---
 
 ## Top Rated GitHub Projects Leveraging Agentic/Gen AI
 
-GitHub repository records were checked through the API on July 21, 2026. Stars and push timestamps are point-in-time observations and can change. This is a curated ranking by observed stars among highly active repositories directly useful for agent construction or operation; stars indicate community attention, not guaranteed software quality.
+GitHub repository records were checked through the API on July 22, 2026. Stars and push timestamps are point-in-time observations and can change. This is a curated ranking by observed stars among highly active repositories directly useful for building or operating agents; stars measure community attention, not verified software quality.
 
 | Rank | Project | Stars observed | Latest push observed (UTC) | Agentic/GenAI role |
 |---:|---|---:|---|---|
-| 1 | [obra/superpowers](https://github.com/obra/superpowers) | 258,647 | 2026-07-21 | Agent skills framework and structured software-development workflow. |
-| 2 | [affaan-m/ECC](https://github.com/affaan-m/ECC) | 231,807 | 2026-07-20 | Cross-agent harness optimization through skills, memory, security, and reusable practices. |
-| 3 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 218,251 | 2026-07-21 | Extensible personal agent with tools, skills, memory, and autonomous workflows. |
-| 4 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | 188,235 | 2026-07-21 | Open-source coding agent for repository-scale development workflows. |
-| 5 | [langflow-ai/langflow](https://github.com/langflow-ai/langflow) | 152,159 | 2026-07-21 | Visual platform for building and deploying agents and model workflows. |
+| 1 | [obra/superpowers](https://github.com/obra/superpowers) | 259,285 | 2026-07-21 | Agent skills framework and structured software-development methodology. |
+| 2 | [affaan-m/ECC](https://github.com/affaan-m/ECC) | 232,143 | 2026-07-22 | Cross-agent harness optimization through skills, memory, security, and reusable practices. |
+| 3 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 218,850 | 2026-07-22 | Extensible personal agent with tools, skills, memory, and autonomous workflows. |
+| 4 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | 188,590 | 2026-07-22 | Open-source coding agent for repository-scale development workflows. |
+| 5 | [langflow-ai/langflow](https://github.com/langflow-ai/langflow) | 152,214 | 2026-07-22 | Visual platform for constructing and deploying agents and model workflows. |
 
 ---
 
 ## Sources with Working URLs
 
-Every URL below returned HTTP 200 during compilation on July 21, 2026.
+Every URL below returned HTTP 200 during compilation on July 22, 2026.
 
 ### Fresh research
 
-- Adaptive harness selection for automated discovery — https://arxiv.org/abs/2607.18235
-- Internal-representation context pruning for coding agents — https://arxiv.org/abs/2607.18213
-- FlashRT real-time multimodal deployment harness — https://arxiv.org/abs/2607.18171
-- TRIM trajectory-guided code minimization — https://arxiv.org/abs/2607.18161
-- Patch Policy for dense visual robot control — https://arxiv.org/abs/2607.18236
-- Date-sorted arXiv AI/ML/NLP discovery feed — https://export.arxiv.org/api/query?search_query=cat%3Acs.AI%20OR%20cat%3Acs.CL%20OR%20cat%3Acs.LG&sortBy=submittedDate&sortOrder=descending&max_results=30
+- Evidence-aware reinforcement learning for long-context grounding — https://arxiv.org/abs/2607.19345
+- Masked visual actions for unified world modeling — https://arxiv.org/abs/2607.19343
+- Native temporal tool use for long audio-video reasoning — https://arxiv.org/abs/2607.19339
+- Budget-calibrated recovery routing for coding agents — https://arxiv.org/abs/2607.19338
+- Sabotage and monitoring evaluation for automated AI R&D — https://arxiv.org/abs/2607.19321
+- Date-sorted arXiv AI/ML/NLP/vision/robotics discovery feed — https://export.arxiv.org/api/query?search_query=cat%3Acs.AI%20OR%20cat%3Acs.CL%20OR%20cat%3Acs.LG%20OR%20cat%3Acs.CV%20OR%20cat%3Acs.RO&sortBy=submittedDate&sortOrder=descending&max_results=80
 
 ### GitHub project records
 
@@ -98,4 +98,4 @@ Every URL below returned HTTP 200 during compilation on July 21, 2026.
 
 ## Short Compilation Note
 
-This report is materially new relative to the July 15 default-branch report: all five lead advancements have been replaced with papers submitted July 20, covering adaptive discovery-harness allocation, model-native context pruning, verified multi-GPU pipeline optimization, trajectory-guided code cleanup, and lightweight dense-vision robot control. The GitHub ranking was also refreshed from live repository records and now highlights current skills, harness, and coding-agent ecosystems. Today's practical theme is **closing the loop with measured adaptation**: select harnesses from evidence, prune context from internal relevance, accept optimizations only after benchmarks and checks, and clean agent code using its trajectory rather than tests alone.
+This report is materially new relative to the July 21 report: all five lead items were replaced with newer arXiv submissions, shifting the focus to evidence-grounded long-context RL, visual-action world models, temporal tool use for audio-video, budget-aware coding-agent recovery, and adversarial monitoring of automated AI R&D. GitHub activity and star observations were refreshed from live API records. Today’s common thread is **selective agency under verification**: attend to the right evidence, spend high-fidelity compute only where needed, recover under explicit cost constraints, and test generated artifacts as potentially adversarial systems before deployment.
