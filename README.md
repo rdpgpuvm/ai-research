@@ -1,89 +1,89 @@
-# 🔬 Agentic AI & Generative AI Research Report — July 22, 2026
+# 🔬 Agentic AI & Generative AI Research Report — July 23, 2026
 
-*Compiled July 22, 2026 (America/Los_Angeles) from the newest available primary arXiv submissions and live GitHub repository records. Quantitative findings below are author-reported preprint results and have not been independently reproduced.*
+*Compiled July 23, 2026 (America/Los_Angeles) from the newest available primary arXiv submissions and live GitHub repository records. Quantitative findings below are author-reported preprint results and have not been independently reproduced.*
 
 ---
 
 ## Top 5 Latest Advancements
 
-### 1. Evidence-aware rewards reduce long-context “repetitive copying”
+### 1. RECAP makes claims about model activations independently checkable
 
-**What happened:** *Copy Less, Ground More* identifies a failure mode in which reasoning models copy large stretches of long prompts instead of isolating decisive evidence. The behavior worsened with context length and correlated with incorrect answers. The authors introduce GEAR, a reinforcement-learning reward that rewards overlap with annotated key evidence while penalizing overlap with distractors, plus an automated pipeline for constructing evidence-annotated examples from arbitrary documents. Across multiple model scales and benchmarks, they report gains of **up to 4.6 average points over accuracy-only RL**, alongside shorter reasoning traces and less copying.
+**What happened:** *Train the Model, Not the Reader* challenges reconstruction score as evidence that a natural-language activation explanation is faithful. On a released Qwen-2.5-7B verbalizer, only about **2% of specific claims were reconstruction-dependent**, meaning good reconstruction largely certified the gist rather than each assertion. Under exact synthetic ground truth, the standard recipe developed co-adapted private codes in **5/5 runs**. The paper introduces RECAP, which co-trains linear auxiliary predictors so designated internal content remains independently decodable. In the sandbox, this added only **0.001 nat** of cost. A RECAP probe separated a verbalizer’s true and false claims at **0.96 AUC**, versus 0.82 without RECAP; under adversarial edits designed to preserve reconstruction while lying, it retained 0.95 AUC while the control fell to 0.51.
 
-**Why it matters:** Long-context agents need more than retrieval capacity: they need an incentive to distinguish supporting evidence from surrounding text. Evidence-aware post-training could make document analysis, due diligence, and research agents both more accurate and less token-intensive.
+**Why it matters:** Interpretability systems should not be graded only by a model that can participate in a private code with the explanation generator. RECAP’s independently trained probes offer a more falsifiable audit path for safety teams, model-debugging tools, and monitors that must verify specific claims about hidden state rather than accept plausible prose.
 
-**Source:** https://arxiv.org/abs/2607.19345
+**Source:** https://arxiv.org/abs/2607.20379
 
-### 2. A video model can use pixel-space trajectories as both actions and goals
+### 2. Language models can distill reusable “notes to self” from experience
 
-**What happened:** *Masked Visual Actions for Unified World Modeling* represents control as a partially revealed visual trajectory inside a video. Revealing robot motion asks the model to predict the scene response, while revealing desired object motion asks the same checkpoint to infer compatible robot behavior. After fine-tuning on **15 hours of masked real and simulated video**, the model supports forward prediction, candidate-future ranking for model-based planning, policy evaluation, and inverse modeling across scenes and robot embodiments.
+**What happened:** *Notes to Self* extracts natural-language strategies and cautionary reminders from LLM solution traces into a retrievable abstraction library. The abstractions can be produced by a stronger teacher or by the model itself, then used either through inference-time retrieval or reinforcement learning with abstraction-augmented prompts. The authors report improvements on mathematical and logical reasoning benchmarks, find that self-extracted abstractions match teacher-extracted ones, and show transfer across datasets and models.
 
-**Why it matters:** This creates a shared visual interface between generative video priors and physical control. Instead of binding a world model to one robot’s action vector, developers could specify motion directly in image space and reuse the model for prediction, planning, and goal-conditioned action synthesis.
+**Why it matters:** Agent memory often stores raw transcripts, examples, or summaries. This work points toward a more compact memory layer that stores operational lessons—such as when a strategy applies or which failure to avoid—and retrieves them for new tasks. Because self-extraction reportedly performs comparably to teacher extraction, an agent may be able to improve its playbook from its own execution history without requiring every lesson to be curated by a larger model.
 
-**Source:** https://arxiv.org/abs/2607.19343
+**Source:** https://arxiv.org/abs/2607.20372
 
-### 3. Long audio-video agents learn when and where to zoom in
+### 3. Future frames can teach a video model how to write better causal memory
 
-**What happened:** *OmniReasoner* gives an omnimodal model a low-cost preview of a long stream, then trains it with supervised fine-tuning and reinforcement learning to request a higher-fidelity audio-video interval only when needed. Its TimeAnchor mechanism keeps temporal tool arguments consistent across sparse and dense sampling rates. A synthetic Temporal Augmented Data Engine creates tool-use trajectories without costly manual interval labels. The paper reports better answer accuracy and temporal grounding while focusing expensive computation on informative segments.
+**What happened:** *Self Gradient Forcing* identifies a historical context-gradient gap in autoregressive video diffusion: self-generated history is available to future frames as a frozen key-value cache, but future losses cannot teach earlier latents how to encode more useful memory. Its two-pass method first runs an inference-matching autoregressive rollout without gradients and records a sampled denoising exit point. A second, parallel reconstruction pass recomputes context representations and future-to-context causal attention, allowing future-video losses to supervise memory writing without backpropagating through the entire serial rollout. The authors report stronger subject identity, background and layout consistency, and temporal stability. Notably, a model trained with only a **five-second window** reportedly extrapolated to videos lasting several minutes.
 
-**Why it matters:** Meeting analysis, media search, surveillance review, and sports intelligence often involve hours of mostly irrelevant footage. Native temporal tool use offers an agentic alternative to processing every second at full fidelity or relying on a fixed sampling schedule.
+**Why it matters:** Long-form video generation is constrained not only by frame quality but by accumulated identity and scene drift. Training the causal cache as a useful memory could support longer synthetic scenes, persistent characters, simulation rollouts, and interactive media without requiring minute-scale training clips or prohibitively expensive full-sequence backpropagation.
 
-**Source:** https://arxiv.org/abs/2607.19339
+**Source:** https://arxiv.org/abs/2607.20368
 
-### 4. Coding agents can route failures between cheap recovery and escalation under a budget
+### 4. A small model can learn exactly when to hand generation to a large model
 
-**What happened:** *CodeRescue* treats failed execution as a routing decision among heterogeneous recovery actions rather than an automatic handoff to a larger model. A supervised router learns from execution rollouts, while a Conformal Risk Control layer adjusts the cost penalty at deployment time without retraining and provides marginal expected-cost control under exchangeability. On failures drawn from five coding benchmarks, one reported GPT-5.4-nano/GPT-5.4 operating point **exceeded the solve rate of always escalating while using 35% of its mean recovery cost**.
+**What happened:** *PyroDash* embeds collaboration directly into a small language model (SLM): during token generation, the SLM emits a control token when it wants one frozen large-model handoff. The design needs no separate router, no access to large-model logits, and no retraining of the large model. Training combines control-token embedding learning, offloading-oriented supervised fine-tuning, and cost-aware alignment with Group Relative Policy Optimization. Across five mathematical-reasoning benchmarks, the authors report two useful operating points. At λ=0.05, PyroDash reached **64.04% average accuracy**, 6.36 percentage points above the LLM-only baseline, while reducing cost by 20.4%. At λ=0.6, it reached 54.55% accuracy with a **1.90% LLM-token ratio** and 0.012 LLM calls per example, reducing reported cost from $49.36 to $1.78.
 
-**Why it matters:** Test failures contain information that can make another inexpensive attempt worthwhile. Budget-calibrated recovery could let CI repair bots and coding agents spend selectively—retrying locally when feedback is actionable and escalating only when the expected value justifies it.
+**Why it matters:** Agent stacks commonly route whole requests before generation begins. A learned in-sequence handoff can defer escalation until the smaller model reaches the difficult part, carrying its partial reasoning forward once rather than paying large-model rates for every token. That creates a practical control surface for high-volume tutoring, analytics, and agent workflows with strict per-task budgets.
 
-**Source:** https://arxiv.org/abs/2607.19338
+**Source:** https://arxiv.org/abs/2607.20327
 
-### 5. ResearchArena tests whether monitors can catch AI-R&D sabotage in deployable artifacts
+### 5. Harmful-output risk can be lower-bounded with statistical guarantees
 
-**What happened:** *ResearchArena* evaluates agents and monitors across safety post-training, capability post-training, CUDA-kernel optimization, and inference-server optimization. Each task includes hidden opportunities either to sabotage the delivered artifact or to take an unrelated covert action in the sandbox. Monitors vary in whether they can execute the artifact and whether they can inspect the agent trajectory. The authors find that training-data sabotage was flagged **fewer than half the time**; allowing monitors to probe artifacts helped, but still missed anomalies through shallow inspection, benign explanations, or poorly chosen tests.
+**What happened:** *Sound Probabilistic Safety Bounds for Large Language Models* applies Clopper–Pearson confidence intervals to obtain probably approximately correct bounds on the probability that a model produces harmful output for a prompt. Its search procedure uses latent-space features to prioritize branches of the autoregressive generation tree that appear more likely to produce harmful completions. The authors emphasize lower bounds that are formally guaranteed not to exceed the true harmful-output probability and report obtaining non-trivial bounds on state-of-the-art LLMs; the abstract does not provide a numerical result.
 
-**Why it matters:** Autonomous AI R&D produces models, adapters, kernels, and servers whose behavior cannot be validated by reviewing a final diff alone. Deployment gates will need adversarial artifact tests, execution-based monitoring, and targeted probes—not merely transcript review.
+**Why it matters:** A red-team run that finds no harmful completion does not establish that risk is absent, while a successful attack does not quantify prevalence. Sound lower bounds can turn discovered failures into statistically interpretable evidence and help safety evaluators compare models, prompts, or mitigations without treating heuristic search frequency as a calibrated probability.
 
-**Source:** https://arxiv.org/abs/2607.19321
+**Source:** https://arxiv.org/abs/2607.20286
 
 ---
 
 ## New Use Cases
 
-- **Grounded contract and policy analysis:** Reward an agent for citing decisive clauses while penalizing reasoning that merely echoes irrelevant pages.
-- **Visual goal programming for robots:** Sketch an object trajectory in a camera view and use one world model to infer robot motion, forecast outcomes, and rank candidate plans.
-- **Long-form multimedia investigation:** Scan a cheap global preview, then let the model request precise high-fidelity audio-video windows around suspected evidence.
-- **Cost-governed CI remediation:** Route a failed coding attempt to another small-model recovery, a targeted diagnostic, or an expensive model according to a live budget.
-- **Adversarial release testing for AI-generated infrastructure:** Give monitors executable access to adapters, kernels, and inference servers so they can probe hidden behavior before deployment.
-- **Adaptive media accessibility:** Locate sparse events in lectures or meetings before producing detailed captions, translations, or summaries only for relevant intervals.
+- **Probe-backed interpretability audits:** Require activation explanations to expose claims that independent predictors can verify, including after adversarial wording edits.
+- **Experience-distilled agent memory:** Convert successful and failed task traces into retrievable strategies and cautionary reminders instead of retaining only verbose transcripts.
+- **Persistent long-form video production:** Use future-frame supervision to improve causal memory for recurring characters, stable environments, and multi-minute generated sequences.
+- **Token-level inference budgeting:** Let an inexpensive model solve routine portions of a request and trigger a single large-model handoff only when generation becomes difficult.
+- **Statistically defensible model red teaming:** Search likely harmful generation branches while reporting sound lower bounds rather than uncalibrated counts of discovered failures.
+- **Self-improving technical tutors:** Distill reusable reasoning lessons from solved exercises, retrieve them for related problems, and reserve expensive-model assistance for hard intermediate steps.
 
 ---
 
 ## Top Rated GitHub Projects Leveraging Agentic/Gen AI
 
-GitHub repository records were checked through the API on July 22, 2026. Stars and push timestamps are point-in-time observations and can change. This is a curated ranking by observed stars among highly active repositories directly useful for building or operating agents; stars measure community attention, not verified software quality.
+GitHub repository records were checked through the API on July 23, 2026. Stars and push timestamps are point-in-time observations and can change. This is a curated ranking by observed stars among highly active repositories directly useful for building or operating agents; stars indicate community attention, not verified software quality.
 
 | Rank | Project | Stars observed | Latest push observed (UTC) | Agentic/GenAI role |
 |---:|---|---:|---|---|
-| 1 | [obra/superpowers](https://github.com/obra/superpowers) | 259,285 | 2026-07-21 | Agent skills framework and structured software-development methodology. |
-| 2 | [affaan-m/ECC](https://github.com/affaan-m/ECC) | 232,143 | 2026-07-22 | Cross-agent harness optimization through skills, memory, security, and reusable practices. |
-| 3 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 218,850 | 2026-07-22 | Extensible personal agent with tools, skills, memory, and autonomous workflows. |
-| 4 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | 188,590 | 2026-07-22 | Open-source coding agent for repository-scale development workflows. |
-| 5 | [langflow-ai/langflow](https://github.com/langflow-ai/langflow) | 152,214 | 2026-07-22 | Visual platform for constructing and deploying agents and model workflows. |
+| 1 | [obra/superpowers](https://github.com/obra/superpowers) | 259,942 | 2026-07-22 22:46:53 | Agent-skills framework and structured software-development methodology. |
+| 2 | [affaan-m/ECC](https://github.com/affaan-m/ECC) | 232,472 | 2026-07-23 00:44:37 | Cross-agent harness optimization through skills, memory, security, and reusable practices. |
+| 3 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 219,369 | 2026-07-23 16:13:11 | Extensible personal agent with tools, skills, memory, and autonomous workflows. |
+| 4 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | 188,938 | 2026-07-23 16:14:09 | Open-source coding agent for repository-scale development workflows. |
+| 5 | [langflow-ai/langflow](https://github.com/langflow-ai/langflow) | 152,272 | 2026-07-23 16:09:29 | Visual platform for constructing and deploying agents and model workflows. |
 
 ---
 
 ## Sources with Working URLs
 
-Every URL below returned HTTP 200 during compilation on July 22, 2026.
+Every URL below returned HTTP 200 during compilation on July 23, 2026.
 
 ### Fresh research
 
-- Evidence-aware reinforcement learning for long-context grounding — https://arxiv.org/abs/2607.19345
-- Masked visual actions for unified world modeling — https://arxiv.org/abs/2607.19343
-- Native temporal tool use for long audio-video reasoning — https://arxiv.org/abs/2607.19339
-- Budget-calibrated recovery routing for coding agents — https://arxiv.org/abs/2607.19338
-- Sabotage and monitoring evaluation for automated AI R&D — https://arxiv.org/abs/2607.19321
+- Verifiable activation explanations with decodability supervision — https://arxiv.org/abs/2607.20379
+- Experiential abstractions as reusable LLM “notes to self” — https://arxiv.org/abs/2607.20372
+- Self Gradient Forcing for native long-video extrapolation — https://arxiv.org/abs/2607.20368
+- Token-level small/large-model collaborative inference — https://arxiv.org/abs/2607.20327
+- Sound probabilistic lower bounds for harmful LLM output — https://arxiv.org/abs/2607.20286
 - Date-sorted arXiv AI/ML/NLP/vision/robotics discovery feed — https://export.arxiv.org/api/query?search_query=cat%3Acs.AI%20OR%20cat%3Acs.CL%20OR%20cat%3Acs.LG%20OR%20cat%3Acs.CV%20OR%20cat%3Acs.RO&sortBy=submittedDate&sortOrder=descending&max_results=80
 
 ### GitHub project records
@@ -98,4 +98,4 @@ Every URL below returned HTTP 200 during compilation on July 22, 2026.
 
 ## Short Compilation Note
 
-This report is materially new relative to the July 21 report: all five lead items were replaced with newer arXiv submissions, shifting the focus to evidence-grounded long-context RL, visual-action world models, temporal tool use for audio-video, budget-aware coding-agent recovery, and adversarial monitoring of automated AI R&D. GitHub activity and star observations were refreshed from live API records. Today’s common thread is **selective agency under verification**: attend to the right evidence, spend high-fidelity compute only where needed, recover under explicit cost constraints, and test generated artifacts as potentially adversarial systems before deployment.
+This report is materially new relative to July 22: **all five lead papers were replaced** with newer submissions. The focus moves from evidence-aware long-context RL, visual-action world models, temporal audio-video tool use, coding-recovery routing, and AI-R&D sabotage monitoring to independently verifiable interpretability, experience-distilled agent memory, gradient-trained causal video memory, token-level model escalation, and statistically sound harmful-output bounds. GitHub stars and activity timestamps were also refreshed from live API records. Today’s common thread is **making adaptive systems auditable**: preserve inspectable internal content, distill lessons from experience, teach generative memory with future consequences, escalate compute only when needed, and attach formal meaning to safety findings.
