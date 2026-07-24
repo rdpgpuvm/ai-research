@@ -1,90 +1,90 @@
-# 🔬 Agentic AI & Generative AI Research Report — July 23, 2026
+# 🔬 Agentic AI & Generative AI Research Report — July 24, 2026
 
-*Compiled July 23, 2026 (America/Los_Angeles) from the newest available primary arXiv submissions and live GitHub repository records. Quantitative findings below are author-reported preprint results and have not been independently reproduced.*
+*Compiled July 24, 2026 (America/Los_Angeles) from fresh arXiv listings and live GitHub repository records. Reported benchmark results are author claims from preprints and have not been independently reproduced.*
 
 ---
 
 ## Top 5 Latest Advancements
 
-### 1. RECAP makes claims about model activations independently checkable
+### 1. OpenForgeRL trains agents inside the same harnesses they use at deployment
 
-**What happened:** *Train the Model, Not the Reader* challenges reconstruction score as evidence that a natural-language activation explanation is faithful. On a released Qwen-2.5-7B verbalizer, only about **2% of specific claims were reconstruction-dependent**, meaning good reconstruction largely certified the gist rather than each assertion. Under exact synthetic ground truth, the standard recipe developed co-adapted private codes in **5/5 runs**. The paper introduces RECAP, which co-trains linear auxiliary predictors so designated internal content remains independently decodable. In the sandbox, this added only **0.001 nat** of cost. A RECAP probe separated a verbalizer’s true and false claims at **0.96 AUC**, versus 0.82 without RECAP; under adversarial edits designed to preserve reconstruction while lying, it retained 0.95 AUC while the control fell to 0.51.
+**What happened:** *OpenForgeRL* addresses a gap between agent training stacks and stateful production harnesses such as coding, “claw,” browser, and computer-use systems. A lightweight proxy serves and records a harness’s model calls for a standard reinforcement-learning backend, while a Kubernetes orchestrator isolates each rollout in a remote container. This separates inference from training without reducing the harness to a simplified simulator. The authors report that models trained on hundreds to a few thousand tasks reached **31.7 pass³ and 55.9 pass@3 on ClawEval**, plus **37.7 on OSWorld-Verified, 63.0 on Online-Mind2Web, and 72.3 on WebVoyager**. RL improved self-verification, tool coverage, and multi-step completion, although error recovery remained weak.
 
-**Why it matters:** Interpretability systems should not be graded only by a model that can participate in a private code with the explanation generator. RECAP’s independently trained probes offer a more falsifiable audit path for safety teams, model-debugging tools, and monitors that must verify specific claims about hidden state rather than accept plausible prose.
+**Why it matters:** Agents can now be optimized against the real tool protocol, state transitions, subprocesses, and interfaces they will encounter after deployment. This should reduce train–serve mismatch and make it easier to study whether gains come from the base policy, the harness, or their interaction.
 
-**Source:** https://arxiv.org/abs/2607.20379
+**Source:** https://arxiv.org/abs/2607.21557
 
-### 2. Language models can distill reusable “notes to self” from experience
+### 2. GraphVid controls multi-object video through interaction graphs
 
-**What happened:** *Notes to Self* extracts natural-language strategies and cautionary reminders from LLM solution traces into a retrievable abstraction library. The abstractions can be produced by a stronger teacher or by the model itself, then used either through inference-time retrieval or reinforcement learning with abstraction-augmented prompts. The authors report improvements on mathematical and logical reasoning benchmarks, find that self-extracted abstractions match teacher-extracted ones, and show transfer across datasets and models.
+**What happened:** *GraphVid* replaces cumbersome per-object motion tracks with a structured graph whose nodes and relations describe subjects and their interactions. The graph conditions an image-to-video model, while the accompanying GraphVid-Bench supplies interaction-centric videos with relational annotations. Despite using fewer trainable parameters and substantially less training data than earlier motion-control methods, the authors report up to **39.9% lower FID** and **37.6% lower FVD** than Motion-I2V; PSNR increased from 9.87 to 15.98 and SSIM from 0.38 to 0.61.
 
-**Why it matters:** Agent memory often stores raw transcripts, examples, or summaries. This work points toward a more compact memory layer that stores operational lessons—such as when a strategy applies or which failure to avoid—and retrieves them for new tasks. Because self-extraction reportedly performs comparably to teacher extraction, an agent may be able to improve its playbook from its own execution history without requiring every lesson to be curated by a larger model.
+**Why it matters:** A semantic relation such as “the dog circles the child while the ball passes behind both” is easier to author and edit as a graph than as several precise, occlusion-aware trajectories. Structured control could make complex video blocking accessible to creative tools, simulation authoring, and synthetic-data pipelines.
 
-**Source:** https://arxiv.org/abs/2607.20372
+**Source:** https://arxiv.org/abs/2607.21580
 
-### 3. Future frames can teach a video model how to write better causal memory
+### 3. Visual self-distillation works without an external teacher or privileged answers
 
-**What happened:** *Self Gradient Forcing* identifies a historical context-gradient gap in autoregressive video diffusion: self-generated history is available to future frames as a frozen key-value cache, but future losses cannot teach earlier latents how to encode more useful memory. Its two-pass method first runs an inference-matching autoregressive rollout without gradients and records a sampled denoising exit point. A second, parallel reconstruction pass recomputes context representations and future-to-context causal attention, allowing future-video losses to supervise memory writing without backpropagating through the entire serial rollout. The authors report stronger subject identity, background and layout consistency, and temporal stability. Notably, a model trained with only a **five-second window** reportedly extrapolated to videos lasting several minutes.
+**What happened:** *Visual Contrastive Self-Distillation (VCSD)* creates its learning signal by asking an exponential-moving-average teacher to predict the next token twice: once with the original image and once with image content erased. The difference identifies tokens specifically supported by visual evidence, sharpens the teacher distribution, and is distilled into the student. It requires no external teacher, answer key, reasoning trace, visual-evidence label, or inference-time component. On ViRL39K, the reported seven-benchmark aggregate for Qwen3-VL rose from **62.27% to 67.04% at 2B**, 71.30% to 73.16% at 4B, and 72.51% to 76.26% at 8B.
 
-**Why it matters:** Long-form video generation is constrained not only by frame quality but by accumulated identity and scene drift. Training the causal cache as a useful memory could support longer synthetic scenes, persistent characters, simulation rollouts, and interactive media without requiring minute-scale training clips or prohibitively expensive full-sequence backpropagation.
+**Why it matters:** The method turns input ablation into scalable supervision. Teams with unlabeled image–instruction data may be able to strengthen visual grounding without paying for a larger teacher or constructing detailed rationales, while retaining the original model’s serving footprint.
 
-**Source:** https://arxiv.org/abs/2607.20368
+**Source:** https://arxiv.org/abs/2607.21556
 
-### 4. A small model can learn exactly when to hand generation to a large model
+### 4. AREX recursively audits and repairs deep-research answers
 
-**What happened:** *PyroDash* embeds collaboration directly into a small language model (SLM): during token generation, the SLM emits a control token when it wants one frozen large-model handoff. The design needs no separate router, no access to large-model logits, and no retraining of the large model. Training combines control-token embedding learning, offloading-oriented supervised fine-tuning, and cost-aware alignment with Group Relative Policy Optimization. Across five mathematical-reasoning benchmarks, the authors report two useful operating points. At λ=0.05, PyroDash reached **64.04% average accuracy**, 6.36 percentage points above the LLM-only baseline, while reducing cost by 20.4%. At λ=0.6, it reached 54.55% accuracy with a **1.90% LLM-token ratio** and 0.012 LLM calls per example, reducing reported cost from $49.36 to $1.78.
+**What happened:** *AREX* exploits the asymmetry between expensive discovery and cheaper verification. An inner loop gathers evidence and drafts an answer; an outer loop checks each constraint, identifies unresolved claims, and launches targeted follow-up research. A learned context-update tool compresses long interaction histories into verified evidence and open constraints without depending on an external model. Dense 4B and 122B-A10B mixture-of-experts versions were trained with agentic mid-training and long-horizon RL. The authors report substantial gains over comparable-scale baselines across BrowseComp, WideSearch, DeepSearchQA, Humanity’s Last Exam, and other tool-use benchmarks, while remaining competitive with systems using more activated parameters.
 
-**Why it matters:** Agent stacks commonly route whole requests before generation begins. A learned in-sequence handoff can defer escalation until the smaller model reaches the difficult part, carrying its partial reasoning forward once rather than paying large-model rates for every token. That creates a practical control surface for high-volume tutoring, analytics, and agent workflows with strict per-task budgets.
+**Why it matters:** Rather than repeatedly restarting broad searches, a research agent can preserve what has already been verified and spend the next round only on failed constraints. That pattern is useful wherever final deliverables must satisfy many independently checkable requirements.
 
-**Source:** https://arxiv.org/abs/2607.20327
+**Source:** https://arxiv.org/abs/2607.21461
 
-### 5. Harmful-output risk can be lower-bounded with statistical guarantees
+### 5. GS-Agent builds controllable 4D worlds with physics in the loop
 
-**What happened:** *Sound Probabilistic Safety Bounds for Large Language Models* applies Clopper–Pearson confidence intervals to obtain probably approximately correct bounds on the probability that a model produces harmful output for a prompt. Its search procedure uses latent-space features to prioritize branches of the autoregressive generation tree that appear more likely to produce harmful completions. The authors emphasize lower bounds that are formally guaranteed not to exceed the true harmful-output probability and report obtaining non-trivial bounds on state-of-the-art LLMs; the abstract does not provide a numerical result.
+**What happened:** *GS-Agent* organizes specialist agents around a physics engine to turn natural-language descriptions into dynamic 4D scenes. Agents handle asset curation, material tuning, placement, motion, cameras, and lighting; they execute code, inspect multimodal feedback, and iteratively revise the result. The reported examples include interactions among liquids, deformable objects, and rigid bodies, with controllable cinematic rendering.
 
-**Why it matters:** A red-team run that finds no harmful completion does not establish that risk is absent, while a successful attack does not quantify prevalence. Sound lower bounds can turn discovered failures into statistically interpretable evidence and help safety evaluators compare models, prompts, or mitigations without treating heuristic search frequency as a calibrated probability.
+**Why it matters:** Generative video can look plausible without representing a reusable world. By producing an editable scene whose motion is executed by a physics engine, this approach points toward assets that can support simulation, robotics development, games, and previsualization—not merely a fixed rendered clip.
 
-**Source:** https://arxiv.org/abs/2607.20286
+**Source:** https://arxiv.org/abs/2607.21522
 
 ---
 
 ## New Use Cases
 
-- **Probe-backed interpretability audits:** Require activation explanations to expose claims that independent predictors can verify, including after adversarial wording edits.
-- **Experience-distilled agent memory:** Convert successful and failed task traces into retrievable strategies and cautionary reminders instead of retaining only verbose transcripts.
-- **Persistent long-form video production:** Use future-frame supervision to improve causal memory for recurring characters, stable environments, and multi-minute generated sequences.
-- **Token-level inference budgeting:** Let an inexpensive model solve routine portions of a request and trigger a single large-model handoff only when generation becomes difficult.
-- **Statistically defensible model red teaming:** Search likely harmful generation branches while reporting sound lower bounds rather than uncalibrated counts of discovered failures.
-- **Self-improving technical tutors:** Distill reusable reasoning lessons from solved exercises, retrieve them for related problems, and reserve expensive-model assistance for hard intermediate steps.
+- **Harness-native agent training:** Reinforce coding, browser, and desktop agents inside their actual multi-process tool environments instead of a reduced proxy task.
+- **Graph-directed scene blocking:** Let creators specify multi-subject relationships and interactions while the video model resolves trajectories and occlusions.
+- **Label-light visual grounding:** Improve smaller vision-language models by contrasting intact and content-erased images, without a proprietary teacher or curated rationales.
+- **Constraint-led due diligence:** Maintain verified evidence and unresolved requirements across iterative market, policy, scientific, or procurement research.
+- **Text-to-simulation prototyping:** Generate editable, physics-backed 4D scenes for robot training, safety scenarios, games, and cinematic previsualization.
+- **Agent reliability diagnostics:** Compare harness choices and inspect whether RL improves verification and tool coverage while explicitly tracking persistent weaknesses such as recovery from errors.
 
 ---
 
 ## Top Rated GitHub Projects Leveraging Agentic/Gen AI
 
-GitHub repository records were checked through the API on July 23, 2026. Stars and push timestamps are point-in-time observations and can change. This is a curated ranking by observed stars among highly active repositories directly useful for building or operating agents; stars indicate community attention, not verified software quality.
+GitHub repository records were queried on July 24, 2026. Stars and push timestamps are point-in-time observations and can change. The table ranks a curated set of actively maintained, directly agent-oriented projects by observed stars; popularity is not a quality or security audit.
 
 | Rank | Project | Stars observed | Latest push observed (UTC) | Agentic/GenAI role |
 |---:|---|---:|---|---|
-| 1 | [obra/superpowers](https://github.com/obra/superpowers) | 259,942 | 2026-07-22 22:46:53 | Agent-skills framework and structured software-development methodology. |
-| 2 | [affaan-m/ECC](https://github.com/affaan-m/ECC) | 232,472 | 2026-07-23 00:44:37 | Cross-agent harness optimization through skills, memory, security, and reusable practices. |
-| 3 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 219,369 | 2026-07-23 16:13:11 | Extensible personal agent with tools, skills, memory, and autonomous workflows. |
-| 4 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | 188,938 | 2026-07-23 16:14:09 | Open-source coding agent for repository-scale development workflows. |
-| 5 | [langflow-ai/langflow](https://github.com/langflow-ai/langflow) | 152,272 | 2026-07-23 16:09:29 | Visual platform for constructing and deploying agents and model workflows. |
+| 1 | [obra/superpowers](https://github.com/obra/superpowers) | 260,470 | 2026-07-24 00:29:46 | Skills framework and structured software-development methodology for coding agents. |
+| 2 | [affaan-m/ECC](https://github.com/affaan-m/ECC) | 232,771 | 2026-07-24 15:52:31 | Agent-harness optimization through reusable skills, memory, security, and workflows. |
+| 3 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 219,878 | 2026-07-24 15:46:27 | Extensible personal agent with tools, skills, persistent memory, and automation. |
+| 4 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | 189,303 | 2026-07-24 16:11:36 | Open-source coding agent for repository-scale development. |
+| 5 | [langflow-ai/langflow](https://github.com/langflow-ai/langflow) | 152,334 | 2026-07-24 15:48:11 | Visual platform for building and deploying agents and model workflows. |
 
 ---
 
 ## Sources with Working URLs
 
-Every URL below returned HTTP 200 during compilation on July 23, 2026.
+Every URL below returned HTTP 200 during compilation on July 24, 2026.
 
 ### Fresh research
 
-- Verifiable activation explanations with decodability supervision — https://arxiv.org/abs/2607.20379
-- Experiential abstractions as reusable LLM “notes to self” — https://arxiv.org/abs/2607.20372
-- Self Gradient Forcing for native long-video extrapolation — https://arxiv.org/abs/2607.20368
-- Token-level small/large-model collaborative inference — https://arxiv.org/abs/2607.20327
-- Sound probabilistic lower bounds for harmful LLM output — https://arxiv.org/abs/2607.20286
-- Date-sorted arXiv AI/ML/NLP/vision/robotics discovery feed — https://export.arxiv.org/api/query?search_query=cat%3Acs.AI%20OR%20cat%3Acs.CL%20OR%20cat%3Acs.LG%20OR%20cat%3Acs.CV%20OR%20cat%3Acs.RO&sortBy=submittedDate&sortOrder=descending&max_results=80
+- Harness-native reinforcement learning for agents — https://arxiv.org/abs/2607.21557
+- Graph-controllable multi-object video generation — https://arxiv.org/abs/2607.21580
+- Visual contrastive self-distillation — https://arxiv.org/abs/2607.21556
+- Recursively self-improving deep research — https://arxiv.org/abs/2607.21461
+- Agentic generation of physics-backed 4D worlds — https://arxiv.org/abs/2607.21522
+- arXiv’s current cs.AI listing used for discovery — https://arxiv.org/list/cs.AI/new
 
 ### GitHub project records
 
@@ -98,4 +98,4 @@ Every URL below returned HTTP 200 during compilation on July 23, 2026.
 
 ## Short Compilation Note
 
-This report is materially new relative to July 22: **all five lead papers were replaced** with newer submissions. The focus moves from evidence-aware long-context RL, visual-action world models, temporal audio-video tool use, coding-recovery routing, and AI-R&D sabotage monitoring to independently verifiable interpretability, experience-distilled agent memory, gradient-trained causal video memory, token-level model escalation, and statistically sound harmful-output bounds. GitHub stars and activity timestamps were also refreshed from live API records. Today’s common thread is **making adaptive systems auditable**: preserve inspectable internal content, distill lessons from experience, teach generative memory with future consequences, escalate compute only when needed, and attach formal meaning to safety findings.
+This report is materially new relative to July 23: **all five featured papers and every lead analysis were replaced**, not merely re-dated. Yesterday’s report covered verifiable activation explanations, reusable “notes to self,” causal video memory, token-level small/large-model handoffs, and probabilistic safety bounds. Today’s research instead centers on training agents in real deployment harnesses, graph-structured video control, teacher-free visual grounding, recursive evidence repair, and physics-backed 4D world construction. GitHub popularity and activity observations were also refreshed from live repository records. The shared theme is a shift from free-form model output toward **systems with explicit structure**—real harness state, interaction graphs, visual counterfactuals, verified constraints, and executable physics.
