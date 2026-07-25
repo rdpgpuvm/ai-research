@@ -1,101 +1,101 @@
-# 🔬 Agentic AI & Generative AI Research Report — July 24, 2026
+# 🔬 Agentic AI & Generative AI Research Report — July 25, 2026
 
-*Compiled July 24, 2026 (America/Los_Angeles) from fresh arXiv listings and live GitHub repository records. Reported benchmark results are author claims from preprints and have not been independently reproduced.*
+*Compiled July 25, 2026 (America/Los_Angeles) from the newest available arXiv listings and live GitHub repository records. Quantitative results below are author-reported preprint results and have not been independently reproduced.*
 
 ---
 
 ## Top 5 Latest Advancements
 
-### 1. OpenForgeRL trains agents inside the same harnesses they use at deployment
+### 1. VLM-IE3D gives RGB-only vision-language models both implicit and explicit 3D geometry
 
-**What happened:** *OpenForgeRL* addresses a gap between agent training stacks and stateful production harnesses such as coding, “claw,” browser, and computer-use systems. A lightweight proxy serves and records a harness’s model calls for a standard reinforcement-learning backend, while a Kubernetes orchestrator isolates each rollout in a remote container. This separates inference from training without reducing the harness to a simplified simulator. The authors report that models trained on hundreds to a few thousand tasks reached **31.7 pass³ and 55.9 pass@3 on ClawEval**, plus **37.7 on OSWorld-Verified, 63.0 on Online-Mind2Web, and 72.3 on WebVoyager**. RL improved self-verification, tool coverage, and multi-step completion, although error recovery remained weak.
+**What happened:** *VLM-IE3D* derives two complementary representations from ordinary RGB video. Implicit Geometry Tokens encode high-level geometric priors, while Explicit Geometry Tokens represent reconstructed 3D attributes; a dedicated adapter fuses both with the model's 2D visual features. The authors report consistent improvements across 3D video detection, visual grounding, dense captioning, and spatial reasoning without requiring point clouds or other 3D input at inference.
 
-**Why it matters:** Agents can now be optimized against the real tool protocol, state transitions, subprocesses, and interfaces they will encounter after deployment. This should reduce train–serve mismatch and make it easier to study whether gains come from the base policy, the harness, or their interaction.
+**Why it matters:** Robots, AR assistants, and video-analysis agents often receive camera frames rather than prepared 3D scans. Learning usable spatial structure from that readily available stream can lower the data and sensor barrier for grounded reasoning while preserving detailed geometry where it matters.
 
-**Source:** https://arxiv.org/abs/2607.21557
+**Source:** https://arxiv.org/abs/2607.21595
 
-### 2. GraphVid controls multi-object video through interaction graphs
+### 2. Expanding Flow Maps make output size a learned part of generation
 
-**What happened:** *GraphVid* replaces cumbersome per-object motion tracks with a structured graph whose nodes and relations describe subjects and their interactions. The graph conditions an image-to-video model, while the accompanying GraphVid-Bench supplies interaction-centric videos with relational annotations. Despite using fewer trainable parameters and substantially less training data than earlier motion-control methods, the authors report up to **39.9% lower FID** and **37.6% lower FVD** than Motion-I2V; PSNR increased from 9.87 to 15.98 and SSIM from 0.38 to 0.61.
+**What happened:** *Expanding Generative Flows* move between distributions whose dimensionality grows over time. Their distilled counterpart, *Expanding Flow Maps*, alternates an **expand operator** that adds conditionally sampled coordinates or tokens with a **transport map** that advances and denoises the enlarged state. The formulation covers continuous states and discrete simplices, and reduces to an ordinary fixed-canvas flow when expansion is the identity.
 
-**Why it matters:** A semantic relation such as “the dog circles the child while the ball passes behind both” is easier to author and edit as a graph than as several precise, occlusion-aware trajectories. Structured control could make complex video blocking accessible to creative tools, simulation authoring, and synthetic-data pipelines.
+**Why it matters:** Many real outputs do not have a natural fixed shape: molecular graphs have different atom counts, scenes contain different numbers of objects, and responses require different sequence lengths. A generator that jointly learns *how much to create* and *what to create* avoids committing to padding, a fixed canvas, or a separately predicted size.
 
-**Source:** https://arxiv.org/abs/2607.21580
+**Source:** https://arxiv.org/abs/2607.21585
 
-### 3. Visual self-distillation works without an external teacher or privileged answers
+### 3. Windowed-MTP removes the long-context draft-cache tax from speculative decoding
 
-**What happened:** *Visual Contrastive Self-Distillation (VCSD)* creates its learning signal by asking an exponential-moving-average teacher to predict the next token twice: once with the original image and once with image content erased. The difference identifies tokens specifically supported by visual evidence, sharpens the teacher distribution, and is distilled into the student. It requires no external teacher, answer key, reasoning trace, visual-evidence label, or inference-time component. On ViRL39K, the reported seven-benchmark aggregate for Qwen3-VL rose from **62.27% to 67.04% at 2B**, 71.30% to 73.16% at 4B, and 72.51% to 76.26% at 8B.
+**What happened:** Built-in multi-token-prediction draft heads can become expensive at million-token context because every draft step reads the full key-value cache. *Windowed-MTP* applies a StreamingLLM-style sliding window and attention sink only to the draft head, while the target model retains full-attention verification. The paper reports discarding roughly **99% of draft KV entries at one million tokens** and cutting per-decode-step cost by **28–44%** across three 35B–122B architecture families. Because the full target still accepts or rejects every proposal, draft windowing does not change the target's verified output distribution.
 
-**Why it matters:** The method turns input ablation into scalable supervision. Teams with unlabeled image–instruction data may be able to strengthen visual grounding without paying for a larger teacher or constructing detailed rationales, while retaining the original model’s serving footprint.
+**Why it matters:** Long-context agents repeatedly decode against large histories, where a supposedly cheap speculative draft can erase the intended speedup. Bounding only the draft's working set offers a training-free path to predictable memory and latency without weakening final verification.
 
-**Source:** https://arxiv.org/abs/2607.21556
+**Source:** https://arxiv.org/abs/2607.21535
 
-### 4. AREX recursively audits and repairs deep-research answers
+### 4. LLM moral revision follows structured social-influence effects, not just generic sycophancy
 
-**What happened:** *AREX* exploits the asymmetry between expensive discovery and cheaper verification. An inner loop gathers evidence and drafts an answer; an outer loop checks each constraint, identifies unresolved claims, and launches targeted follow-up research. A learned context-update tool compresses long interaction histories into verified evidence and open constraints without depending on an external model. Dense 4B and 122B-A10B mixture-of-experts versions were trained with agentic mid-training and long-horizon RL. The authors report substantial gains over comparable-scale baselines across BrowseComp, WideSearch, DeepSearchQA, Humanity’s Last Exam, and other tool-use benchmarks, while remaining competitive with systems using more activated parameters.
+**What happened:** *Beyond Sycophancy* studies resistance and compliance across three dimensions familiar from social psychology: distance from the model's initial view, attribution of the incoming view, and the coalition supporting it. Across three studies, models were more receptive to nearby positions, more influenced when a view was framed as their own prior judgment, and sensitive to group-pressure structure.
 
-**Why it matters:** Rather than repeatedly restarting broad searches, a research agent can preserve what has already been verified and spend the next round only on failed constraints. That pattern is useful wherever final deliverables must satisfy many independently checkable requirements.
+**Why it matters:** Treating every answer change as “sycophancy” conflates constructive updating with ungrounded compliance. The richer framework suggests alignment evaluations should vary source, distance, and coalition cues—especially for advice, moderation, and deliberative agents where both stubbornness and excessive deference can cause harm.
 
-**Source:** https://arxiv.org/abs/2607.21461
+**Source:** https://arxiv.org/abs/2607.21558
 
-### 5. GS-Agent builds controllable 4D worlds with physics in the loop
+### 5. MedGame turns static clinical cases into executable decision-centered stories
 
-**What happened:** *GS-Agent* organizes specialist agents around a physics engine to turn natural-language descriptions into dynamic 4D scenes. Agents handle asset curation, material tuning, placement, motion, cameras, and lighting; they execute code, inspect multimodal feedback, and iteratively revise the result. The reported examples include interactions among liquids, deformable objects, and rigid bodies, with controllable cinematic rendering.
+**What happened:** *MedGame* uses a Medical Narrative Designer to create case-grounded states and decision nodes, then a Story Director converts those into dependency-aware multimodal orchestration plans for an interactive platform. The authors introduce a **5,000-case MedGame Bench**, report that task-specific fine-tuning narrows the gap between open and commercial models, and describe a pilot study in which students perceived the experience as more engaging and useful than text-only alternatives.
 
-**Why it matters:** Generative video can look plausible without representing a reusable world. By producing an editable scene whose motion is executed by a physics engine, this approach points toward assets that can support simulation, robotics development, games, and previsualization—not merely a fixed rendered clip.
+**Why it matters:** This moves medical tutoring beyond isolated question answering. A case can become a branching, reproducible learning trajectory in which decisions have downstream consequences, enabling scenario rehearsal and structured assessment—though clinical accuracy and educational outcomes still require expert validation.
 
-**Source:** https://arxiv.org/abs/2607.21522
+**Source:** https://arxiv.org/abs/2607.21570
 
 ---
 
 ## New Use Cases
 
-- **Harness-native agent training:** Reinforce coding, browser, and desktop agents inside their actual multi-process tool environments instead of a reduced proxy task.
-- **Graph-directed scene blocking:** Let creators specify multi-subject relationships and interactions while the video model resolves trajectories and occlusions.
-- **Label-light visual grounding:** Improve smaller vision-language models by contrasting intact and content-erased images, without a proprietary teacher or curated rationales.
-- **Constraint-led due diligence:** Maintain verified evidence and unresolved requirements across iterative market, policy, scientific, or procurement research.
-- **Text-to-simulation prototyping:** Generate editable, physics-backed 4D scenes for robot training, safety scenarios, games, and cinematic previsualization.
-- **Agent reliability diagnostics:** Compare harness choices and inspect whether RL improves verification and tool coverage while explicitly tracking persistent weaknesses such as recovery from errors.
+- **Camera-only spatial assistants:** Derive 3D grounding from RGB video for warehouse navigation, AR guidance, remote inspection, and embodied question answering.
+- **Variable-size generative design:** Generate graphs, molecules, scene layouts, or sequences whose size emerges during the flow rather than being fixed in advance.
+- **Million-token agent serving:** Keep native speculative decoding useful when an agent carries very large codebases, logs, or research histories in context.
+- **Socially calibrated deliberation tests:** Audit whether advice agents revise beliefs for evidential reasons or because of self-attribution and coalition pressure.
+- **Branching clinical education:** Convert validated cases into interactive diagnostic and treatment simulations with explicit decision dependencies.
+- **Adaptive asset generation:** Use expanding flows to grow a scene or structured artifact until its content—not a preset tensor size—determines completion.
 
 ---
 
 ## Top Rated GitHub Projects Leveraging Agentic/Gen AI
 
-GitHub repository records were queried on July 24, 2026. Stars and push timestamps are point-in-time observations and can change. The table ranks a curated set of actively maintained, directly agent-oriented projects by observed stars; popularity is not a quality or security audit.
+GitHub repository records were queried on July 25, 2026. Stars and push timestamps are point-in-time observations and can change. This is a popularity-ranked, curated snapshot of highly starred projects with direct agentic or generative-AI utility, not a quality or security audit.
 
 | Rank | Project | Stars observed | Latest push observed (UTC) | Agentic/GenAI role |
 |---:|---|---:|---|---|
-| 1 | [obra/superpowers](https://github.com/obra/superpowers) | 260,470 | 2026-07-24 00:29:46 | Skills framework and structured software-development methodology for coding agents. |
-| 2 | [affaan-m/ECC](https://github.com/affaan-m/ECC) | 232,771 | 2026-07-24 15:52:31 | Agent-harness optimization through reusable skills, memory, security, and workflows. |
-| 3 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 219,878 | 2026-07-24 15:46:27 | Extensible personal agent with tools, skills, persistent memory, and automation. |
-| 4 | [anomalyco/opencode](https://github.com/anomalyco/opencode) | 189,303 | 2026-07-24 16:11:36 | Open-source coding agent for repository-scale development. |
-| 5 | [langflow-ai/langflow](https://github.com/langflow-ai/langflow) | 152,334 | 2026-07-24 15:48:11 | Visual platform for building and deploying agents and model workflows. |
+| 1 | [nexu-io/open-design](https://github.com/nexu-io/open-design) | 81,474 | 2026-07-25 16:09:01 | Local-first design workspace that uses coding agents to produce editable web, slide, image, and video artifacts. |
+| 2 | [bytedance/deer-flow](https://github.com/bytedance/deer-flow) | 77,837 | 2026-07-25 15:50:21 | Long-horizon agent harness combining sandboxes, memory, tools, skills, subagents, and messaging. |
+| 3 | [code-yeongyu/oh-my-openagent](https://github.com/code-yeongyu/oh-my-openagent) | 66,580 | 2026-07-25 16:08:14 | Coding-agent harness for complex repositories and multiple coding-agent backends. |
+| 4 | [diegosouzapw/OmniRoute](https://github.com/diegosouzapw/OmniRoute) | 29,709 | 2026-07-25 15:55:32 | Multi-provider AI gateway with quota-aware routing, fallback, compression, MCP, and A2A support. |
+| 5 | [topoteretes/cognee](https://github.com/topoteretes/cognee) | 29,305 | 2026-07-25 16:04:57 | Self-hostable graph-based long-term memory layer for agents. |
 
 ---
 
 ## Sources with Working URLs
 
-Every URL below returned HTTP 200 during compilation on July 24, 2026.
+Every URL below returned HTTP 200 during compilation on July 25, 2026.
 
 ### Fresh research
 
-- Harness-native reinforcement learning for agents — https://arxiv.org/abs/2607.21557
-- Graph-controllable multi-object video generation — https://arxiv.org/abs/2607.21580
-- Visual contrastive self-distillation — https://arxiv.org/abs/2607.21556
-- Recursively self-improving deep research — https://arxiv.org/abs/2607.21461
-- Agentic generation of physics-backed 4D worlds — https://arxiv.org/abs/2607.21522
-- arXiv’s current cs.AI listing used for discovery — https://arxiv.org/list/cs.AI/new
+- RGB-only implicit and explicit 3D geometry for VLMs — https://arxiv.org/abs/2607.21595
+- Variable-dimensional expanding generative flows — https://arxiv.org/abs/2607.21585
+- Long-context Windowed-MTP speculative decoding — https://arxiv.org/abs/2607.21535
+- Structured resistance and compliance in moral reasoning — https://arxiv.org/abs/2607.21558
+- LLM-driven decision-centered medical education — https://arxiv.org/abs/2607.21570
+- arXiv's current cs.AI listing used for discovery — https://arxiv.org/list/cs.AI/new
 
 ### GitHub project records
 
-- Superpowers — https://github.com/obra/superpowers
-- Everything Claude Code — https://github.com/affaan-m/ECC
-- Hermes Agent — https://github.com/NousResearch/hermes-agent
-- OpenCode — https://github.com/anomalyco/opencode
-- Langflow — https://github.com/langflow-ai/langflow
+- Open Design — https://github.com/nexu-io/open-design
+- DeerFlow — https://github.com/bytedance/deer-flow
+- Oh My OpenAgent — https://github.com/code-yeongyu/oh-my-openagent
+- OmniRoute — https://github.com/diegosouzapw/OmniRoute
+- Cognee — https://github.com/topoteretes/cognee
 
 ---
 
 ## Short Compilation Note
 
-This report is materially new relative to July 23: **all five featured papers and every lead analysis were replaced**, not merely re-dated. Yesterday’s report covered verifiable activation explanations, reusable “notes to self,” causal video memory, token-level small/large-model handoffs, and probabilistic safety bounds. Today’s research instead centers on training agents in real deployment harnesses, graph-structured video control, teacher-free visual grounding, recursive evidence repair, and physics-backed 4D world construction. GitHub popularity and activity observations were also refreshed from live repository records. The shared theme is a shift from free-form model output toward **systems with explicit structure**—real harness state, interaction graphs, visual counterfactuals, verified constraints, and executable physics.
+This report is materially new relative to July 24: **all five lead topics and analyses were replaced**, rather than merely changing the date. The previous report emphasized harness-native reinforcement learning, graph-controlled video, visual self-distillation, recursive deep research, and physics-backed 4D worlds. Today's review instead covers RGB-derived 3D reasoning, variable-dimensional flow generation, efficient speculative decoding at million-token context, socially structured moral belief revision, and executable clinical storytelling. The GitHub snapshot was also rebuilt from live API records around a different set of active projects. Together, the findings highlight a practical shift toward AI systems that can adapt their representation size, context cost, spatial grounding, social calibration, and application structure to the task at hand.
