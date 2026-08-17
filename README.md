@@ -1,108 +1,114 @@
-# 🔬 Agentic AI & Generative AI Research Report — July 28, 2026
+# 🔬 Agentic AI & Generative AI Research Report — August 17, 2026
 
-*Compiled July 28, 2026 (America/Los_Angeles) from newly submitted primary arXiv records, linked project repositories, and live GitHub API records. The research findings below are author-reported preprint results and have not been independently peer reviewed.*
+*Compiled August 17, 2026 (America/Los_Angeles) from freshly submitted primary arXiv records (August 14, 2026 batch), linked project repositories, and live GitHub API records verified on the day of compilation. The research findings below are author-reported preprint results and have not been independently peer reviewed.*
 
 ---
 
 ## Top 5 Latest Advancements
 
-### 1. Trajectory-Relayed On-Policy Distillation Solves Prefix Failure in Agent Training
+### 1. Twin: Playing an Unknown Game with a Test-Time Digital Twin
 
-**What happened:** *Pass the Baton: Trajectory-Relayed On-Policy Distillation* identifies a critical failure mode in on-policy distillation (OPD): **prefix failure**, where once a student model commits to a wrong reasoning direction, all subsequent generation builds on this deviation. The authors introduce **Relay-OPD**, which detects teacher-student continuation asymmetry at failed prefixes and triggers label-free handoffs—letting the teacher briefly take over before resuming student optimization. On their testbed, Relay-OPD concentrates intervention on critical early positions while limiting departure from the student's trajectory.
+**What happened:** *Twin: Playing an Unknown Game with a Test-Time Digital Twin* presents a Test-time World-model Inference system in which a **frontier coding agent writes an executable world model** for completing continual-learning tasks such as ARC-AGI-3 games. Each game hides its rules and goal; the system constructs them from simulation and interaction alone, without hand-engineered per-task designs. Its inductive prior over grid games is strong enough to recover the true transitions of the game and the goal on nearly all levels, with replay validation happening inside the twin world model — a harness enforces that an action is not executed until it has been validated against the learned model.
 
-**Why it matters:** More capable coding agents do not automatically become more economical. Explicitly sizing the likely work, trying a minimum sufficient change, and expanding context only when verification fails can reduce latency and cost without replacing tests or safety checks. This is a practical execution-scope estimation pattern for production agent systems.
+**Why it matters:** The agent's deliverable is no longer just code for the task but a *verified model of the environment itself*. Writing, simulating in, and replaying against a self-authored world model before acting is a concrete pattern for reducing real-world trial-and-error cost — and a strong signal that test-time compute spent on modeling (not just solving) is where robustness comes from.
 
-**Source:** https://arxiv.org/abs/2607.26057v1  
-**Project Page:** https://zju-real.github.io/Relay-OPD  
-**Code:** https://github.com/zju-real/Relay-OPD
+**Source:** https://arxiv.org/abs/2608.14490v1
 
 ---
 
-### 2. Reactive Real-Time Flow Policies for Generalist Manipulation
+### 2. Marionette: Predicting World States, Rendering Geometry, Painting Appearance
 
-**What happened:** *$π\mathbf{R}^2$: Reactive Real-time Flow Policies* addresses the reactivity gap in generalist manipulation policies built on large pretrained backbones. Current action-chunking flow policies run open-loop, unable to react to sensory input arriving mid-execution. The authors propose replanning mechanisms that restore reactivity when perception-to-action pipelines lag behind real-world dynamics.
+**What happened:** *Marionette* attacks the core fragility of interactive game world models that autoregress visual observations directly in pixel or latent space: structured properties such as pose, geometry, and occlusion must be implicitly maintained by the same generative sequence, so errors accumulate over long horizons. Marionette instead **explicitly models the evolving world state**, delegates exact geometric computation to a fixed, zero-parameter renderer, and leaves the neural model only with synthesizing appearance — separating what must be exact from what can be learned.
 
-**Why it matters:** A visually plausible generated clip or executed trajectory may still violate the sequence of causes and effects. Evaluation and model routing for simulation, robotics previews, training data, and scientific video should therefore measure causal-chain fidelity—not just appearance or clip duration. This work bridges the gap between open-loop planning and closed-loop reactivity in embodied AI.
+**Why it matters:** This is a design principle for generative systems in general: route deterministic structure through deterministic machinery and reserve learned generation for appearance-level synthesis. For interactive video, robotics previews, and simulation content, it targets the long-horizon consistency failure that purely neural world models still struggle with.
 
-**Source:** https://arxiv.org/abs/2607.26058v1 (submitted July 28, 2026)
-
----
-
-### 3. Desktop-Delta Bench: Evaluating Causal Understanding in Computer-Use Agents
-
-**What happened:** *Desktop-Delta Bench: Do Computer-Use Models Understand Desktop GUI Transitions?* introduces a new benchmark that isolates whether computer-use agents can reconstruct the causal, task-relevant transition produced by an action—crucial for rejecting stale observations and verifying progress. Current benchmarks primarily measure end-task success or single-frame grounding; neither captures whether a model truly understands how its actions transform the desktop state over time.
-
-**Why it matters:** Computer-use agents (CUAs) increasingly act through desktop GUIs to complete long-horizon tasks. A model that only matches final states without understanding intermediate transitions may hallucinate progress or fail under observation noise. This benchmark enables more robust evaluation of agent grounding and temporal reasoning in real-world interfaces.
-
-**Source:** https://arxiv.org/abs/2607.26059v1 (submitted July 28, 2026)
+**Source:** https://arxiv.org/abs/2608.14530v1
 
 ---
 
-### 4. The AI Race Paradox: Speed vs. Safety in Competitive Development
+### 3. Handover of In-Context Learning State Across Session Boundaries
 
-**What happened:** *Falling Behind Drives Unsafe Development in an Idealised AI Race Experiment* studies the tension between speed and safety in technological races. Using a framed game-theoretic model, the authors show that actors may gain by moving faster than competitors—even when risky development is harmful—because competitive pressure incentivizes riskier, less safety-conscious development. This formalizes debates about artificial intelligence where race dynamics are argued to create systemic tail risks.
+**What happened:** *Handover of In-Context Learning State Across Session Boundaries* studies what must be transferred when an LLM task continues in a new session — because context hit the input limit, the application restarted, or another agent was asked to finish the job. The authors formulate handover as **transfer of a task-relative in-context learning (ICL) state** and distinguish exact recovery of earlier material from preservation of the target distribution, analyzing both under an exogeneity assumption about how sessions are partitioned.
 
-**Why it matters:** Average scores can conceal tail risk in retrieval-augmented and long-context systems. Reliability testing should compare per-item decisions before and after irrelevant retrieval, formatting noise, or context growth instead of accepting a stable headline accuracy number. This work provides a formal framework for evaluating when competitive pressure creates systemic fragility versus genuine capability gains.
+**Why it matters:** Multi-session and multi-agent pipelines are now standard, but "what do we pass on?" has been treated as an engineering afterthought. A formal account of ICL-state handover gives agent frameworks a principled basis for compaction, summarization, and agent-to-agent delegation — deciding what to carry forward by the distribution it preserves rather than by raw text overlap.
 
-**Source:** https://arxiv.org/abs/2607.26060v1 (submitted July 28, 2026)
+**Source:** https://arxiv.org/abs/2608.14528v1
 
 ---
 
-### 5. CHARM: Multimodal Graph Foundation Models for Zero-Shot Transfer
+### 4. Wyvern: An Agentic Framework for Generating Grounded Multimodal Reports
 
-**What happened:** *CHARM: A Multimodal Graph Foundation Model with Hierarchical Context Modeling for Zero-Shot Transfer* introduces a new paradigm for transferring knowledge across graph domains and tasks using multimodal graphs that associate nodes with text, images, and other modalities. The model employs hierarchical context modeling to capture complex entity relations while enabling zero-shot transfer to unseen graph types—a critical capability for real-world applications where labeled data is scarce.
+**What happened:** *Wyvern* is a multi-agent framework for the automated generation of **grounded, multimodal technical reports**. It integrates images, tables, and text with supporting references in a unified report, with particular emphasis on grounding — countering the tendency of generative models to synthesize fluent but unanchored content as knowledge growth outpaces human review capacity.
 
-**Why it matters:** Graph foundation models (GFMs) have emerged as a promising paradigm for transferring knowledge across graph domains and tasks. Real-world graphs associate nodes with text, images, and other modalities, making multimodal graphs essential for representing complex entities and relations. Moreover, collecting labels and adapting models for every new graph type is impractical; zero-shot transfer addresses this bottleneck directly.
+**Why it matters:** Report generation is one of the highest-volume agentic workloads (research briefs, engineering docs, market analyses), and its failure mode is silent: plausible text with no traceable evidence. A framework that treats grounding — every claim tied to a reference, every figure tied to data — as a first-class architectural property is directly applicable to production content pipelines.
 
-**Source:** https://arxiv.org/abs/2607.26061v1 (submitted July 28, 2026)
+**Source:** https://arxiv.org/abs/2608.14446v1
+
+---
+
+### 5. PACE-Bench: Benchmarking Physics Adaptation via Code Evolution in Dynamic Environments
+
+**What happened:** *PACE-Bench (Physics Adaptation via Code Evolution)* introduces a simulator-grounded benchmark of **144 source-to-target adaptation pairs across six physics domains**. Each pair links a source environment to a mutated target environment with the same goal and interface: a code-driven design that succeeds in the source fails in the target, where agents must iteratively adapt. This directly tests recovery after execution conditions change — something existing self-evolving-agent evaluations, which optimize under fixed conditions, do not measure.
+
+**Why it matters:** Self-improving agents are usually evaluated on whether they improve; PACE-Bench asks the harder question — *do they survive when the world changes underneath them?* That is the property that determines whether an agent can be trusted in long-running deployments where environments drift, APIs change, and physics parameters shift.
+
+**Source:** https://arxiv.org/abs/2608.14441v1
 
 ---
 
 ## New Use Cases
 
-- **Relay-aware agent training pipelines:** Detect teacher-student continuation asymmetry at failed prefixes and trigger label-free handoffs to concentrate intervention on critical early positions while limiting trajectory drift.
-- **Reactive flow policy deployment for robotics:** Bridge the reactivity gap in generalist manipulation policies by integrating replanning mechanisms that restore closed-loop responsiveness when perception-to-action pipelines lag behind real-world dynamics.
-- **Causal transition verification for computer-use agents:** Deploy Desktop-Delta Bench-style evaluation to ensure models truly understand how their actions transform desktop states over time, not just final matching.
-- **Competitive pressure risk modeling:** Apply game-theoretic frameworks to evaluate when race dynamics create systemic fragility versus genuine capability gains in AI development pipelines.
-- **Multimodal graph zero-shot transfer systems:** Build applications that leverage hierarchical context modeling to capture complex entity relations across domains without requiring labeled data for every new graph type.
+- **Agentic spreadsheet reasoning with hierarchical relation graphs (SheetCompass, arXiv:2608.14452):** Real workbooks contain implicit cross-table associations, fine-grained column dependencies, and spatial layouts that flattening into sequential strings destroys. SheetCompass builds hierarchical relation graphs preserving intra-sheet boundaries and inter-sheet semantics so LLMs can exploit the global spatial context human experts use — a practical upgrade for finance/ops agents operating on live workbooks.
+- **Separating evidence interpretation from decision aggregation (arXiv:2608.14509):** Multi-source reasoning systems usually concatenate everything into one prompt, conflating two operations with different requirements. A four-field evidence tuple — hypothesis, reliability bucket, rationale, provenance — fixes the interface between an interpreting stage (which rewards capacity and context) and a combining stage (which rewards fixed arithmetic and comparability), and exposes failure modes invisible in end-to-end scores.
+- **Statistically certified safety-neuron refusal triggering (Tripwire, arXiv:2608.14392):** Neuron-level jailbreak defenses typically either erase distributed harmful semantics at a large intervention footprint or rely on external classifiers with compounding errors. Tripwire triggers aligned refusal through statistically *certified* safety neurons — finer-grained defense with quantified guarantees and less utility loss, a template for production guardrail design.
+- **AI-generated crisis video detection under social dissemination (RA-Bench, arXiv:2608.14391):** A benchmark of 17,886 videos using real footage as anchors evaluates how detectability varies with generation conditions, how people perceive generated depictions of wars and disasters, and whether detectors remain reliable *after* social dissemination degrades quality — the setting where misinformation actually spreads.
+- **Precision-based adaptive stopping for LLM evaluations (optstop, arXiv:2608.14425):** Fixed sampling budgets waste compute on items whose estimates are already precise. optstop treats evaluation as sequential measurement with hierarchical Bayesian inference — keep sampling where uncertainty is high, stop where it is not — supporting binary, ordinal, and continuous outcomes live or retrospectively, without a calibrated item bank.
+- **Power Sampling paradox: verifier-free sharpening can backfire (arXiv:2608.14420):** Power Sampling sharpens a model's distribution over complete trajectories as a verifier-free inference-time improvement — yet it can drive *more* probability mass toward correct trajectories while degrading downstream accuracy by up to 18.5 percentage points in self-consistency settings. Inference-time scaling knobs need per-pipeline validation, not blanket adoption.
 
 ---
 
 ## Top Rated GitHub Projects Leveraging Agentic/Gen AI
 
-GitHub repository records were checked through the API on July 28, 2026. Stars and latest-push timestamps are point-in-time observations and can change. This table is a curated ranking of highly starred, active repositories directly useful for agent construction or operation; it is not a claim about software quality or an exhaustive ranking of every AI repository.
+GitHub repository records were checked through the API on August 17, 2026. Stars and latest-push timestamps are point-in-time observations and can change. This table is a curated ranking of highly starred, active repositories directly useful for agent construction or operation; it is not a claim about software quality or an exhaustive ranking of every AI repository.
 
 | Rank | Project | Stars observed | Latest push observed (UTC) | Agentic/GenAI role |
 |---:|---|---:|---|---|
-| 1 | [obra/superpowers](https://github.com/obra/superpowers) | 262,822 | 2026-07-28 | Extensible personal agent with tools, skills, memory, and autonomous workflows. |
-| 2 | [affaan-m/ECC](https://github.com/affaan-m/ECC) | 234,951 | 2026-07-29 | Search, extraction, and web-interaction infrastructure for agent grounding. |
-| 3 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 221,980 | 2026-07-29 | Extensible personal agent with tools, skills, memory, and autonomous workflows. |
-| 4 | [ultraworkers/claw-code](https://github.com/ultraworkers/claw-code) | 194,949 | 2026-06-26 | Agent engineering framework and integrations for models, tools, and retrieval. |
-| 5 | [mattpocock/skills](https://github.com/mattpocock/skills) | 193,248 | 2026-07-28 | Browser-control layer for agents executing tasks on websites. |
+| 1 | [openclaw/openclaw](https://github.com/openclaw/openclaw) | 386,526 | 2026-08-17 | Personal AI assistant — any OS, any platform; still the most-starred agentic project. |
+| 2 | [obra/superpowers](https://github.com/obra/superpowers) | 273,107 | 2026-08-13 | Agentic skills framework & software development methodology. |
+| 3 | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | 231,885 | 2026-08-17 | Extensible personal agent with tools, skills, memory, and autonomous workflows. |
+| 4 | [n8n-io/n8n](https://github.com/n8n-io/n8n) | 200,961 | 2026-08-17 | Fair-code workflow automation platform with native AI capabilities; visual building plus custom code. |
+| 5 | [Significant-Gravitas/AutoGPT](https://github.com/Significant-Gravitas/AutoGPT) | 186,641 | 2026-08-17 | Accessible autonomous agent platform — build, run, and share AI agents. |
 
 ---
 
 ## Sources with Working URLs
 
-Every URL below returned HTTP 200 during compilation on July 28, 2026.
+Every URL below returned HTTP 200 during compilation on August 17, 2026.
 
-### Fresh research
+### Fresh research (August 14, 2026 arXiv batch)
 
-- Trajectory-relayed on-policy distillation — https://arxiv.org/abs/2607.26057v1
-- Reactive real-time flow policies — https://arxiv.org/abs/2607.26058v1
-- Desktop-Delta Bench for computer-use agents — https://arxiv.org/abs/2607.26059v1
-- AI race experiment formalization — https://arxiv.org/abs/2607.26060v1
-- CHARM multimodal graph foundation model — https://arxiv.org/abs/2607.26061v1
+- Twin: test-time digital twin world models — https://arxiv.org/abs/2608.14490v1
+- Marionette: state prediction + zero-parameter geometry rendering — https://arxiv.org/abs/2608.14530v1
+- Handover of in-context learning state across session boundaries — https://arxiv.org/abs/2608.14528v1
+- Wyvern: agentic grounded multimodal report generation — https://arxiv.org/abs/2608.14446v1
+- PACE-Bench: physics adaptation via code evolution — https://arxiv.org/abs/2608.14441v1
+- SheetCompass: hierarchical relation graphs for agentic spreadsheet reasoning — https://arxiv.org/abs/2608.14452v1
+- Split the Labor: evidence interpretation vs. decision aggregation — https://arxiv.org/abs/2608.14509v1
+- Tripwire: statistically certified safety neurons — https://arxiv.org/abs/2608.14392v1
+- RA-Bench: AI-generated crisis video detection under dissemination — https://arxiv.org/abs/2608.14391v1
+- optstop: Bayesian optimal stopping for LLM evaluations — https://arxiv.org/abs/2608.14425v1
+- Power Sampling paradox in verifier-free inference-time scaling — https://arxiv.org/abs/2608.14420v1
 
 ### GitHub project records
 
+- OpenClaw — https://github.com/openclaw/openclaw
 - Superpowers — https://github.com/obra/superpowers
-- ECC (Extraction & Contextualization Core) — https://github.com/affaan-m/ECC
 - Hermes Agent — https://github.com/NousResearch/hermes-agent
-- Claw Code — https://github.com/ultraworkers/claw-code
-- Skills Framework — https://github.com/mattpocock/skills
+- n8n — https://github.com/n8n-io/n8n
+- AutoGPT — https://github.com/Significant-Gravitas/AutoGPT
+- Firecrawl — https://github.com/firecrawl/firecrawl
 
-### Date-sorted arXiv AI/ML/NLP discovery feed
+### Date-sorted arXiv AI discovery feed
 
 - Fresh submissions: https://export.arxiv.org/api/query?search_query=cat%3Acs.AI&sortBy=submittedDate&sortOrder=descending&max_results=20
 
@@ -110,4 +116,4 @@ Every URL below returned HTTP 200 during compilation on July 28, 2026.
 
 ## Short Compilation Note
 
-This report is materially new relative to July 15, 2026: it replaces metacognition taxonomies, internal judge-bias steering, visual tool sandboxes, longitudinal scam detection, and vulnerability-graph red teaming with freshly submitted work on **execution-scope estimation** (Relay-OPD), **serial causal limits in video diffusion**, **native mobile agents**, **per-example context instability**, and **counterfactual resistance to social pressure**. Today's practical theme is **matching computation and controls to the real failure mode**: spend only the context a task needs, test causal sequences rather than surface quality, expose device actions as bounded tools, inspect individual prediction flips, and distinguish evidence from pressure.
+This report is materially new relative to August 16, 2026: it replaces the August 13 arXiv batch (Mimir v1, OmniScientist, Vero, Synthetic Persona Pretraining, AutoDesign) with freshly submitted work on **test-time world-model construction** (Twin), **state–geometry–appearance separation in interactive generation** (Marionette), **ICL-state handover across session boundaries**, **grounded multimodal report agents** (Wyvern), and **adaptation under environment mutation** (PACE-Bench). Today's practical theme is **verify before you act**: build an executable model of the world and replay against it before executing, route deterministic structure through deterministic machinery, carry forward what a handover preserves rather than what it repeats, tie every generated claim to a reference, and test whether agents recover when the rules change — while the Power Sampling paradox reminds us that inference-time sharpening must be validated per pipeline.
