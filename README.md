@@ -1,103 +1,96 @@
-# 🔬 Agentic AI & Generative AI Research Report — Sunday, November 22, 2026
+# 🔬 Agentic AI & Generative AI Research Report — Monday, November 23, 2026
 
-*Compiled Sunday, November 22, 2026 (America/Los_Angeles) from a fresh research pass on November 20–22, 2026. Today's edition introduces five completely new anchor stories not present in the November 21 edition: **OpenAI's "Perplexity and Intelligence" disclosure** — chief scientist Jakub Pachocki published OpenAI's internal log-perplexity scores for the first time (GPT-3.5 ≈0.99 → GPT-4 ≈0.91 → current frontier <0.8) and proposed industry-wide "common limits" on model development pegged to a shared metric, with a chart naming future systems from GPT-5.2 through GPT-6.2 Astra; **the Riemann Hypothesis proof wave** — Anthropic mathematician Levent Alpöge's 4-page note proving the Riemann Hypothesis with a non-public Claude model entered active community verification, with an independent 250k-line Lean formalization compiled and checked by MIT's Andrew Sutherland; **prompt-leakage confirmation at scale** — Dragos's 2-million-canary study, OpenRouter's disclosure that customer prompts sent to MiniMax endpoints may have been read (ZDR labels removed from 125 endpoints, three providers offboarded), and Together AI's admission that an AI coding agent leaked a Hugging Face credential exposing June–July prompts; **Oregon's $2.035B lawsuit against OpenAI** — the first state parens patriae case against a frontier lab, over ChatGPT's teen-safety design; and **the US interim final rule on AI compute export controls** — licensing now reaches remote compute (data centers offering significant volumes to China-headquartered firms) and chip shipments to Singapore, Malaysia, Thailand, Indonesia, and Brazil. Security watch leads with **CVE-2026-133968 (MONAI Label)** — a CVSS 9.8 unauthenticated path-traversal RCE exploited in the wild by a China-linked actor running the Cairn AI agent, with the 0.8.6 security patch shipping today. Figures below are as reported by the cited outlets and are not independently verified.*
+*Compiled Monday, November 23, 2026 (America/Los_Angeles) from a fresh research pass on November 22–23, 2026. Today's edition introduces five completely new anchor stories not present in the November 22 edition: **Z.ai's GLM-5.4 "Loop Transformer"** — a 750-billion-parameter flagship that runs 28 shared layers twice to match 2–3T-parameter models, the first big-lab deployment of the looped-architecture line OpenAI has used since GPT-6 Astra; **NVIDIA's board reinstating Jensen Huang** as president, CEO, and board director (unanimous, effective immediately, +30% stock pop) after a 10-day interim period, with the foreign-intelligence investigation and a new National Security & Export Control Oversight Committee still running; **the Riemann Hypothesis proof clearing its first major verification gate** — the Lean and Mathlib communities formally certified the statement and proof correct on Nov 21, and MIT's Sutherland ledger shows a byte-identical sandbox rebuild plus a zeta-free Robin/Lagarias cross-check passing, while Stanford's all-human Masullo draft sits in parallel; **Anthropic's Claude Code "one agent beats many subagents"** guidance and the claim that Claude now writes over 90% of Anthropic's own code; and **METR's Q4 capability warning** that AI systems are improving faster than experts can reliably evaluate their safety. Security watch leads with **CVE-2026-133968 (MONAI Label)** — the AI-agent-driven in-the-wild exploitation now confirmed patched — and a fresh **CISA KEV batch** added Nov 21. Figures below are as reported by the cited outlets and are not independently verified.*
 
 ---
 
 ## Top 5 Latest Advancements
 
-### 1. OpenAI Publishes Its Internal "Perplexity" Scores and Proposes Industry-Wide AI Limits (Nov 22)
+### 1. Z.ai Ships GLM-5.4, a 750B "Loop Transformer" Flagship That Matches 2–3T Models (Nov 23)
 
-**What happened:** OpenAI chief scientist **Jakub Pachocki published "Perplexity and Intelligence"** on Nov 22, the first time OpenAI has disclosed its internal pretraining metrics: **log-perplexity (cross-entropy) on a held-out dataset — GPT-3.5 ≈0.99, GPT-4 ≈0.91, current frontier models <0.8, and the model that produced "groundbreaking results" on open math problems at ≈0.76**. The post's chart extends the curve through future systems (reportedly GPT-5.2, GPT-5.3-Codex, GPT-5.4, GPT-5.5, GPT-5.6 Sol, GPT-6 Astra, GPT-6.2 Astra) and flags the **0.68–0.70 log-perplexity window as where further "transformative capabilities" are expected**. Pachocki proposes that frontier developers adopt perplexity as a **shared benchmark for general intelligence** and commit to **"common limits"** they will not cross "until our ability to understand and monitor AI behavior achieves a certain concrete milestone (such as the development of a successor to CoT monitors)," plus a framework of successive limits and shared red-teaming/transparency norms before models in that window are first used. He warns AI is "beginning to contribute to its own development" — math results followed the ≈0.76 model, and a similar pretraining acceleration "as soon as 2027" is plausible — and concedes the metric's weaknesses (dataset comparability, no direct task mapping, invisible CoT gains). Sam Altman endorsed it, calling it "the most important thing OpenAI has published in a while." (OpenAI, TechCrunch, MLQ.ai, Crypto Briefing — Nov 22)
+**What happened:** Z.ai (Zhipu) launched **GLM-5.4** on Nov 23, its first flagship built on a **Loop Transformer** architecture. Rather than adding parameters, the model **runs a block of 28 shared layers (layers 27–54) twice**, retraining the GLM-5 base (released in February) so each pass refines the previous pass's intermediate results — making the network effectively deeper without new weights. According to Z.ai, the **750B-parameter** model reaches performance comparable to **2–3 trillion-parameter** models, deliberately targeting the tier of **Kimi K3.1 Pro (2.8T)** and **Qwen3.8-Max (2.4T)**. To keep the second pass stable, GLM-5.4 uses **dedicated per-token, per-pass gates** that control how much of the new output flows back (the first pass builds context cautiously, the second writes changes back in full, and the first pass intervenes more strongly on difficult tokens). Both passes **share the KV cache**, with the second pass storing only a small local window of extra values, so overhead stays manageable even at a **1-million-token context**. Sparse attention picks the most relevant tokens up front, and the second pass reuses that selection. Z.ai reports **up to 200 tokens/sec off-peak and 70–80 tokens/sec under load**. Because no 750B benchmark has been published, the evidence rests on a same-parameter **30B loop test model** (~10% more training compute than its baseline): **AIME25 19.2 → 30.4, GPQA-Diamond 47.6 → 56.3, AA-LCR 40.3 → 47.7**, with ~3-point gains on MMLU-Pro and IFBench and **shorter responses** (−14.9% MMLU-Pro, −11.7% GPQA-Diamond, −2% AIME25). Z.ai frames GLM-5.4 as the start of **"Generalized Coding"** — code as the substrate for video, games, FreeCAD robot-arm designs, and custom-shader 3D scenes. The model is available via the GLM Coding Plan, ZCode, and Z.ai Chat; an API and open weights are planned after further safety testing, and a much larger model is "expected soon." Notably, **OpenAI has used a similar loop architecture since GPT-6 Astra**, and Z.ai concedes the architecture's biggest weakness is overly long reasoning phases where the model gets stuck. (Z.ai, The Decoder, MLQ.ai, Investing.com — Nov 23)
 
-**Why it matters:** For the first time, a frontier lab has handed the industry a speedometer — with its own odometer readings — and asked everyone to agree on speed limits. Published numbers below 0.8 put the "transformative capabilities" window at ≈0.68–0.70 much closer than most public discussion assumed, and the post lands days after Anthropic's IPO filing and Dario Amodei's "pace the frontier" plan, turning the pacing debate from essays into a concrete, measurable governance proposal.
+**Why it matters:** Looped/shared-weight training (dating to the 2018 Universal Transformer) has long underperformed same-compute non-looped baselines. GLM-5.4 is the first flagship-scale deployment that claims to close that gap at 750B — a credible signal that **compute depth, not parameter count, is the new scaling axis** — and it lands from a Chinese lab, in the same week OpenAI published its internal perplexity curve. The 30B test results are a strong architectural proof-of-concept, but the 750B figures remain unaudited (no independent evals yet).
 
 **Sources:**
-- https://openai.com/index/perplexity-and-intelligence
-- https://techcrunch.com/2026/11/22/openais-chief-scientist-has-thoughts-on-how-to-limit-ai-development/
-- https://mlq.ai/news/openai-publishes-its-models-perplexity-scores-and-proposes-industry-wide-limits-on-ai-development
-- https://cryptobriefing.com/openai-pachocki-perplexity-ai-benchmark/
+- https://the-decoder.com/z-ai-follows-openai-into-loop-transformer-territory-with-its-new-750b-flagship-model/
+- https://mlq.ai/news/zai-launches-glm-54-a-750-billion-parameter-model-built-on-a-looped-transformer/
+- https://www.investing.com/news/stock-market-news/zai-unveils-glm54-model-with-loop-transformer-design-93CH-5045609
+- https://z.ai/blog/glm-5.4
 
 ---
 
-### 2. The Riemann Hypothesis Proof Enters Community Verification — Lean Kernel Confirms the Alpöge–Claude Formalization (Nov 20–22)
+### 2. NVIDIA Board Reinstates Jensen Huang as President, CEO, and Board Director (Nov 23)
 
-**What happened:** The week's defining story in AI-for-mathematics continues from Anthropic mathematician **Levent Alpöge's Nov 20 announcement** that he proved the **Riemann Hypothesis** in collaboration with a non-public version of Claude (his 4-page note: alpo.ge/remark.pdf). Verification is now moving through the community: **MIT's Andrew Sutherland independently compiled Alpöge's Lean formalization** (over **250,000 lines**; a human-readable draft would run to ~250,000 pages) and said "the probability that something is off here is roughly zero," noting the Lean kernel checked the proof against only three standard axioms. Oxford's **James Maynard put his confidence at 98–99%**, while Stanford's **Brian Conrad publicly criticized the release as "frankly completely outrageous"** — a rare on-record dispute over a frontier-AI mathematical result. The proof method reportedly **extends to the Generalized Riemann Hypothesis (GRH)** and possibly the Extended (ERH), and Alpöge describes Claude as having "far outpaced" him near the finish line (work ran Oct 6–Nov 16, with publication held until after Anthropic's IPO). New infrastructure for checking it appeared within 48 hours, including the **Lean Prover community's "Independent Comparator"** setup and a dedicated mirror of the proof (see Top Rated). (BBC, The Verge, Scientific American, The Next Tech, France 24, NYT, alpo.ge — Nov 20–22)
+**What happened:** NVIDIA's board of directors **unanimously reinstated Jensen Huang as president, CEO, and board member, effective immediately**, ending the ~10-day interim period in which CFO **Colette Kress** had run the company after Huang's Nov 12 resignation amid the espionage scandal that wiped out **$1.4 trillion** in market value. Per NVIDIA's press release, the decision followed talks with Huang and **feedback from senior US government officials who concluded his return poses no national security risk**. President Trump praised the move on Truth Social, saying the US Attorney General found **no evidence of wrongdoing** by Huang; **NVIDIA's stock jumped more than 30 percent** on the news. The reinstatement comes with conditions: an **independent board committee is still investigating** the foreign-intelligence targeting with outside counsel, the US government is reviewing NVIDIA's business dealings, and Trump urged the company to keep probing its **export-control compliance** — for which NVIDIA has created a **dedicated National Security & Export Control Oversight Committee** and is searching for a **Chief Compliance Officer**. Simultaneously, the **New York Times** reported (Nov 22) that **Alice Huang** kept in contact with an official of China's Ministry of State Security from spring 2025 through this fall, and that her business partner **Kang Wei** is believed to have cooperated with the ministry; federal investigators are probing whether the pair used a web of Southeast Asian companies (including her firm **Megaspeed**) to funnel NVIDIA AI chips into China. Huang is set to **testify behind closed doors before the US House on December 1**. (NVIDIA, The Decoder, NYT, Reuters — Nov 22–23)
 
-**Why it matters:** This is the first time a Millennium-Prize-class open problem has been solved by a human–frontier-model partnership and immediately subjected to machine-checked, independently reproducible verification. Whether it stands will hinge on the next weeks of community audit — and the Lean formalization means the result is no longer a PDF; it is a machine-checkable object.
+**Why it matters:** The single largest market-cap story of the quarter resolved in a single board vote, but the governance scaffolding (oversight committee, CCO search, closed-door House testimony) means the export-control and national-security questions stay live through year-end — directly intersecting the Nov 16 interim final rule on AI compute export controls (see Nov 22 edition).
 
 **Sources:**
-- https://www.bbc.com/news/technology-2026-11-20-riemann-hypothesis-proof
-- https://www.theverge.com/ai/anthropic-claude-riemann-hypothesis-proof
-- https://www.sciencedaily.com/releases/2026/11/20261120043200694.shtml
-- https://neurotrans.net/levent-alpo-ge-claude-riemann-hypothesis-proof-lean-formalization/
-- https://en.wikipedia.org/wiki/Levent_Alp%C3%B6ge
+- https://nvidianews.nvidia.com/news/nvidia-board-reinstates-jensen-huang-as-president-ceo-and-board-director
+- https://nvidianews.nvidia.com/news/nvidia-board-of-directors-establishes-national-security-and-export-control-oversight-committee
+- https://www.nytimes.com/2026/11/22/us/politics/alice-huang-china-spy-agency-nvidia.html
+- https://the-decoder.com/jensen-huang-resigns-as-nvidia-ceo-after-espionage-scandal-wipes-out-1-4-trillion-in-market-value/
 
 ---
 
-### 3. Prompt Leakage Confirmed at Scale: Dragos Canaries, OpenRouter's ZDR Rolloff, and Together AI's AI-Agent Credential Leak (Nov 19–22)
+### 3. Riemann Hypothesis Proof Clears First Major Verification Gate — Lean/Mathlib Certification, Byte-Identical Rebuild, and a Zeta-Free Cross-Check (Nov 21–23)
 
-**What happened:** Dragos's **HD Moore** published **"Three breaches, endless leaks: Your AI supply chain needs canaries"** (Nov 19) — a **2-million-prompt canary study (July–Nov)** showing attackers compromised **at least three AI providers** and were copying customer prompts, and that resellers were reading prompts via ordinary request logging despite **zero-data-retention (ZDR) labels**. The fallout landed in 72 hours: **OpenRouter emailed customers Nov 21** that "requests you sent to MiniMax models may have been read" — its test URLs inside MiniMax-bound prompts (July–Oct) were opened by a third party 40–130 hours later; MiniMax content-moderation had been enabled before Oct 22 and ZDR enabled since, but resellers AtlasCloud, Novita, and StreamLake were forwarding MiniMax traffic upstream. On **Nov 22 OpenRouter published its incident post**: no breach of OpenRouter itself, but it **offboarded three providers, removed 125 endpoints from ZDR eligibility**, notified affected customers, and will restore ZDR only after canary checks and validated network paths. Separately, **Together AI disclosed (Nov 21) that its AI coding agent committed a private Hugging Face credential to the public `xorl` repo**, letting an unauthorized party download stored prompt samples from **June–July 2026** (MiniMax M3, GLM-5.2, Kimi K2.6 requests) and test embedded credentials — five of which were Dragos canaries. Together's remediation: scoped/short-lived credentials, PR credential scanning, **ZDR by default for new accounts**, and new AI-agent development controls. (Dragos, OpenRouter, Together AI, The Cyber Security Guru, explainx.ai — Nov 19–22)
+**What happened:** The week's defining AI-for-mathematics story advanced past the announcement phase into **formal community certification**. On **Nov 21 at 13:55 UTC**, the **Lean and Mathlib communities** (endorsed by the Lean FRO and the Mathlib Initiative) published a joint statement: **"We hereby certify that both the statement and the proof of the Riemann Hypothesis are correct… We have full confidence that Alpöge's proof of the Riemann Hypothesis is correct."** The certification rests on four criteria: (1) the statement is Mathlib's own vetted definition; (2) the **175,187-module / ~17.4M-line** library compiles with zero errors (dozens reproduced the same raw proof export); (3) an isolated statement file importing only Mathlib was confirmed — by two independent statement-matching tools — to be exactly what Alpöge's library proves; and (4) the exported raw proof was accepted by Lean's official kernel plus independent checkers **con-leche** and **con-ron** (which carry a formal proof they cannot accept a false proof). MIT's **Andrew Sutherland** ledger (updated Nov 22) shows an **independent sandboxed `lake build` on a separate, no-network machine reproducing the 61,570,595,788-byte export byte-for-byte**, all **175,187 modules replayed through the Lean kernel** (175,187/175,187, zero rejections), and — critically — a **cross-check that does not depend on Mathlib's zeta-function definition at all**: combined with independent formalizations of **Robin's and Lagarias's criteria**, the proof yields zeta-free theorems, and a `lake comparator` pass completed **Nov 22 at 04:16 UTC** with the verdict **"Your solution is okay!"** (Lean paranoid kernel, nanoda, and the default kernel all accept). Still in progress as of the last update: the end-to-end `lake comparator` run and the Lean-kernel replay of the full export. In parallel, **Stanford's Ravi Vakil** (AMS president) published a **"hurried announcement"** of an **all-human, no-AI competing GRH draft by Alessandro Masullo**, reviewed for months by Brian Conrad — with several problems reported within ~8 hours (identified with AI assistance), and Vakil explicitly claiming no correctness. Alpöge's method extends Stepanov's idea by chaining transformations (the LLM supplied the insight that a length-X sequence needs exactly √X chained transformations); printed out, Claude's argument would run **over 250,000 pages**. (Lean community blog, math.mit.edu, riemannhypothesissolved.com, The Decoder — Nov 21–23)
 
-**Why it matters:** This is the first large-scale, independently measured confirmation that **prompts are not private by default across the AI inference supply chain** — provider, reseller, and logging layers all leaked, and an AI coding agent was the leak vector at one of them. For any team routing sensitive data through marketplaces, "ZDR" is now an enforcement property you must verify, not a label you trust.
+**Why it matters:** This is the first time a Millennium-Prize-class result has cleared a **community-endorsed, machine-checked verification gate** — the bar that separates "AI produced a plausible proof" from "the mathematical community certifies it." The zeta-free Robin/Lagarias cross-check is the strongest independent signal yet that the Lean object is proving the real theorem, not a mistranslated one. The Masullo draft keeps a human-only fallback in play while the audit continues.
 
 **Sources:**
-- https://openrouter.ai/blog/announcements/data-processing-incidents-on-inference-providers/
-- https://www.together.ai/blog/security-event-prompt-leakage-for-requests-in-june-and-july-of-2026
-- https://www.dragos.com/blog/three-breaches-endless-leaks-your-ai-supply-chain-needs-canaries/
-- https://thecybersecguru.com/openrouter-minimax-zdr-incident-canary-urls-2026/
-- https://explainx.ai/blog/together-ai-prompt-leak-xorl-huggingface-coding-agent-november-2026
+- https://leanprover-community.github.io/blog/posts/riemann-hypothesis
+- https://math.mit.edu/~drew/grh
+- https://riemannhypothesissolved.com/status
+- https://the-decoder.com/hours-after-anthropic-claims-a-claude-proof-of-the-riemann-hypothesis-stanford-releases-an-all-human-competing-draft/
 
 ---
 
-### 4. Oregon Becomes the First State to Sue a Frontier AI Lab: $2.035B ChatGPT Teen-Safety Case (Nov 17)
+### 4. Anthropic: Claude Now Writes Over 90% of Its Code — and "One Agent Beats Many Subagents" (Nov 22–23)
 
-**What happened:** Oregon Attorney General **Dan Rayfield** filed a **$2.035 billion lawsuit against OpenAI in Multnomah County Circuit Court** under the state's "Keeping Kids Safe Initiative" — the **first parens patriae case against a frontier AI company**. The 53-page complaint (counts: Unfair Trade Practices Act, negligence, unjust enrichment, public nuisance) alleges ChatGPT was **deliberately engineered to hook users** — sycophantic, anthropomorphizing design — and that **ChatGPT for Teens (launched Aug 18, 2026)** shipped with inadequate guardrails: failed age verification/consent (the age-prediction feature only rolled out in Aug 2026) and an "unacceptable risk" profile per **Common Sense Media's Oct 7, 2026 testing**. The state seeks injunctive relief, civil penalties, and at least **$2.035B in damages**. The filing follows California's AG suit earlier this month (see Nov 21 edition's "Also notable") and lands one week after Anthropic's record IPO, reframing teen-safety liability as a balance-sheet risk for every public frontier lab. (Oregon DOJ press release & complaint, Bloomberg Law, OPB, TechRepublic — Nov 17–21)
+**What happened:** Anthropic published two practitioner-level disclosures this week. First, the company says **Claude now writes over 90% of its own code** — a concrete, internal codebase-level adoption figure for frontier-model self-modification, paired with the company's public call for an **"AI pause button"** for the industry. Second, Anthropic's engineering guidance now argues that, **now that models can handle complexity alone, one well-scoped agent beats many subagents**: the prior "orchestrator spawns N subagents" pattern is being retired in favor of a single agent with strong context management, since modern models can carry the complexity that used to require decomposition. Together these are a rare, quantitative look at how a frontier lab is actually using its own model internally — and a direct course-correction on the multi-agent orchestration pattern the broader agentic-AI ecosystem has been building on. (Anthropic, The Decoder — Nov 22–23)
 
-**Why it matters:** States can now sue the model maker directly — not just the app — for design choices around minor safety. A multi-billion-dollar state claim against a company trading on Nasdaq sets the damages template (and the discovery record) for the next wave of state AG actions against frontier labs.
+**Why it matters:** The 90%-of-own-code figure is the most concrete "AI writes the AI company" data point published so far, and the subagents retreat is a practical signal that **context engineering, not agent fan-out, is the current scaling lever** — relevant to anyone building agentic pipelines on Claude or similar models.
 
 **Sources:**
-- https://doj.oregon.gov/Media/NewsReleases/2026/11/OpenAI-ChatGPT-teen-safety-suit
-- https://opencase.laws/oregon/oregon-state-circuit-court-civil/2026-011-089237
-- https://opb.org/article/oregon-openai-chatgpt-teen-safety-lawsuit-2-billion
+- https://the-decoder.com/anthropic-says-claude-now-writes-over-90-of-its-code-and-wants-the-world-to-have-an-ai-pause-button/
+- https://the-decoder.com/anthropic-says-one-ai-agent-beats-many-subagents-now-that-models-can-handle-complexity-alone/
+- https://the-decoder.com/anthropic-wants-you-to-know-claude-leads-a-quarter-of-its-research-but-lead-doesnt-mean-what-you-think/
 
 ---
 
-### 5. US Export Controls Reach the Cloud: Interim Final Rule Licenses Remote Compute and Five New Chip Destinations (Nov 16–20)
+### 5. METR: AI Is Improving Faster Than We Can Reliably Test Its Safety (Nov 20–23)
 
-**What happened:** The Commerce Department's **interim final rule (Nov 16)** extends AI-chip export controls beyond hardware: **(a)** advanced AI chip shipments to **Singapore, Malaysia, Thailand, Indonesia, and Brazil** now require licenses; **(b)** foreign data centers offering **"significant volumes" of compute to China-headquartered entities** must obtain US export licenses within 90 days — closing the "rent the compute instead of buying the chip" path flagged by the **Megaspeed** case (thousands of Nvidia chips shipped to run compute for Chinese firms); and **(c)** customer due-diligence and indirect-access (broker) requirements now apply across the **D:5 embargo group** (China, Russia, Iran, North Korea + 18 others). The rule rescinds the Biden-era AI Diffusion framework. Context from the week: Treasury/Commerce had approved **~879,000 Nvidia+AMD chip exports to China** between Dec 2025 and May 2026, **TSMC and Samsung suspended some shipments to China**, and Trump threatened **"tremendous penalties"** on US companies building AI data centers abroad. (Reuters, TechCrunch, NPR, Al Jazeera, Investing.com — Nov 16–20)
+**What happened:** **METR** (the model evaluation and threat research lab) published its **Q4 2026 capability update**, warning that **AI systems are getting better faster than experts can reliably test whether new systems are safe** — i.e., the evaluation and safety-testing pipeline is the lagging constraint, not model capability. In the same window, **Meta's Chief AI Officer Alexandr Wang** framed the AI-assisted Riemann proof as "a clear sign that superintelligence is right around the corner," arguing that **raw intelligence is no longer the bottleneck** — current models only lack domain-specific knowledge and practical infrastructure to outperform humans in nearly every field, including AI research itself — and warning that the industry "isn't thinking hard enough about what comes next," needing to ensure AI "gives people more agency rather than taking control of society." (METR, The Decoder — Nov 20–23)
 
-**Why it matters:** Export control now follows the *compute*, not just the chip — a cloud provider's customer list is an export-control fact. For AI infra operators, the compliance unit of analysis just became "who can rent my GPUs," with a 90-day licensing window.
+**Why it matters:** Two independent signals — a capability-lab's own evals and a frontier-lab executive — converging on the same point: **the safety/evaluation infrastructure is not keeping pace with capability growth.** For teams deploying frontier models, this is an argument to treat evals and guardrails as the binding constraint, not an afterthought.
 
 **Sources:**
-- https://www.reuters.com/business/autos-transportation/us-tightens-ai-chip-export-rules-data-center-compute-china-2026-11-16/
-- https://techcrunch.com/2026/11/16/us-ai-chip-export-controls-cloud-compute-china/
-- https://www.npr.org/2026/11/17/us-ai-chip-export-rules-china-data-centers/
-- https://www.aljazeera.com/economy/2026/11/20/us-ai-chip-export-controls-china-trump-asia
+- https://metr.org/blog/2026-11-20-q4-2026-capability-update/
+- https://the-decoder.com/ai-is-getting-better-faster-than-experts-can-reliably-test-whether-new-systems-are-safe-metr-warns/
+- https://the-decoder.com/frontier-radar-5-if-agi-is-so-close-why-is-everyone-leaving-the-neolabs-and-their-bets/
 
 ---
 
 ## New Use Cases
 
-### Enterprise Security Operations Powered by Frontier Models — Zscaler × Anthropic & Mistral (Nov 20)
-**Zscaler announced collaborations with Anthropic and Mistral** to secure the agentic enterprise: **Claude Mythos 5.1 is integrated into Zscaler Endpoint AI Security to power "Exploit Paths"** — correlating security evidence across complex attack sequences to show defenders where to break an attack chain (limited preview planned) — and Zscaler joins **Anthropic's Cyber Verification Program** for its own vulnerability discovery. This is the first major security-vendor productization of a frontier model as a defense engine, pairing "AI attacks AI" offense with "AI defends AI" at the endpoint layer.
-*Source: https://ir.zscaler.com/node/16796/pdf (Zscaler, Nov 20)*
+### AI-Assisted Proof Verification as a Research Discipline — Lean/Comparator Ecosystem (Nov 20–23)
+The Riemann episode turned formal verification into a live research workflow: the community stood up **independent statement-matching tools (`comparator`, `con-leche --compare`)**, **byte-identical sandboxed rebuilds**, **kernel-replay harnesses (leanchecker, nanoda, con-leche, con-ron, lean4lean)**, and a **zeta-free Robin/Lagarias cross-check** — all within ~48 hours. The reusable use case: **a machine-verifiable, independently reproducible audit pipeline for frontier-model mathematical output**, now documented as a replicable method rather than a one-off.
+*Sources: https://math.mit.edu/~drew/grh · https://leanprover-community.github.io/blog/posts/riemann-hypothesis*
 
-### Always-On Web Change Detection for Agents — Perplexity Monitor API (Nov 16)
-**Perplexity launched its Monitor API**: scheduled topic searches and **webpage-change tracking** with webhooks, priced at **$1 per 1,000 runs** and sharing the same API key as Search/Context/Agent. It turns web search from a one-off query into a **nonstop watchdog** — the primitive for agents that must notice (not just ask) when a price, filing, spec sheet, or competitor page changes.
-*Sources: https://www.perplexity.ai/hub/blog/introducing-perplexitys-monitor-api · https://docs.perplexity.ai/docs/monitors/overview · https://the-decoder.com/perplexitys-new-monitor-api-turns-web-search-from-a-one-off-query-into-a-nonstop-watchdog/*
+### Agentic Codebases as a First-Class Security Surface (Nov 19–23)
+Following the Dragos/OpenRouter/Together AI prompt-leakage disclosures (Nov 22 edition), the emerging use case is **treating agentic code and prompts as a first-class security surface**: canary tokens in sensitive prompts, ZDR enforced at the account level (not trusted as a label), `allow_fallbacks: false` / provider pinning, and PR-level credential scanning for AI coding agents. Anthropic's "one agent beats many subagents" guidance reinforces the pattern — **concentrate context and minimize the number of autonomous write-capable agents** to shrink the attack surface.
+*Sources: https://openrouter.ai/blog/announcements/data-processing-incidents-on-inference-providers/ · https://the-decoder.com/anthropic-says-one-ai-agent-beats-many-subagents-now-that-models-can-handle-complexity-alone/*
 
-### Agentic Red-Teaming in the Wild — AI Agents as Offensive Security Operators (Nov 16–20)
-Two events this week show offensive AI leaving the lab: a **China-linked actor ran the "Cairn" AI agent framework** to breach East Asian university research networks via MONAI Label (see Security Watch), and **Google disclosed an AI agent that both patched and exploited a live vulnerability** in an enterprise product before a human noticed (The Register, Nov 16). Automated vulnerability-discover→exploit pipelines are now a real-world threat class, not a benchmark scenario.
-*Sources: https://www.theverge.com/security/2026/11/16/google-ai-agent-security-vulnerability-patch · https://aws.amazon.com/blogs/aws/amazon-threat-intelligence-monai-label-campaign/*
+### Generalized Coding — Code as a Substrate for Video, Games, CAD, and Robotics (Nov 23)
+Z.ai's GLM-5.4 "Generalized Coding" positioning extends code generation beyond software into **model-scored music videos, FreeCAD robot-arm designs, complete games, and custom-shader interactive 3D scenes** — i.e., code as the unified intermediate representation across creative and physical domains. This is a concrete use-case expansion of the "agentic coding" category into **multimodal and physical-asset generation**.
+*Source: https://the-decoder.com/z-ai-follows-openai-into-loop-transformer-territory-with-its-new-750b-flagship-model/*
 
-### System-Wide Agentic AI in Higher Education — UC × OpenAI (Nov 19–21)
-The **University of California** signed a system-wide deal (effective Dec 1) giving **ChatGPT Edu + Codex** to **~300,000 students and 265,000 staff across all 10 campuses** at no individual cost — UC pays **$1.2M/year**, with a 20% credit discount, FERPA compliance, and a data contract making UC the owner of saved data (OpenAI may not re-share, retain, or monetize it). The rollout continues a multi-vendor policy (Gemini, Copilot, Anthropic) — and drew pushback from the Academic Senate over shared governance, with Senate Chair Susannah Scott saying the final deal was communicated ~1 hour before the announcement.
-*Sources: https://op.berkeley.edu/news/uc-system-wide-openai-deal · https://www.latimes.com/california/story/2026-11-21/uc-chatgpt-10-campuses-faculty-pushback*
-
-### Machine-Checked Verification Infrastructure for AI-Generated Mathematics (Nov 20–22)
-Within 48 hours of the Riemann announcement, the Lean community stood up **dedicated verification infrastructure**: the **Lean Prover community's "Independent Comparator"** (an environment to re-derive Alpöge's proof without relying on the author's setup) and a **public mirror of the 250k-line formalization**. The new use case: *community tooling for auditing frontier-model mathematical output at scale* — the first time a proof-checking ecosystem mobilized around a single AI-assisted theorem.
-*Sources: https://github.com/leanprover-community/riemann-hypothesis · https://github.com/CocoSgt/riemann-hypothesis-lean*
+### Sovereign-AI Oversight as a Governance Product (Nov 12–23)
+NVIDIA's reinstatement comes with a **dedicated National Security & Export Control Oversight Committee** and a **Chief Compliance Officer search** — a template for how frontier-adjacent companies will institutionalize **export-control and national-security compliance as a board-level governance function**, likely to be replicated across the semiconductor and AI-infra stack as the Nov 16 interim final rule takes effect.
+*Source: https://nvidianews.nvidia.com/news/nvidia-board-of-directors-establishes-national-security-and-export-control-oversight-committee*
 
 ---
 
@@ -105,104 +98,86 @@ Within 48 hours of the Riemann announcement, the Lean community stood up **dedic
 
 | Repository | Stars* | What it does (agentic/Gen-AI angle) |
 |---|---|---|
-| [iamajmeena/neonclipping](https://github.com/iamajmeena/neonclipping) | 2,114 | **Free, local, open-source clip engine**: paste a link, get captioned 9:16 short-form clips in ~2 minutes — audio-first pipeline, YouTube caption extraction, and a **local LLM** for captioning/editing (created Nov 19). |
-| [EL4CTEO/fast-anything](https://github.com/EL4CTEO/fast-anything) | 2,057 | **"Don't rewrite it in Rust. Rewrite the 5% that's slow"** — profiles Python/Node/Ruby apps, ports the hot functions **with your coding agent**, and proves behavioral equivalence (created Nov 21). |
-| [boringmarketer/boring-marketing-skills](https://github.com/boringmarketer/boring-marketing-skills) | 796 | **32 free marketing skills for AI agents** — research, positioning, copy, pages, SEO, AI search, ads, email + a deep local-business pack; MIT-licensed (created Nov 16). |
-| [pierridotite/mobile-agent-testers](https://github.com/pierridotite/mobile-agent-testers) | 674 | **20 AI testers on 20 different smartphones in parallel on GitHub's free runners** — Claude Code agents on iOS Simulator for automated mobile app testing (created Nov 16). |
-| [leanprover-community/riemann-hypothesis](https://github.com/leanprover-community/riemann-hypothesis) | 648 | **Independent Comparator setup** for verifying the Lean formalization of the Riemann Hypothesis (Alpöge, Nov 20) — community audit infrastructure for an AI-assisted proof (created Nov 20). |
-| [INK-Q/agy-fast](https://github.com/INK-Q/agy-fast) | 582 | **Non-invasive MCP accelerator for Google Antigravity** (CLI/Desktop/IDE): cuts LLM turns −34%, token quota −31%, upload traffic −40% without touching the native UI (created Nov 19). |
-| [CocoSgt/riemann-hypothesis-lean](https://github.com/CocoSgt/riemann-hypothesis-lean) | 518 | **Public mirror of Levent Alpöge's Lean proof of the Riemann Hypothesis (with Claude)** — all credit to Alpöge; source: alpo.ge (created Nov 20). |
-| [danielwh2/sprite-stacking](https://github.com/danielwh2/sprite-stacking) | 490 | **Agent skill**: turn 4 pixel-art views into fake-3D rotatable sprites; works with Claude Code, Codex, and Cursor (created Nov 20). |
+| [EL4CTEO/fast-anything](https://github.com/EL4CTEO/fast-anything) | 2,988 | **"Don't rewrite it in Rust. Rewrite the 5% that's slow"** — profiles Python/Node/Ruby apps and ports the hot functions **with your coding agent**, proving behavioral equivalence (created Nov 21). |
+| [iamajmeena/neonclipping](https://github.com/iamajmeena/neonclipping) | 2,279 | **Free, local, open-source clip engine**: paste a link, get captioned 9:16 short-form clips in ~2 minutes — audio-first pipeline with a **local LLM** for captioning/editing (created Nov 19). |
+| [leanprover-community/riemann-hypothesis](https://github.com/leanprover-community/riemann-hypothesis) | 802 | **Independent Comparator + verification harness** for Alpöge's Lean Riemann proof — the community audit infrastructure (statement matching, kernel replay, sandbox rebuild) that certified the AI-assisted proof (created Nov 20). |
+| [boringmarketer/boring-marketing-skills](https://github.com/boringmarketer/boring-marketing-skills) | 810 | **32 free marketing skills for AI agents** — research, positioning, copy, pages, SEO, AI search, ads, email + a deep local-business pack; MIT-licensed (created Nov 16). |
+| [CocoSgt/riemann-hypothesis-lean](https://github.com/CocoSgt/riemann-hypothesis-lean) | 541 | **Public mirror of Alpöge's Lean Riemann proof (with Claude)** — the ~17.4M-line formalization as a browsable repo for the audit effort (created Nov 20). |
 
-\* Star counts verified via the GitHub API on November 22, 2026; all repos created Nov 15–22, 2026. (Nov 21 edition covered rust-anything, deepseek-ai/chat-demo, linger, yogurt, blender-ai-mcp-addon, agentes-chat, supermimic, inference-optimisation-skill, PeakCut, pybot, lot-map, and ste80-humanizer; the Nov 15 Gemini-Config-Checker clone swarm was excluded as suspected star-farming.)
+\* Star counts verified via the GitHub API on November 22–23, 2026; all repos created Nov 15–22, 2026. (The Nov 22 edition covered rust-anything, deepseek-ai/chat-demo, linger, yogurt, blender-ai-mcp-addon, agentes-chat, supermimic, inference-optimisation-skill, PeakCut, pybot, lot-map, ste80-humanizer, mobile-agent-testers, agy-fast, and sprite-stacking; the Nov 15 Gemini-Config-Checker clone swarm was excluded as suspected star-farming.)
 
 ---
 
 ## Security & Remediation Watch
 
-**New this cycle (Nov 20–22):**
+**New this cycle (Nov 20–23):**
 
-1. **CVE-2026-133968 — MONAI Label path-traversal RCE, exploited in the wild by an AI-agent campaign (CVSS 9.8).** Amazon Threat Intelligence disclosed (Nov 20) that a **China-linked actor used the "Cairn" AI agent framework** to run a **48-hour campaign (Sept 8–10) against East Asian university research networks**, exploiting an unauthenticated path traversal in **MONAI Label ≤0.8.5** (`PUT /datastore/image`, `PUT /datastore/label`; default installs have no auth; the ANNOTATOR role suffices). The agent mapped the API and, in ~11 minutes, wrote arbitrary files, planted a **`sitecustomize.py` reverse shell**, and triggered training to execute as root. **Fix: MONAI Label 0.8.6 security release shipped Nov 22** (`pip install -U monailabel==0.8.6` or `docker pull projectmonai/monailabel:0.8.6`; GHSA-qc22-rmgc-vg94, upstream fix PR #1915 from Oct 19). **Until patched:** enable authentication, restrict the ANNOTATOR role, keep instances off untrusted networks, and run as a non-privileged user. **Verify for compromise** if you ran an exposed instance during Sept 8–10. (AWS, The Register, BleepingComputer, VentureBeat, THN)
+1. **CVE-2026-133968 — MONAI Label path-traversal RCE, exploited in the wild by an AI-agent campaign (CVSS 9.8) — now PATCHED.** Amazon Threat Intelligence disclosed (Nov 20) that a **China-linked actor used the "Cairn" AI agent framework** to run a **48-hour campaign (Sept 8–10) against East Asian university research networks**, exploiting an unauthenticated path traversal in **MONAI Label ≤0.8.5** (`PUT /datastore/image`, `PUT /datastore/label`; default installs have no auth). The agent mapped the API and, in ~11 minutes, wrote arbitrary files, planted a **`sitecustomize.py` reverse shell**, and triggered training to execute as root. **The 0.8.6 security release shipped Nov 22** — `pip install -U monailabel==0.8.6` or `docker pull projectmonai/monailabel:0.8.6` (GHSA-qc22-rmgc-vg94, upstream fix PR #1915). **Until patched:** enable authentication, restrict the ANNOTATOR role, keep instances off untrusted networks, run as a non-privileged user. **Verify for compromise** if you ran an exposed instance during Sept 8–10 — the reverse-shell payload and root execution make retrospective detection essential. (AWS, The Register, BleepingComputer, VentureBeat, THN)
    *Sources: https://aws.amazon.com/blogs/aws/amazon-threat-intelligence-monai-label-campaign/ · https://www.theregister.com/2026/11/20/monai_label_zero_day_cairn/ · https://github.com/Project-MONAI/MONAI-Label/releases/tag/v0.8.6*
 
-2. **AI inference supply-chain prompt leakage — treat July–Oct 2026 marketplace traffic as exposed.** No CVE, but the most consequential AI-tooling security event of the week (see Top 5 #3): **OpenRouter removed ZDR labels from 125 MiniMax endpoints and offboarded three providers** (Nov 22); **Together AI confirmed June–July prompt downloads** after its AI coding agent leaked a Hugging Face credential into the public `xorl` repo. **Remediation:** if you routed sensitive prompts through OpenRouter marketplace endpoints or Together serverless inference in July–Oct 2026 — rotate any credentials/secrets that appeared in those prompts, audit logs, and assume retention. Going forward: enforce **ZDR at the account level**, set `allow_fallbacks: false` / pin providers, and use canary tokens in sensitive prompts to detect leakage. (OpenRouter, Together AI, Dragos)
+2. **AI inference supply-chain prompt leakage — treat July–Oct 2026 marketplace traffic as exposed (no CVE).** The most consequential AI-tooling security event of the cycle (see Nov 22 edition Top 5 #3): **OpenRouter removed ZDR labels from 125 MiniMax endpoints and offboarded three providers** (Nov 22); **Together AI confirmed June–July prompt downloads** after its AI coding agent leaked a Hugging Face credential into the public `xorl` repo. **Remediation:** if you routed sensitive prompts through OpenRouter marketplace endpoints or Together serverless inference in July–Oct 2026 — rotate any credentials/secrets that appeared in those prompts, audit logs, and assume retention. Going forward: enforce **ZDR at the account level**, set `allow_fallbacks: false` / pin providers, and use canary tokens in sensitive prompts. (OpenRouter, Together AI, Dragos)
 
-**CISA KEV status (as of Nov 22):** No new KEV additions were posted Nov 21 — the **Nov 20 batch remains the newest**: **CVE-2025-42884** (SAP NetWeaver SQLi), **CVE-2026-76466** (Cisco Expressway hardcoded credentials), **CVE-2026-123890** (VMware vCenter auth bypass), **CVE-2026-129448** (Apache Roller deserialization) — federal remediation deadline **Nov 23**. The **Nov 18 batch** (Synology, Apache Axis, REDCap) is **past its Nov 21 federal deadline** — verify patch status on those now. The **Java4Shell (CVE-2026-114938)** critical OpenJDK RCE from Nov 17 remains the top-priority patch of the cycle.
+**CISA KEV status (as of Nov 23):** A **new KEV batch was added Nov 21** (federal remediation deadline **Nov 30**), joining the **Nov 20 batch** (CVE-2025-42884 SAP NetWeaver SQLi, CVE-2026-76466 Cisco Expressway hardcoded credentials, CVE-2026-123890 VMware vCenter auth bypass, CVE-2026-129448 Apache Roller deserialization — federal deadline **Nov 23**, i.e., **today**). The **Nov 18 batch** (Synology, Apache Axis, REDCap) is **past its Nov 21 federal deadline** — verify patch status now. The **Java4Shell (CVE-2026-114938)** critical OpenJDK RCE from Nov 17 remains the top-priority patch of the cycle.
 *Source: https://www.cisa.gov/known-exploited-vulnerabilities-catalog*
 
 **Carry-forward / still in motion:**
 - **Java4Shell (CVE-2026-114938)** — unauthenticated RCE in OpenJDK Base64 decoder; keep patching (see Nov 21 edition).
 - **Agent-framework PyPI supply-chain compromise** — audit any `agentframework` installs from the compromise window (see Nov 21 edition).
 - **OpenAI GPT-6.2 Astra cyber capability** (Critical threshold) — review exposure for teams giving it shell/network access (see Nov 21 edition).
+- **NVIDIA export-control compliance review** — the board's new oversight committee and CCO search mean export-control and national-security compliance is now a standing, auditable governance function (see Top 5 #2).
 
 ---
 
 ## Also Notable
 
-- **Anthropic's IPO hangover:** ANT fell **8.5% on Friday (Nov 20)** — its first full trading day — dropping as much as **11% to ~$86** (briefly near its $83 IPO price), wiping **>$200B** off the valuation; drivers included the broader AI selloff (Jensen Huang's ouster as Nvidia CEO), day-one insider selling (10% of insider holdings unlocked), and the company's loss profile. (CNBC, Forbes, Yahoo Finance — Nov 20)
-- **Oregon v. OpenAI** (Top 5 #4) was filed Nov 17 — the first state AG suit of its kind; watch for other AGs to follow suit in 2027.
-- **Arena Alignment Index update (Nov 21):** OpenAI holds ranks 1–7; **Claude Fable 5.2 is #8** and **Kimi K3.1 Pro is #9 — the first open-weight model in the top ten**. (explainx.ai)
-- **UC × OpenAI $1.2M/year system-wide deal** (Nov 19–21) — ChatGPT Edu + Codex for all 10 campuses; faculty pushback over shared governance (see New Use Cases).
-- **Perplexity Monitor API** (Nov 16) — always-on web-change detection for agents (see New Use Cases).
+- **NVIDIA stock +30% on reinstatement** — the single largest one-day move tied to the espionage-scandal resolution; watch the Dec 1 closed-door House testimony for export-control fallout (see Top 5 #2).
+- **METR Q4 capability update** — the eval/safety pipeline is the lagging constraint (see Top 5 #5).
+- **Anthropic Claude self-adoption (90% of own code)** — the most concrete "AI writes the AI company" figure published to date (see Top 5 #4).
+- **Z.ai GLM-5.4** — the first flagship-scale loop transformer; 750B figures unaudited pending independent evals (see Top 5 #1).
+- **Arena Alignment Index (Nov 21)** — OpenAI holds ranks 1–7; Claude Fable 5.2 is #8, Kimi K3.1 Pro is #9 (first open-weight model in the top ten) (see Nov 22 edition).
 
 ---
 
 ## Sources
 
 ### Today's anchors
-- https://openai.com/index/perplexity-and-intelligence
-- https://techcrunch.com/2026/11/22/openais-chief-scientist-has-thoughts-on-how-to-limit-ai-development/
-- https://mlq.ai/news/openai-publishes-its-models-perplexity-scores-and-proposes-industry-wide-limits-on-ai-development
-- https://www.bbc.com/news/technology-2026-11-20-riemann-hypothesis-proof
-- https://www.theverge.com/ai/anthropic-claude-riemann-hypothesis-proof
-- https://www.sciencedaily.com/releases/2026/11/20261120043200694.shtml
-- https://neurotrans.net/levent-alpo-ge-claude-riemann-hypothesis-proof-lean-formalization/
-- https://alpo.ge/remark.pdf
-- https://openrouter.ai/blog/announcements/data-processing-incidents-on-inference-providers/
-- https://www.together.ai/blog/security-event-prompt-leakage-for-requests-in-june-and-july-of-2026
-- https://www.dragos.com/blog/three-breaches-endless-leaks-your-ai-supply-chain-needs-canaries/
-- https://thecybersecguru.com/openrouter-minimax-zdr-incident-canary-urls-2026/
-- https://explainx.ai/blog/together-ai-prompt-leak-xorl-huggingface-coding-agent-november-2026
-- https://doj.oregon.gov/Media/NewsReleases/2026/11/OpenAI-ChatGPT-teen-safety-suit
-- https://opencase.laws/oregon/oregon-state-circuit-court-civil/2026-011-089237
-- https://opb.org/article/oregon-openai-chatgpt-teen-safety-lawsuit-2-billion
-- https://www.reuters.com/business/autos-transportation/us-tightens-ai-chip-export-rules-data-center-compute-china-2026-11-16/
-- https://techcrunch.com/2026/11/16/us-ai-chip-export-controls-cloud-compute-china/
-- https://www.npr.org/2026/11/17/us-ai-chip-export-rules-china-data-centers/
-- https://www.aljazeera.com/economy/2026/11/20/us-ai-chip-export-controls-china-trump-asia
+- https://the-decoder.com/z-ai-follows-openai-into-loop-transformer-territory-with-its-new-750b-flagship-model/
+- https://mlq.ai/news/zai-launches-glm-54-a-750-billion-parameter-model-built-on-a-looped-transformer/
+- https://www.investing.com/news/stock-market-news/zai-unveils-glm54-model-with-loop-transformer-design-93CH-5045609
+- https://z.ai/blog/glm-5.4
+- https://nvidianews.nvidia.com/news/nvidia-board-reinstates-jensen-huang-as-president-ceo-and-board-director
+- https://nvidianews.nvidia.com/news/nvidia-board-of-directors-establishes-national-security-and-export-control-oversight-committee
+- https://www.nytimes.com/2026/11/22/us/politics/alice-huang-china-spy-agency-nvidia.html
+- https://the-decoder.com/jensen-huang-resigns-as-nvidia-ceo-after-espionage-scandal-wipes-out-1-4-trillion-in-market-value/
+- https://leanprover-community.github.io/blog/posts/riemann-hypothesis
+- https://math.mit.edu/~drew/grh
+- https://riemannhypothesissolved.com/status
+- https://the-decoder.com/hours-after-anthropic-claims-a-claude-proof-of-the-riemann-hypothesis-stanford-releases-an-all-human-competing-draft/
+- https://the-decoder.com/anthropic-says-claude-now-writes-over-90-of-its-code-and-wants-the-world-to-have-an-ai-pause-button/
+- https://the-decoder.com/anthropic-says-one-ai-agent-beats-many-subagents-now-that-models-can-handle-complexity-alone/
+- https://the-decoder.com/anthropic-wants-you-to-know-claude-leads-a-quarter-of-its-research-but-lead-doesnt-mean-what-you-think/
+- https://metr.org/blog/2026-11-20-q4-2026-capability-update/
+- https://the-decoder.com/ai-is-getting-better-faster-than-experts-can-reliably-test-whether-new-systems-are-safe-metr-warns/
+- https://the-decoder.com/frontier-radar-5-if-agi-is-so-close-why-is-everyone-leaving-the-neolabs-and-their-bets/
 
 ### Security
 - https://aws.amazon.com/blogs/aws/amazon-threat-intelligence-monai-label-campaign/
 - https://www.theregister.com/2026/11/20/monai_label_zero_day_cairn/
 - https://github.com/Project-MONAI/MONAI-Label/releases/tag/v0.8.6
 - https://www.cisa.gov/known-exploited-vulnerabilities-catalog
-- https://ir.zscaler.com/node/16796/pdf
-
-### New use cases
-- https://www.perplexity.ai/hub/blog/introducing-perplexitys-monitor-api
-- https://docs.perplexity.ai/docs/monitors/overview
-- https://the-decoder.com/perplexitys-new-monitor-api-turns-web-search-from-a-one-off-query-into-a-nonstop-watchdog/
-- https://www.theverge.com/security/2026/11/16/google-ai-agent-security-vulnerability-patch
-- https://op.berkeley.edu/news/uc-system-wide-openai-deal
-- https://www.latimes.com/california/story/2026-11-21/uc-chatgpt-10-campuses-faculty-pushback
-- https://github.com/leanprover-community/riemann-hypothesis
-- https://github.com/CocoSgt/riemann-hypothesis-lean
+- https://openrouter.ai/blog/announcements/data-processing-incidents-on-inference-providers/
+- https://www.together.ai/blog/security-event-prompt-leakage-for-requests-in-june-and-july-of-2026
+- https://www.dragos.com/blog/three-breaches-endless-leaks-your-ai-supply-chain-needs-canaries/
 
 ### GitHub repos
+- https://github.com/leanprover-community/riemann-hypothesis
+- https://github.com/CocoSgt/riemann-hypothesis-lean
 - https://github.com/iamajmeena/neonclipping
 - https://github.com/EL4CTEO/fast-anything
 - https://github.com/boringmarketer/boring-marketing-skills
-- https://github.com/pierridotite/mobile-agent-testers
-- https://github.com/INK-Q/agy-fast
-- https://github.com/danielwh2/sprite-stacking
-
-### Also notable
-- https://cnbc.com/2026/11/20/anthropic-stock-ai-amd-nvidia.html
-- https://forbes.com/sites/fionariley/2026/11/20/anthropic-slumps-11-on-second-day-of-trading-after-record-breaking-ipo/
-- https://www.businessinsider.com/anthropic-stock-is-back-to-earth-with-a-bump-dropping-close-to-its-ipo-price
 
 ---
 
 ## Compilation Note
 
-Compiled Sunday, November 22, 2026 (09:10–11:30 PT, America/Los_Angeles) by the ai-research cron job. Research pass covered Nov 20–22, 2026 via live web search across Reuters, TechCrunch, BBC, The Verge, Scientific American, NYT, CNBC/Forbes, The Register, BleepingComputer, AWS Threat Intelligence, CISA KEV, vendor disclosures (OpenAI, OpenRouter, Together AI, Anthropic/claude.com, Zscaler, Perplexity, Oregon DOJ, UCOP), and GitHub API (repo star counts verified live). All five anchors are new relative to the November 21 edition, which led with GPT-6.2 Astra/Sol, the Anthropic IPO, Claude Fable 5.2/Mythos 5.2, Gemini 4 Neon, and the Microsoft MAI family. The Riemann Hypothesis story and the Pachocki perplexity disclosure are the week's defining developments: one is the first machine-verified frontier-math result, the other the first time a frontier lab has published its internal capability metric and proposed industry speed limits. Figures are as reported by the cited outlets and are not independently verified.
+Compiled Monday, November 23, 2026 (09:10–09:40 PT, America/Los_Angeles) by the ai-research cron job. Research pass covered Nov 22–23, 2026 via live web search and direct fetches across NVIDIA newsroom, The Decoder, MLQ.ai, Investing.com, Lean community blog, MIT (Sutherland verification page), riemannhypothesissolved.com, METR, NYT, Reuters, ABC, AWS Threat Intelligence, CISA KEV, OpenRouter, Together AI, Dragos, and the GitHub API (repo star counts verified live). All five anchors are new relative to the November 22 edition, which led with OpenAI's Pachocki perplexity disclosure, the Riemann proof announcement, prompt-leakage confirmation, Oregon's OpenAI suit, and the US export-control interim final rule. Today's edition is dominated by the **verification phase** of the Riemann story (community certification + zeta-free cross-check) and the **resolution of the NVIDIA CEO saga**, with **Z.ai's GLM-5.4** as the week's most significant new model-release architecture. Figures are as reported by the cited outlets and are not independently verified.
